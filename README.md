@@ -23,7 +23,7 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 
 # Projeto: *Nome_do_seu_Projeto*
 
-# Grupo: *Nome_do_seu_Grupo*
+# Grupo: *Voando Baixo*
 
 # Descrição
 
