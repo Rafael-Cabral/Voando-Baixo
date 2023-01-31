@@ -70,9 +70,11 @@ Planejador de trajetórias para voos em baixa altitude
 
 # Visão Geral do Projeto
 
-## Empresa
+## Empresa: Ael Sistemas
 
-*Descrição_da_empresa*
+A AEL Sistemas é uma empresa brasileira, situada em Porto Alegre que dedica-se ao projeto, desenvolvimento, fabricação, manutenção e suporte logístico de sistemas
+eletrônicos militares e espaciais, para aplicações em plataformas aéreas, marítimas e terrestres. Capacitada para o fornecimento, projeto e desenvolvimento de 
+aviônicos, sistemas terrestres e sistemas para segurança pública, a empresa também participa de diversos programas da indústria espacial.
 
 ## O Problema
 
