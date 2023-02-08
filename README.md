@@ -8,26 +8,13 @@
 </tr>
 </table>
 
-# Instruções para o projeto do Módulo 5 de Ciência da Computação
+# Projeto: Planejador de trajetórias para voos em baixa altitude.
 
-Este repositório define um modelo (*template*) que deve ser seguido por cada grupo para o projeto do módulo 5.
-
-A seguir estão os passos sugeridos para a preparação do seu grupo no início do módulo:
-
-* **Passo 1**: Cada membro do grupo deverá [preparar o seu computador](install.md), instalando e configurando as ferramentas necessárias para redigir a documentação, desenvolver a aplicação e elaborar o artigo.
-
-* **Passo 2**: Cada membro do grupo deverá clonar o repositório do grupo no seu computador e [validar a preparação do seu computador para o projeto](validate.md).
-
-* **Passo 3**: Cada grupo deverá editar este arquivo, removendo estas instruções iniciais e preenchendo o restante da página com os dados do projeto do seu grupo.
-
-
-# Projeto: *Nome_do_seu_Projeto*
-
-# Grupo: *Voando Baixo*
+# Grupo: Voando Baixo
 
 # Descrição
 
-*Descrição_resumida_do_projeto*
+Este projeto tem como principal área de negócio a aviação militar. O principal objetivo desta iniciativa é proporcionar uma interface humano-computador para o cálculo de trajetórias, por meio de grafos, para voos de baixa altitude, de modo que estas respeitem uma série de restrições com o fim de atenuar possíveis situações de risco, como, por exemplo, a passagem por áreas urbanas densamente povoadas, instalações militares sensíveis e regiões previamente conhecidas como perigosas. 
 
 # Documentação
 
