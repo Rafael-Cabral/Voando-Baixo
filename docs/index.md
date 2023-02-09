@@ -155,7 +155,7 @@ O projeto poderá otimizar os trajetos de missões críticas, aumentando a chanc
 
 [persona-1](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/persona1.png)
 
-<a href= "/img/persona2.png"><img src="/img/persona2.png" alt="Persona 2 - time de reconhecimento" border="0" width="70%"></a>
+[persona-2](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/persona2.png)
 
 
 ## Histórias dos usuários (user stories)
