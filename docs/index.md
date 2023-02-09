@@ -46,6 +46,14 @@ Planejador de trajetórias para voos em baixa altitude
   - [Testes Unitários](#testes-unitários)
   - [Teste de Usabilidade](#teste-de-usabilidade)
 - [Análise de Dados](#análise-de-dados)
+- [ANÁLISE DOS DADOS](#análise-dos-dados)
+  - [Formato](#formato)
+  - [Biblioteca utilizada](#biblioteca-utilizada)
+  - [CARACTERÍSTICAS DOS ARQUIVOS](#características-dos-arquivos)
+  - [CARACTERÍSTICAS DOS DADOS](#características-dos-dados)
+    - [INPUTS](#inputs)
+    - [OUTPUT](#output)
+  - [Localização dos dados no github](#localização-dos-dados-no-github)
 - [Manuais](#manuais)
   - [Manual de Implantação](#manual-de-implantação)
   - [Manual do Usuário](#manual-do-usuário)
@@ -166,6 +174,65 @@ Autores/Alunos - Realizam o projeto
 
 
 # Análise de Dados
+
+# ANÁLISE DOS DADOS
+
+## Formato
+Os dados repassados pela AEL são dados geoespaciais, eles estão em formato DTED2(.dt2) e precisam de algumas bibliotecas específicas para serem manipulados e visualizados.
+<br>
+<br>
+## Biblioteca utilizada
+GDAL - biblioteca tradutora para formatos de dados geoespaciais vetoriais e raster que é lançada sob uma licença de código aberto estilo MIT pela Open Source Geospatial Foundation.
+<br>
+<br>
+
+## CARACTERÍSTICAS DOS ARQUIVOS
+<br>
+
+| REGIÃO | NOME | MB |
+| ------ | ---- | --- |
+| SP | W045_S23.dt2 | 24.8 mb |
+| SP | W045_S24.dt2 | 24.8 mb |
+| SP | W046_S23.dt2 | 24.8 mb |
+| SP | W046_S24.dt2 | 24.8 mb |
+| SP | W047_S23.dt2 | 24.8 mb |
+| SP | W047_S24.dt2 | 24.8 mb |
+| RJ | W043_S23.dt2 | 24.8 mb |
+| RJ | W043_S24.dt2 | 24.8 mb |
+| RJ | W044_S23.dt2 | 24.8 mb |
+| RJ | W044_S24.dt2 | 24.8 mb |
+
+<br>
+
+## CARACTERÍSTICAS DOS DADOS
+
+Para trabalharmos com os dados em questão, precisamos adicionar dois inputs: Longitude e Latitude de um local. Obteremos como output dessa coordenada: Altura(esperada) dessa região.
+<br>
+<br>
+
+### INPUTS
+
+| CARACTERÍSTICA | TIPO | EXEMPLO |
+| ------ | ---- | --- |
+| 1 - Longitude | NUMBER(double) | -23.0696792891117 |
+| 2 - Latitude | NUMBER(double) | -43.5573428666663 |
+<br>
+
+### OUTPUT
+
+| CARACTERÍSTICA | TIPO | EXEMPLO |
+| ------ | ---- | --- |
+| Altura(esperada) | NUMBER(double) | 1928 (valor esperado) |
+<br>
+
+## Localização dos dados no github
+
+|--> src/main<br>
+  &emsp;| --> resources/dted <br>
+  &emsp;&emsp;| -->T3_G3_V5_IoT_Document.pdf<br>
+  &emsp;&emsp;&emsp;| Rio<br>
+  &emsp;&emsp;&emsp;| SP<br>
+<br>
 
 
 # Manuais
