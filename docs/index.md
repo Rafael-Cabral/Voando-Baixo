@@ -46,7 +46,7 @@ Planejador de trajetórias para voos em baixa altitude
   - [Testes Unitários](#testes-unitários)
   - [Teste de Usabilidade](#teste-de-usabilidade)
 - [Análise de Dados](#análise-de-dados)
-- [ANÁLISE DOS DADOS](#análise-dos-dados)
+- [Limitações](#limitações)
   - [Formato](#formato)
   - [Biblioteca utilizada](#biblioteca-utilizada)
   - [CARACTERÍSTICAS DOS ARQUIVOS](#características-dos-arquivos)
@@ -263,6 +263,11 @@ Outros dados que também devem ser implementados, são o ponto de partida e o po
   &emsp;&emsp;&emsp;| SP<br>
 <br>
 
+## Limitações
+
+Desenvolver uma solução eficaz para o problema de caminho mínimo apresenta complexidade elevada, ainda mais quando adicionamos features como optar pela menor altura possível. A memória é intensivamente usada durante o desenvolvimento dos algoritmos, o que pode causar desempenho lento e dificultar a escalabilidade da solução. 
+
+Por conta da solução ter uma complexidade muito alta e a equipe de desenvolvimento ainda é pouco familiarizada com as ferramentas utilizadas, podem ocorrer erros ao escolher o melhor algoritmo e torná-lo o mais eficiente possível. Alguns pontos que também podem influenciar, são os fatores externos, como dificuldade dos terrenos e condições climáticas, também devem ser considerados ao definir o percurso.
 
 # Manuais
 
