@@ -155,6 +155,8 @@ O projeto poderá otimizar os trajetos de missões críticas, aumentando a chanc
 
 ![Persona-1](https://drive.google.com/file/d/1G-oEipf0NM5KlQn80lX-t0D28_ai0fCo/view)
 
+<a href= "../img/persona2.png"><img src="../img/persona2.png" alt="Persona 2 - time de reconhecimento" border="0" width="70%"></a>
+
 
 ## Histórias dos usuários (user stories)
 
