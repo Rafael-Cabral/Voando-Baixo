@@ -175,8 +175,6 @@ Autores/Alunos - Realizam o projeto
 
 # Análise de Dados
 
-# ANÁLISE DOS DADOS
-
 ## Formato
 Os dados repassados pela AEL são dados geoespaciais, eles estão em formato DTED2(.dt2) e precisam de algumas bibliotecas específicas para serem manipulados e visualizados.
 <br>
@@ -186,7 +184,7 @@ GDAL - biblioteca tradutora para formatos de dados geoespaciais vetoriais e rast
 <br>
 <br>
 
-## CARACTERÍSTICAS DOS ARQUIVOS
+## Características dos arquivos
 <br>
 
 | REGIÃO | NOME | MB |
@@ -204,13 +202,13 @@ GDAL - biblioteca tradutora para formatos de dados geoespaciais vetoriais e rast
 
 <br>
 
-## CARACTERÍSTICAS DOS DADOS
+## Características dos dados
 
 Para trabalharmos com os dados em questão, precisamos adicionar dois inputs: Longitude e Latitude de um local. Obteremos como output dessa coordenada: Altura(esperada) dessa região.
 <br>
 <br>
 
-### INPUTS
+### Inputs
 
 | CARACTERÍSTICA | TIPO | EXEMPLO |
 | ------ | ---- | --- |
@@ -218,7 +216,7 @@ Para trabalharmos com os dados em questão, precisamos adicionar dois inputs: Lo
 | 2 - Latitude | NUMBER(double) | -43.5573428666663 |
 <br>
 
-### OUTPUT
+### Output
 
 | CARACTERÍSTICA | TIPO | EXEMPLO |
 | ------ | ---- | --- |
