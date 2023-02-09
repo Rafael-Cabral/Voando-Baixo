@@ -115,6 +115,27 @@ Autores/Alunos - Realizam o projeto
 
 *Matriz_SWOT*
 
+## Descrição da solução a ser desenvolvida:
+
+
+
+### 3.1) qual é o problema a ser resolvido
+
+Atualmente, a AEL Sistemas tem um algoritmo para missões de voo de baixa altitude, que considera vários aspectos de voo para encontrar um equilíbrio entre a probabilidade da aeronave colidir com o solo e a probabilidade da aeronave ser alvo de forças opositoras. Entretanto, a AEL Sistemas não possui um algoritmo que consiga achar a rota mais benéfica para a missão. A presença de vários obstáculos como: regiões muito povoadas, regiões com tropas inimigas, entre outras ameaças que dificultam a missão, fazem necessário o desenvolvimento de uma nova solução.
+
+### 3.2) qual a solução proposta (visão de negócios)
+
+A solução proposta é o desenvolvimento de uma aplicação em Java, com a qual o cliente pode interagir e planejar trajetórias para voos a baixa altitude. Esta aplicação utilizará dados de elevação para criar uma representação gráfica da área de voo e suas características geográficas, permitindo que o cliente encontre o caminho mais otimizado entre o ponto de partida e o destino. Além disso, a aplicação será desenvolvida de forma a seguir as restrições especificadas pelo cliente, garantindo assim a segurança e eficiência dos voos.
+
+### 3.3) como a solução proposta deverá ser utilizada
+
+Ao receber a informação de uma missão que necessite descrição, a equipe poderá colocar na interface o ponto de partida e o de chegada. O algoritmo irá procurar, de acordo com os dados topográficos entre a região dos pontos, a melhor trajetória para manter baixa altitude e evitar ser detectado. Uma vez calculado o caminho, a solução devolverá para o usuário um caminho tracejado no mapa ligando os dois pontos, e também um arquivo de texto com um vetor de coordenadas para poder ser utilizado em outro aplicativo.
+
+
+### 3.4) quais os benefícios trazidos pela solução proposta
+
+O projeto poderá otimizar os trajetos de missões críticas, aumentando a chance de sucesso da missão, e servir de base para projetos que englobam, além da plataforma embarcada, sistemas de planejamento de missões em solo. Com a implantação deste projeto, a empresa estará preparada para enfrentar os desafios futuros e aproveitar as oportunidades emergentes, conseguindo usar a nova solução em conjunto com um produto que eles já possuem e gerar ainda mais valor.
+
 
 ## Proposta de Valor: Value Proposition Canvas
 
