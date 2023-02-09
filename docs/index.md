@@ -228,22 +228,30 @@ GDAL - biblioteca tradutora para formatos de dados geoespaciais vetoriais e rast
 ## Características dos dados
 
 Para trabalharmos com os dados em questão, precisamos adicionar dois inputs: Longitude e Latitude de um local. Obteremos como output dessa coordenada: Altura(esperada) dessa região.
-<br>
-<br>
 
-### Inputs
+Além disso, é possível inputar zonas de exclusão, ou seja, zonas que devem ser evitadas de acordo com quem for inputar os dados no sistema. Também é possível adicionar locais por onde deve passar a trajetória, obrigatoriamente, essas são chamadas de zonas essenciais.
+
+Outros dados que também devem ser implementados, são o ponto de partida e o ponto de destino, para que seja feito o cálculo da melhor trajetória pelo algoritmo. 
+<br>
+<br>
+## Inputs
 
 | CARACTERÍSTICA | TIPO | EXEMPLO |
-| ------ | ---- | --- |
-| 1 - Longitude | NUMBER(double) | -23.0696792891117 |
-| 2 - Latitude | NUMBER(double) | -43.5573428666663 |
+|----------------|------|---------|
+| 1 - Longitude  | NUMBER(double) | -23.0696792891117 |
+| 2 - Latitude   | NUMBER(double) | -43.5573428666663 |
+| 3 - Zonas de exclusão | Coordenada | (-23.0696792891117, -43.5573428666663) |
+| 4 - Zonas essenciais | Coordenada | (-23.55666444, -46.653497386) |
+| 5 - Ponto de partida | Coordenada | (-23.588333, -46.658890) |
+| 6 - Ponto de destino | Coordenada | (-23.5767, -46.6878) |
 <br>
 
-### Output
+## Outputs
 
 | CARACTERÍSTICA | TIPO | EXEMPLO |
-| ------ | ---- | --- |
+|----------------|------|---------|
 | Altura(esperada) | NUMBER(double) | 1928 (valor esperado) |
+| Trajetória | Imagem | -------------------------| 
 <br>
 
 ## Localização dos dados no github
