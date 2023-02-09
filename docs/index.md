@@ -153,7 +153,7 @@ O projeto poderá otimizar os trajetos de missões críticas, aumentando a chanc
 
 ## Personas
 
-*Descrição_das_personas*
+<a href= "file:///C:/Users/Beny%20Frid/Downloads/persona-profile-template.pdf"><img src="file:///C:/Users/Beny%20Frid/Downloads/persona-profile-template.pdf" alt="Persona 1 - Piloto" border="0" width="70%"></a>
 
 
 ## Histórias dos usuários (user stories)
