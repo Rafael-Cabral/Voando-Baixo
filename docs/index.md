@@ -135,8 +135,10 @@ Ao receber a informação de uma missão que necessite descrição, a equipe pod
 ### 3.4) quais os benefícios trazidos pela solução proposta
 
 O projeto poderá otimizar os trajetos de missões críticas, aumentando a chance de sucesso da missão, e servir de base para projetos que englobam, além da plataforma embarcada, sistemas de planejamento de missões em solo. Com a implantação deste projeto, a empresa estará preparada para enfrentar os desafios futuros e aproveitar as oportunidades emergentes, conseguindo usar a nova solução em conjunto com um produto que eles já possuem e gerar ainda mais valor.
+<br>
+<br>
 
-## Indicação de uma solução viável
+# Indicação de uma solução viável
 
 O software sera projetado para calcular a rota mais otimizada para voos a baixa altitude de uma aeronave. Ele utiliza informações geográficas fornecidas por um arquivo .dt2 como entrada e retorna a rota ideal para voar entre dois pontos, levando em consideração restrições específicas definidas pelo usuário. A solução é baseada em teorias de grafos e emprega algoritmos eficientes, como algoritmos de caminho mínimo, para determinar a rota ideal para a aeronave percorrer.
 
