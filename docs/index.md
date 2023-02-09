@@ -136,6 +136,30 @@ Ao receber a informação de uma missão que necessite descrição, a equipe pod
 
 O projeto poderá otimizar os trajetos de missões críticas, aumentando a chance de sucesso da missão, e servir de base para projetos que englobam, além da plataforma embarcada, sistemas de planejamento de missões em solo. Com a implantação deste projeto, a empresa estará preparada para enfrentar os desafios futuros e aproveitar as oportunidades emergentes, conseguindo usar a nova solução em conjunto com um produto que eles já possuem e gerar ainda mais valor.
 
+## Indicação de uma solução viável
+
+O software sera projetado para calcular a rota mais otimizada para voos a baixa altitude de uma aeronave. Ele utiliza informações geográficas fornecidas por um arquivo .dt2 como entrada e retorna a rota ideal para voar entre dois pontos, levando em consideração restrições específicas definidas pelo usuário. A solução é baseada em teorias de grafos e emprega algoritmos eficientes, como algoritmos de caminho mínimo, para determinar a rota ideal para a aeronave percorrer.
+
+### Objetivos
+
+1. Definir a melhor rota segundo os parâmetros estabelecidos, como:
+   - Menor altitude
+   - Percurso com baixa visibilidade
+   - Exclusão de zonas mais perigosas
+2. Desenvolver um algoritmo eficiente
+3. Agregar valor a AEL
+
+### Benefícios
+
+1. Vantagens econômicas: gera trajetórias de voo ótimas, economizando combustível e tempo na viagem.
+2. Economia de tempo: particularmente importante nas operações militares, aumentando as chances de sucesso em missões de interceptação e reconhecimento de inimigos.
+3. Segurança dos pilotos: evita rotas perigosas, reduzindo o risco de acidentes.
+
+### Conclusão
+
+O software desenvolvido visa ser uma ferramenta de suporte valiosa para pilotos que realizam voos em altitudes baixas, fornecendo-lhes uma rota eficiente e segura. A solução é um MVP e precisará de algumas alterações para se adequar aos sistemas da AEL, mas pode apresentar grandes benefícios para os usuários.
+<br>
+<br>
 
 ## Proposta de Valor: Value Proposition Canvas
 
