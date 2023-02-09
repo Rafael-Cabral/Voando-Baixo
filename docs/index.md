@@ -65,7 +65,7 @@ Planejador de trajetórias para voos em baixa altitude
 
 * Beny Frid
 * Elias Biondo
-* Luiz Carlos
+* Luiz Carlos jr
 * Pedro Munhoz
 * Pedro Romão
 * Rafael Cabral
