@@ -109,8 +109,11 @@ Autores/Alunos - Realizam o projeto
 *Descrição_da_análise_do_problema*
 
 ## Análise da área de atuação
+
 ## Análise de mercado
-###Contexto da indústria
+
+## Contexto da indústria
+
 O mercado de tecnologia e defesa aeroespacial brasileiro possui baixa diversidade em relação aos players, sendo 11 empresas no total. Isso se deve ao mercado ser extremamente estruturado e conservador, afinal, soluções nessa área afetam diretamente a segurança nacional. Contudo, esse é um mercado que, historicamente, recebe grande atenção do governo e, segundo a Associação de Indústrias Aeroespaciais do Brasil, houve um programa de incentivo a projetos da área no valor de 120 milhões de reais, além dos investimentos previstos no orçamento público.
 O orçamento de Defesa Nacional é revisto anualmente e projeta o mercado futuro das empresas que atuam nessa área, pois, com ele, podemos ter noção do valor total disponível do principal cliente desses produtos, o próprio governo.
 Figura 1 – Orçamento total da Defesa Nacional
@@ -124,23 +127,31 @@ Por fim, devemos analisar a Ael Sistemas. Ela é uma empresa de capital privado 
 Figura 2 – Montante do valor formalizado de contratos públicos
 
 Fonte: Portal da Transparência
-###Análise 5 Forças de Porter:
-###Poder de barganha dos clientes:
+
+## Análise 5 Forças de Porter:
+
+### Poder de barganha dos clientes:
+
 O cenário específico da Ael está ligado diretamente aos órgãos públicos de defesa, pois esses constituem a maior parte da sua receita relatada no Brasil, segundo dados apresentados pela própria instituição. Sendo assim, existe, basicamente, um único cliente, o governo, e isso depende do orçamento ser aprovado no congresso e das licitações. Além disso, existem outras 10 empresas que atuam nesse mesmo ramo e compartilham do mesmo cliente governamental. Apesar disso, a Ael indica que sua receita atual ampliou sua composição no exterior para 50%, mas não existem dados públicos sobre isso. Sendo assim, com base nos dados disponíveis, pode-se concluir que existe um baixo poder de barganha com o cliente, uma vez que ele é único (o governo) e pode procurar melhores ofertas caso ache necessário.
-###Poder de barganha dos fornecedores
+
+### Poder de barganha dos fornecedores
 O único produto do portfólio da AEL Sistemas que possui um fornecedor evidente é o seu computador embarcado de alto desempenho “X-86”, que, como todo computador embarcado, o “X-86” precisa de componentes eletrônicos que são produzidos, hoje, por diversas fábricas centralizadas no mercado asiático, com destaque para Taiwa e China. Essa dependência de poucos países se mostrou maléfica sobretudo durante a pandemia, mas, historicamente, elas não ocorrem com frequência. Portanto, podemos considerar esse um mercado estável e bem diversificado. Por conta disso, podemos dizer que o poder de barganha com o fornecedor é alto.
-###Ameaça de novos entrantes:
+
+### Ameaça de novos entrantes:
 A indústria de tecnologia e defesa aeroespacial é altamente restritiva a novos entrantes, pois os contratos priorizam a segurança institucionalizada e, por conta de serem conservadores, os custos operacionais e de P&D são muito altos, pois precisam atender a critérios extremamente rigorosos e existe, por fim, uma predisposição política as empresas que já atuam neste cenário, já que existe um histórico do governo atrelado ao trabalho destas empresas. Deste modo, existe uma baixa ameaça de novos entrantes e isso pode ser e é muito bem explorado pela empresa que sabe da segurança deste ponto.
-###Ameaça de produtos substitutos:
+
+### Ameaça de produtos substitutos:
 A empresa possui em seu portfólio produtos extremamente específicos, como o Terrain Following, que é um sistema embarcado a aeronaves que, de forma síncrona, identificam a posição territorial do avião e guiam o piloto, através de sensores, com base no relevo. Por se tratar de necessidades muito específicas, existe baixa probabilidade de haver um produto que substitua, mas ainda existe a opção de outras empresas apresentarem a mesma solução com precisões melhores ou um incremento tecnológico neste sentido, mas por ser um mercado conservador, essa ameaça é baixa. Portanto, a ameaça de produtos substitutos no mercado é baixa. 
-###Rivalidade entre concorrentes:
+
+
+### Rivalidade entre concorrentes:
 Existem alguns fatores que demonstram a rivalidade, dentre eles, podemos destacar que a barreira de entrada é alta e esse setor é composto por apenas 11 empresas. Além disso, a demanda é linear durante todo o ano e o Brasil não possui histórico de conflitos armados externos, sendo assim, podemos observar um mercado bastante previsível para as empresas que já estão no meio. Por isso, podemos definir que a rivalidade entre concorrentes é baixa e que existe até mesmo uma colaboração entre eles em alguns setores em que os players não tem expertise. 
 
 
 
 *Descrição_da_análise_da_área_de_atuação*
 
-## Análise do cenário: Matriz SWOT
+### Análise do cenário: Matriz SWOT
 
 *Matriz_SWOT*
 
