@@ -86,17 +86,59 @@ aviônicos, sistemas terrestres e sistemas para segurança pública, a empresa t
 
 ## O Problema
 
-*Descrição_do_problema*
+Contexto do problema a ser resolvido
+
+Este projeto tem como principal área de negócio a aviação militar. Ele é liderado por Conrad Pilotto (cpilotto@ael.com.br) como líder do projeto e Norton Lima Barbieri (nbarbieri@ael.com.br) como líder técnico. 
+O principal objetivo desta iniciativa é proporcionar uma interface humano-computador para o cálculo de trajetórias, por meio de grafos, para voos de baixa altitude, de modo que estas respeitem uma série de restrições com o fim de atenuar possíveis situações de risco.
+Dito isso, o presente projeto relaciona-se diretamente com o uso de uma solução de aviação já existente — o terrain following, que permite uma aeronave manter sua altitude constante de acordo com as variações do terreno, através da utilização de sensores que fornecem informações precisas sobre as condições do setor aéreo e zona de voo. Apesar de robusto, esse sistema não conta com a capacidade de calcular rotas e trajetórias, e o acréscimo de tais funcionalidades aumentariam, expressivamente, a sua efetividade, na medida que minimizariam os riscos de exposições e colisões.
+Dado o exposto, fica evidente que o problema principal é encontrar o equilíbrio ideal entre o risco iminente de colisão com o solo (CFIT) e a exposição da aeronave durante missões de voo a baixa altitude. O sistema de Terrain Following tem como objetivo ajudar a mitigar esse risco, mas para isso é necessário levar em consideração uma série de fatores de voo e geográficos. Infere-se que as causas desse problema são as dificuldades e desafios enfrentados por um piloto durante uma operação a baixa altitude, como a necessidade de considerar diversos aspectos de voo, a possibilidade de colisão com o solo, a possibilidade de ser abatido por forças opositoras, entre outros. A construção de uma trajetória de voo de referência é uma estratégia para minimizar essas causas e, por consequência, os riscos decorrentes disso.
+São expectativas e necessidades dos stakeholders a criação de um processo mensurável e objetivo de planejamento de trajetórias e rotas de voo, que leve em conta critérios apropriados de otimização e restrições, de modo a reduzir o risco de colisão com o solo durante voos a baixa altitude, prover orientação segura aos pilotos, balancear as probabilidades de colisão com o solo e exposição, e a construção de trajetórias de voo de referência eficientes e seguras para missões.
+São metas específicas do projeto, no processo de planejamento de trajetórias e rotas de voo, a inclusão de fatores geográficos e de segurança apropriados.
+Modelagem do problema - variáveis consideradas
+
+A análise de variáveis de decisão é fundamental para garantir o sucesso e a segurança do projeto descrito. A aviação militar é uma área complexa e repleta de desafios, onde o risco iminente de colisão com o solo (CFIT) e a exposição são preocupações constantes. Para minimizar esse risco, é necessário levar em consideração uma série de fatores de voo e geográficos, como altitude de voo, condições do setor aéreo e zona de voo, terreno, possibilidade de colisão com o solo, exposição e probabilidade de ser abatido, sistemas de monitoramento, visibilidade dada a presença de obstáculos como montanhas, florestas, entre outros e visada dadas as características do relevo. A análise dessas variáveis permite a construção de trajetórias de voo seguras e eficientes, atendendo às expectativas e necessidades dos stakeholders e alcançando as metas específicas do projeto.
+Com isso em mente, a seguir, apresentamos, ainda em uma fase inicial, uma avaliação detalhada dos fatores mencionados anteriormente, na ordem em que foram escritos, sem prejuízos ao resultado ou priorização:
+
+Altitude de voo: O projeto tem como foco voos de baixa altitude, o que é uma restrição importante a ser considerada. Um voo a baixa altitude é definido como um voo realizado a uma altitude inferior a certa altitude estabelecida, geralmente determinada pela regulamentação aeronáutica ou pelas normas de segurança de voo. Em geral, um voo a baixa altitude pode ser considerado entre 500 a 1000 pés (cerca de 152 a 305 metros) acima do solo.
+
+Confiabilidade do setor aéreo e zona de voo: A confiabilidade do setor aéreo e da zona de voo é mensurada através de indicadores de segurança como o índice de acidentes por hora de voo, índice de incidências climáticas e restrições de tráfego aéreo. Valores acima de 90% são considerados aceitáveis para garantir a segurança do voo.
+
+Terreno: A altura do terreno é uma consideração importante para voos de baixa altitude, pois afeta a segurança do voo. É necessário verificar a presença de obstáculos, como montanhas, torres, prédios, árvores, entre outros, que possam prejudicar a segurança do voo e a capacidade do piloto de realizar manobras. Uma distância mínima recomendada em relação aos obstáculos pode ser estabelecida pela regulamentação aeronáutica ou pelas normas de segurança de voo.
+
+Possibilidade de colisão com o solo (CFIT): Este é o principal problema a ser resolvido pelo projeto, já que o objetivo é minimizar o risco de CFIT durante voos de baixa altitude. Não há uma taxa de CFIT aceitável universalmente aceita. A taxa é determinada pelas regulamentações aeronáuticas relevantes, às necessidades da operação e as circunstâncias específicas.
+
+Exposição e probabilidade de ser abatido: O projeto visa minimizar a taxa de exposição a riscos de abate durante voos de baixa altitude. Esta taxa pode ser quantificada com base em fatores como o número de horas de voo, as condições do setor aéreo, a altitude de voo e o perfil de voo. Esta taxa é calculada com base em estatísticas históricas, simulações de voo e análises de risco, e é usada como indicador da segurança do voo.
+
+Sistemas de monitoramento: A interferência e detecção por sistemas de monitoramento e radares durante as trajetórias de voo também é uma variável a ser considerada. Isso pode ser quantificado por meio da avaliação da taxa de interferência e detecção em relação ao número total de rotas e trajetórias calculadas.
+
+Visibilidade da aeronave: O projeto visa minimizar a visibilidade da aeronave considerando obstáculos como montanhas, florestas, etc., durante a construção de trajetórias de voo de referência.
+
+Visada de relevo: A caracterização do relevo é importante para garantir uma visada adequada durante voos de baixa altitude, permitindo que a aeronave mantenha a segurança ao evitar obstáculos. O projeto considera as características do relevo na construção de trajetórias de voo de referência.
+
 
 ## Objetivos
 
 ### Objetivos gerais
 
-*Lista_de_objetivos_gerais*
+O principal objetivo desta iniciativa é proporcionar uma interface humano-computador para o cálculo de trajetórias, por meio de grafos, para voos de baixa altitude, de modo que estas respeitem uma série de restrições com o fim de atenuar possíveis situações de risco.
 
 ### Objetivos específicos
 
-*Lista_de_objetivos específicos*
+Altitude de voo: O projeto tem como foco voos de baixa altitude, o que é uma restrição importante a ser considerada. Um voo a baixa altitude é definido como um voo realizado a uma altitude inferior a certa altitude estabelecida, geralmente determinada pela regulamentação aeronáutica ou pelas normas de segurança de voo. Em geral, um voo a baixa altitude pode ser considerado entre 500 a 1000 pés (cerca de 152 a 305 metros) acima do solo.
+
+Confiabilidade do setor aéreo e zona de voo: A confiabilidade do setor aéreo e da zona de voo é mensurada através de indicadores de segurança como o índice de acidentes por hora de voo, índice de incidências climáticas e restrições de tráfego aéreo. Valores acima de 90% são considerados aceitáveis para garantir a segurança do voo.
+
+Terreno: A altura do terreno é uma consideração importante para voos de baixa altitude, pois afeta a segurança do voo. É necessário verificar a presença de obstáculos, como montanhas, torres, prédios, árvores, entre outros, que possam prejudicar a segurança do voo e a capacidade do piloto de realizar manobras. Uma distância mínima recomendada em relação aos obstáculos pode ser estabelecida pela regulamentação aeronáutica ou pelas normas de segurança de voo.
+
+Possibilidade de colisão com o solo (CFIT): Este é o principal problema a ser resolvido pelo projeto, já que o objetivo é minimizar o risco de CFIT durante voos de baixa altitude. Não há uma taxa de CFIT aceitável universalmente aceita. A taxa é determinada pelas regulamentações aeronáuticas relevantes, às necessidades da operação e as circunstâncias específicas.
+
+Exposição e probabilidade de ser abatido: O projeto visa minimizar a taxa de exposição a riscos de abate durante voos de baixa altitude. Esta taxa pode ser quantificada com base em fatores como o número de horas de voo, as condições do setor aéreo, a altitude de voo e o perfil de voo. Esta taxa é calculada com base em estatísticas históricas, simulações de voo e análises de risco, e é usada como indicador da segurança do voo.
+
+Sistemas de monitoramento: A interferência e detecção por sistemas de monitoramento e radares durante as trajetórias de voo também é uma variável a ser considerada. Isso pode ser quantificado por meio da avaliação da taxa de interferência e detecção em relação ao número total de rotas e trajetórias calculadas.
+
+Visibilidade da aeronave: O projeto visa minimizar a visibilidade da aeronave considerando obstáculos como montanhas, florestas, etc., durante a construção de trajetórias de voo de referência.
+
+Visada de relevo: A caracterização do relevo é importante para garantir uma visada adequada durante voos de baixa altitude, permitindo que a aeronave mantenha a segurança ao evitar obstáculos. O projeto considera as características do relevo na construção de trajetórias de voo de referência.
 
 ## Partes interessadas
 
@@ -146,10 +188,6 @@ A empresa possui em seu portfólio produtos extremamente específicos, como o Te
 
 ### Rivalidade entre concorrentes:
 Existem alguns fatores que demonstram a rivalidade, dentre eles, podemos destacar que a barreira de entrada é alta e esse setor é composto por apenas 11 empresas. Além disso, a demanda é linear durante todo o ano e o Brasil não possui histórico de conflitos armados externos, sendo assim, podemos observar um mercado bastante previsível para as empresas que já estão no meio. Por isso, podemos definir que a rivalidade entre concorrentes é baixa e que existe até mesmo uma colaboração entre eles em alguns setores em que os players não tem expertise. 
-
-
-
-*Descrição_da_análise_da_área_de_atuação*
 
 ### Análise do cenário: Matriz SWOT
 
@@ -226,7 +264,33 @@ O software desenvolvido visa ser uma ferramenta de suporte valiosa para pilotos 
 
 ## Histórias dos usuários (user stories)
 
-*Descrição_das_histórias_dos_usuários*
+
+
+Piloto
+
+Como piloto militar, quero ter acesso a mapas atualizados com os trajetos mais eficientes para poder navegar com precisão em missões.
+
+Como piloto militar, quero ter acesso a informações sobre o terreno e as condições adversas para tomar decisões de voo e certificar que a missão será um sucesso .
+
+Como piloto militar, quero ter uma trajetória que minimize a minha visibilidade, para inimigos não me identificarem facilmente.
+
+Como piloto militar , quero poder me comunicar com colegas e comandante em caso de emergências durante minhas missões.
+
+Como piloto militar, quero saber o que embasou a escolha da rota para a missão, para estar a par. 
+
+
+
+Inteligencia Militar
+
+Eu, como inteligência militar, quero garantir que a missão seja executada com a altitude mais baixa possível, para evitar que meu piloto e avião sejam abatidos.
+
+Eu, como inteligência militar, quero fazer uma rota que seja compatível com a autonomia do avião, pois o combustível não pode terminar antes do pouso.
+
+Eu, como inteligência militar, quero que o trajeto tenha a menor variação de altitude possível, para evitar o gasto desnecessário de combustível. 
+
+Eu, como inteligência militar, quero traçar caminhos que evitem áreas indesejadas, como bases inimigas, para evitar a exposição da aeronave.
+
+Eu, como inteligência militar, quero uma aplicação que dê uma rota em menos de 1 minuto, para garantir que o planejamento emergencial aconteça dentro do tempo limite.
 
 
 # Arquitetura do Sistema
