@@ -243,7 +243,7 @@ O software desenvolvido visa ser uma ferramenta de suporte valiosa para pilotos 
 
 ## Proposta de Valor: Value Proposition Canvas
 
-[VPC](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/Cópia de Value Proposition Canvas - módulo 5.png)
+[VPC](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/VPC.png)
 
 
 ## Matriz de Risco
