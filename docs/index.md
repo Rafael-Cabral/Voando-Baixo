@@ -191,7 +191,7 @@ Existem alguns fatores que demonstram a rivalidade, dentre eles, podemos destaca
 
 ### Análise do cenário: Matriz SWOT
 
-*Matriz_SWOT*
+[SWOT](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/image_2023-02-11_230622327.png)
 
 ## Descrição da solução a ser desenvolvida:
 
@@ -243,12 +243,12 @@ O software desenvolvido visa ser uma ferramenta de suporte valiosa para pilotos 
 
 ## Proposta de Valor: Value Proposition Canvas
 
-*Value_Proposition_Canvas*
+[VPC](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/Cópia de Value Proposition Canvas - módulo 5.png)
 
 
 ## Matriz de Risco
 
-*Matriz_de_risco*
+[Matriz de Risco](https://docs.google.com/spreadsheets/d/1IckJ2GDFogIn9OFoECq05htuEOgNn2KIkfMbei2BZPs/edit?usp=sharing)
 
 
 # Requisitos do Sistema
