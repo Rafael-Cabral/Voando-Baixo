@@ -28,7 +28,7 @@ Planejador de trajetórias para voos em baixa altitude.
 - [Requisitos do Sistema](#requisitos-do-sistema)
   - [Personas](#personas)
   - [Histórias dos usuários (user stories)](#histórias-dos-usuários-user-stories)
-
+- [Análise de dados](#análise-de-dados)
 - [Referências](#referências)
 
 
@@ -294,6 +294,13 @@ Outros dados importantes que devem ser incluídos são o ponto de partida e o de
   &emsp;&emsp;&emsp;| Rio<br>
   &emsp;&emsp;&emsp;| SP<br>
 <br>
+
+## Representação visual inicial (Neo4j)
+
+A representação visual inicial do problema pode ser visualizada abaixo ou, se preferível, gerada através dos comandos [descritos aqui](https://github.com/2023M5T1-Inteli/grupo2/blob/master/src/cql/db.cql) ou no link https://github.com/2023M5T1-Inteli/grupo2/blob/master/src/cql/db.cql.
+
+![Representação visual](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/graph.png?raw=true)
+
 
 ## Limitações
 
