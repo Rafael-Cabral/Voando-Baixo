@@ -1,0 +1,12 @@
+MERGE (st:Coordinate {latitude: "-22.9464149", longitude:"-44.5350541", type: "start"})
+MERGE (c1:Coordinate {latitude: "-22.9593803", longitude:"-44.5474983", type: "coordinate"})
+MERGE (c2:Coordinate {latitude: "-22.9689633", longitude:"-44.5468429", type: "coordinate"})
+MERGE (c3:Coordinate {latitude: "-22.9825205", longitude:"-44.5454494", type: "coordinate"})
+MERGE (c4:Coordinate {latitude: "-22.9870343", longitude:"-44.5356863", type: "coordinate"})
+MERGE (en:Coordinate {latitude: "-22.9870343", longitude:"-44.5356863",type:"end"})
+
+MERGE (st)-[:IS_NEXT_TO]-(c1)
+MERGE (c1)-[:IS_NEXT_TO]-(c2)
+MERGE (c2)-[:IS_NEXT_TO]-(c3)
+MERGE (c3)-[:IS_NEXT_TO]-(c4)
+MERGE (c4)-[:IS_NEXT_TO]-(en)
