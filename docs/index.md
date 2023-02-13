@@ -169,7 +169,7 @@ Para ter uma compreensão mais clara da situação atual da empresa parceira, re
 ### Problema a ser resolvido
 A AEL Sistemas possui atualmente um algoritmo para missões de voo de baixa altitude que considera diversos aspectos de voo para encontrar um equilíbrio entre a probabilidade de colisão com o solo e a probabilidade de ser atacado. No entanto, a empresa não dispõe de um algoritmo que possa identificar a rota mais benéfica para a missão. Isso é complicado por diversos obstáculos como regiões altamente povoadas, regiões com tropas inimigas, entre outras ameaças, tornando necessário o desenvolvimento de uma solução.
 
-### Solução proposta (Visão de negócios)
+### Solução proposta (visão de negócios)
 A solução proposta é o desenvolvimento de uma aplicação em Java que permita ao cliente planejar trajetórias para voos de baixa altitude. A aplicação utilizará dados de elevação para criar uma representação gráfica da área de voo e suas características geográficas, possibilitando ao cliente encontrar a rota mais otimizada entre o ponto de partida e o destino. A aplicação será desenvolvida de forma a seguir as restrições impostas pelo cliente, garantindo a segurança e eficiência dos voos.
 
 ### Como a solução deve ser usada
