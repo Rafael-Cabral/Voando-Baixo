@@ -237,5 +237,68 @@ Para compreender o projeto com mais profundidade, criamos as personas. As person
 | 9 | Eu, como inteligência militar, quero traçar caminhos que evitem áreas indesejadas, como bases inimigas, para evitar a exposição da aeronave. |Média|Alta|Pendente|
 | 10 | Eu, como inteligência militar, quero uma aplicação que dê uma rota em menos de 1 minuto, para garantir que o planejamento emergencial aconteça dentro do tempo limite. |Alta|Baixa|Pendente|
 
+# Análise de Dados
+
+## Formato
+Os dados repassados pela AEL são dados geoespaciais, eles estão em formato DTED2 (.dt2) e precisam de algumas bibliotecas específicas para serem manipulados e visualizados.
+
+## Biblioteca utilizada
+GDAL - biblioteca tradutora para formatos de dados geoespaciais vetoriais e raster que é lançada sob uma licença de código aberto estilo MIT pela Open Source Geospatial Foundation.
+
+## Características dos arquivos
+
+| REGIÃO | NOME | MB |
+| ------ | ---- | --- |
+| SP | W045_S23.dt2 | 24.8 mb |
+| SP | W045_S24.dt2 | 24.8 mb |
+| SP | W046_S23.dt2 | 24.8 mb |
+| SP | W046_S24.dt2 | 24.8 mb |
+| SP | W047_S23.dt2 | 24.8 mb |
+| SP | W047_S24.dt2 | 24.8 mb |
+| RJ | W043_S23.dt2 | 24.8 mb |
+| RJ | W043_S24.dt2 | 24.8 mb |
+| RJ | W044_S23.dt2 | 24.8 mb |
+| RJ | W044_S24.dt2 | 24.8 mb |
+
+## Características dos dados
+
+Para processar esses dados, precisamos incluir duas informações: as coordenadas de longitude e latitude de um determinado local. O resultado será a altura prevista para essa área.
+
+Além disso, é possível incluir áreas que devem ser evitadas, conhecidas como zonas de exclusão. Também é possível especificar pontos obrigatórios a serem percorridos, chamados de zonas essenciais.
+
+Outros dados importantes que devem ser incluídos são o ponto de partida e o destino, para que o algoritmo possa calcular a melhor rota.
+
+## Inputs
+
+| CARACTERÍSTICA | TIPO | EXEMPLO |
+|----------------|------|---------|
+| 1 - Longitude  | NUMBER(double) | -23.0696792891117 |
+| 2 - Latitude   | NUMBER(double) | -43.5573428666663 |
+| 3 - Zonas de exclusão | Coordenada | (-23.0696792891117, -43.5573428666663) |
+| 4 - Zonas essenciais | Coordenada | (-23.55666444, -46.653497386) |
+| 5 - Ponto de partida | Coordenada | (-23.588333, -46.658890) |
+| 6 - Ponto de destino | Coordenada | (-23.5767, -46.6878) |
+
+## Outputs
+
+| CARACTERÍSTICA | TIPO | EXEMPLO |
+|----------------|------|---------|
+| Altura(esperada) | NUMBER(double) | 1928 (valor esperado) |
+| Trajetória | Imagem | -------------------------| 
+
+## Localização dos dados no github
+
+|--> src/main<br>
+  &emsp;| --> resources/dted <br>
+  &emsp;&emsp;| -->T3_G3_V5_IoT_Document.pdf<br>
+  &emsp;&emsp;&emsp;| Rio<br>
+  &emsp;&emsp;&emsp;| SP<br>
+<br>
+
+## Limitações
+
+Desenvolver uma solução eficaz para o problema de caminho mínimo apresenta complexidade elevada, ainda mais quando adicionamos features como optar pela menor altura possível. A memória é intensivamente usada durante o desenvolvimento dos algoritmos, o que pode causar desempenho lento e dificultar a escalabilidade da solução.
+
+Devido à alta complexidade da solução e à falta de familiaridade da equipe de desenvolvimento com as ferramentas em uso, erros podem ocorrer na escolha do melhor algoritmo e na otimização de sua eficiência. Fatores externos, como dificuldades de terreno e condições climáticas, também devem ser levados em consideração ao planejar o trajeto.
 
 # Referências
