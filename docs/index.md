@@ -191,7 +191,23 @@ Existem alguns fatores que demonstram a rivalidade, dentre eles, podemos destaca
 
 ### Análise do cenário: Matriz SWOT
 
-[SWOT](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/image_2023-02-11_230622327.png)
+>Para entendermos melhor o cenário atual da empresa parceira, criamos uma análise SWOT dela. Análise SWOT é uma ferramenta de gestão que serve para fazer o planejamento estratégico de empresas e novos projetos. Com ela, nos conectamos melhor à empresa, entendemos suas dores a serem melhoradas e seus pontos fortes a serem explorados.
+
+### Forças
+- Capacidade de produzir soluções com alto nível de qualidade
+- Vasta diversidade de produtos e serviços
+- Faz parte do grupo Elbit Systems, líder mundial no segmento de defesa
+### Fraquezas
+- Produtos voltados para um mercado restrito
+- Modalidade de trabalho restritiva, já que sua sede está fora do polo tecnológico aeronáutico do Brasil
+- Qualidade dos materiais de divulgação podem ser mais atualizados e refinados
+### Oportunidades
+- Maior o investimento em tecnologias no setor militar, pois o Brasil possui a segunda maior frota de aeronaves militares do continente
+- Aumentar o investimento an área aeroespacial devido ao crescimento do mercado no mundo
+### Ameaças
+- Diminuição do investimento do governo brasileiro nas áreas da empresa
+- Por conta de seus clientes serem majoritariamente conservadores, há restrições ao fazer contratos de fornecimento de materiais com outras empresas
+- Teccnologias utilizadas podem se tornar obsoletas rapidamente pelo maior investimento em P&D em relação ao cenário internacional
 
 ## Descrição da solução a ser desenvolvida:
 
@@ -243,7 +259,10 @@ O software desenvolvido visa ser uma ferramenta de suporte valiosa para pilotos 
 
 ## Proposta de Valor: Value Proposition Canvas
 
-[Value Proposition Canvas](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/Value%20Proposition%20Canvas.png)
+>Para melhor representar as dores e necessidades do cliente, criamos a `Value Proposition Canvas`, ou `Proposta de Valor`. O Value Proposition Canvas trata-se de uma representação visual e fácil de entender dos principais motivos do cliente ter a necessidade de nosso produto. VEmos as dores do cliente, como resolveríamos elas com nosso produto e os ganhos que o cliente teria com isso.
+
+![Value Proposition Canvas](https://raw.githubusercontent.com/2023M5T1-Inteli/grupo2/master/docs/img/Value%20Proposition%20Canvas.png)
+
 
 
 ## Matriz de Risco
@@ -256,41 +275,39 @@ O software desenvolvido visa ser uma ferramenta de suporte valiosa para pilotos 
 *Descrição_dos_requisitos*
 
 ## Personas
+>Para entender melhor o projeto, criamos personas. As personas são uma personificação do usuário final do projeto a ser desenvolvido. Seu principal obetivo é entender melhor o usuário e criar uma conexão mais próxima para facilitar na hora do desenvolvimento e termos certeza que nosso sistema vai atender suas necessidades. Para isso, criamos duas personas diferentes.
 
-[persona-1](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/persona1.png)
-
-[persona-2](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/persona2.png)
+### Persona principal:
+![persona-1](https://raw.githubusercontent.com/2023M5T1-Inteli/grupo2/master/docs/img/persona1.png)
+### Persona secundária:
+![persona-2](https://raw.githubusercontent.com/2023M5T1-Inteli/grupo2/master/docs/img/persona2.png)
 
 
 ## Histórias dos usuários (user stories)
+>Com nossas prsonas criadas, desenvolvemos as histórias dos usuários. As histórias dos usuários são as necessidades que cada persona tem e que deverão ser resolvidas com nosso produto. Por uma questão de facilitar o entendimento dessas necessidades, colocamos-as sem termos técnicos, como visto abaixo.
 
+### Piloto
+1. Como piloto militar, quero ter acesso a mapas atualizados com os trajetos mais eficientes para poder navegar com precisão em missões.
 
+2. Como piloto militar, quero ter acesso a informações sobre o terreno e as condições adversas para tomar decisões de voo e certificar que a missão será um sucesso .
 
-Piloto
+3. Como piloto militar, quero ter uma trajetória que minimize a minha visibilidade, para inimigos não me identificarem facilmente.
 
-Como piloto militar, quero ter acesso a mapas atualizados com os trajetos mais eficientes para poder navegar com precisão em missões.
+4. Como piloto militar , quero poder me comunicar com colegas e comandante em caso de emergências durante minhas missões.
 
-Como piloto militar, quero ter acesso a informações sobre o terreno e as condições adversas para tomar decisões de voo e certificar que a missão será um sucesso .
+5. Como piloto militar, quero saber o que embasou a escolha da rota para a missão, para estar a par.
+<br/><br/><br/>
+### Inteligencia Militar
 
-Como piloto militar, quero ter uma trajetória que minimize a minha visibilidade, para inimigos não me identificarem facilmente.
+1. Eu, como inteligência militar, quero garantir que a missão seja executada com a altitude mais baixa possível, para evitar que meu piloto e avião sejam abatidos.
 
-Como piloto militar , quero poder me comunicar com colegas e comandante em caso de emergências durante minhas missões.
+2. Eu, como inteligência militar, quero fazer uma rota que seja compatível com a autonomia do avião, pois o combustível não pode terminar antes do pouso.
 
-Como piloto militar, quero saber o que embasou a escolha da rota para a missão, para estar a par. 
+3. Eu, como inteligência militar, quero que o trajeto tenha a menor variação de altitude possível, para evitar o gasto desnecessário de combustível. 
 
+5. Eu, como inteligência militar, quero traçar caminhos que evitem áreas indesejadas, como bases inimigas, para evitar a exposição da aeronave.
 
-
-Inteligencia Militar
-
-Eu, como inteligência militar, quero garantir que a missão seja executada com a altitude mais baixa possível, para evitar que meu piloto e avião sejam abatidos.
-
-Eu, como inteligência militar, quero fazer uma rota que seja compatível com a autonomia do avião, pois o combustível não pode terminar antes do pouso.
-
-Eu, como inteligência militar, quero que o trajeto tenha a menor variação de altitude possível, para evitar o gasto desnecessário de combustível. 
-
-Eu, como inteligência militar, quero traçar caminhos que evitem áreas indesejadas, como bases inimigas, para evitar a exposição da aeronave.
-
-Eu, como inteligência militar, quero uma aplicação que dê uma rota em menos de 1 minuto, para garantir que o planejamento emergencial aconteça dentro do tempo limite.
+6. Eu, como inteligência militar, quero uma aplicação que dê uma rota em menos de 1 minuto, para garantir que o planejamento emergencial aconteça dentro do tempo limite.
 
 
 # Arquitetura do Sistema
@@ -395,7 +412,7 @@ Outros dados que também devem ser implementados, são o ponto de partida e o po
 
 ## Limitações
 
-Desenvolver uma solução eficaz para o problema de caminho mínimo apresenta complexidade elevada, ainda mais quando adicionamos features como optar pela menor altura possível. A memória é intensivamente usada durante o desenvolvimento dos algoritmos, o que pode causar desempenho lento e dificultar a escalabilidade da solução. 
+Desenvolver uma solução eficaz para o problema de caminho mínimo apresenta complexidade elevada, ainda mais quando adicionamos features como optar pela menor altura possível. A memória é intensivamente usada durante o desenvolvimento dos algoritmos, o que pode causar desempenho lento e dificultar a escalabilidade da solução.
 
 Por conta da solução ter uma complexidade muito alta e a equipe de desenvolvimento ainda é pouco familiarizada com as ferramentas utilizadas, podem ocorrer erros ao escolher o melhor algoritmo e torná-lo o mais eficiente possível. Alguns pontos que também podem influenciar, são os fatores externos, como dificuldade dos terrenos e condições climáticas, também devem ser considerados ao definir o percurso.
 
