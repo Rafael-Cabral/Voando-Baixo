@@ -166,28 +166,17 @@ Para ter uma compreensão mais clara da situação atual da empresa parceira, re
 
 ## Descrição da solução a ser desenvolvida
 
-### O problema a ser resolvido
+### Problema a ser resolvido
+A AEL Sistemas possui atualmente um algoritmo para missões de voo de baixa altitude que considera diversos aspectos de voo para encontrar um equilíbrio entre a probabilidade de colisão com o solo e a probabilidade de ser atacado. No entanto, a empresa não dispõe de um algoritmo que possa identificar a rota mais benéfica para a missão. Isso é complicado por diversos obstáculos como regiões altamente povoadas, regiões com tropas inimigas, entre outras ameaças, tornando necessário o desenvolvimento de uma solução.
 
-Atualmente, a AEL Sistemas tem um algoritmo para missões de voo de baixa altitude, que considera vários aspectos de voo para encontrar um equilíbrio entre a probabilidade da aeronave colidir com o solo e a probabilidade da aeronave ser alvo de forças opositoras. Entretanto, a AEL Sistemas não possui um algoritmo que consiga achar a rota mais benéfica para a missão. A presença de vários obstáculos como: regiões muito povoadas, regiões com tropas inimigas, entre outras ameaças que dificultam a missão, fazem necessário o desenvolvimento de uma nova solução.
+### Solução proposta (Visão de negócios)
+A solução proposta é o desenvolvimento de uma aplicação em Java que permita ao cliente planejar trajetórias para voos de baixa altitude. A aplicação utilizará dados de elevação para criar uma representação gráfica da área de voo e suas características geográficas, possibilitando ao cliente encontrar a rota mais otimizada entre o ponto de partida e o destino. A aplicação será desenvolvida de forma a seguir as restrições impostas pelo cliente, garantindo a segurança e eficiência dos voos.
 
-### Solução proposta (visão de negócios)
-
-A solução proposta é o desenvolvimento de uma aplicação em Java, com a qual o cliente pode interagir e planejar trajetórias para voos a baixa altitude. Esta aplicação utilizará dados de elevação para criar uma representação gráfica da área de voo e suas características geográficas, permitindo que o cliente encontre o caminho mais otimizado entre o ponto de partida e o destino. Além disso, a aplicação será desenvolvida de forma a seguir as restrições especificadas pelo cliente, garantindo assim a segurança e eficiência dos voos.
-
-### Como a solução deve ser utilizadas
-
-Ao receber a informação de uma missão que necessite descrição, a equipe poderá colocar na interface o ponto de partida e o de chegada. O algoritmo irá procurar, de acordo com os dados topográficos entre a região dos pontos, a melhor trajetória para manter baixa altitude e evitar ser detectado. Uma vez calculado o caminho, a solução devolverá para o usuário um caminho tracejado no mapa ligando os dois pontos, e também um arquivo de texto com um vetor de coordenadas para poder ser utilizado em outro aplicativo.
-
+### Como a solução deve ser usada
+Quando receber informações sobre uma missão que precise de planejamento, a equipe poderá inserir o ponto de partida e chegada na interface. O algoritmo então procurará, com base nos dados topográficos entre as regiões dos pontos, a melhor trajetória para manter baixa altitude e evitar ser detectado. Após o cálculo da rota, a solução retornará ao usuário uma trajetória tracejada no mapa conectando os dois pontos e um arquivo de texto com um vetor de coordenadas que pode ser utilizado em outra aplicação.
 
 ### Benefícios trazidos pela solução proposta
-
-O projeto poderá otimizar os trajetos de missões críticas, aumentando a chance de sucesso da missão, e servir de base para projetos que englobam, além da plataforma embarcada, sistemas de planejamento de missões em solo. Com a implantação deste projeto, a empresa estará preparada para enfrentar os desafios futuros e aproveitar as oportunidades emergentes, conseguindo usar a nova solução em conjunto com um produto que eles já possuem e gerar ainda mais valor.
-<br>
-<br>
-
-## Indicação de uma solução viável
-
-O software sera projetado para calcular a rota mais otimizada para voos a baixa altitude de uma aeronave. Ele utiliza informações geográficas fornecidas por um arquivo .dt2 como entrada e retorna a rota ideal para voar entre dois pontos, levando em consideração restrições específicas definidas pelo usuário. A solução é baseada em teorias de grafos e emprega algoritmos eficientes, como algoritmos de caminho mínimo, para determinar a rota ideal para a aeronave percorrer.
+A implementação deste projeto pode melhorar os percursos de missões críticas, elevando a probabilidade de sucesso, e servir como base para futuros projetos que envolvam tanto a plataforma embarcada quanto sistemas de planejamento de missões no solo. Com a adoção desta solução, a empresa estará preparada para encarar desafios futuros e aproveitar novas oportunidades, utilizando-a em conjunto com um produto já existente e criando ainda mais valor.
 
 ### Objetivos
 
@@ -207,8 +196,6 @@ O software sera projetado para calcular a rota mais otimizada para voos a baixa 
 ### Conclusão
 
 O software desenvolvido visa ser uma ferramenta de suporte valiosa para pilotos que realizam voos em altitudes baixas, fornecendo-lhes uma rota eficiente e segura. A solução é um MVP e precisará de algumas alterações para se adequar aos sistemas da AEL, mas pode apresentar grandes benefícios para os usuários.
-<br>
-<br>
 
 
 ## Proposta de Valor: Value Proposition Canvas
