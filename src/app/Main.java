@@ -9,7 +9,7 @@ public class Main {
         graph.addVertex(45.18927, 54.56391, 1250);
         graph.addVertex(32.37628, 72.87261, 1500);
         graph.addVertex(67.46345, 89.28140, 1750);
-
+        
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
         graph.addEdge(1, 2);

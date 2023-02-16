@@ -54,20 +54,32 @@ public class Vertex {
 
     }
 
-    public int getQuantityOfConnections() {
+    public int getNumberOfConnections() {
 
         return this.connections.size();
 
     }
 
+
+    /*
+     * Add a connection from a departure vertex to an arrival vertex by creating a new edge in connections adjacency list.
+     * @param   Vertex   arrivalVertex
+     */
     public void addConnectionTo(Vertex arrivalVertex) {
+    
         int weight = (int) (Math.abs(arrivalVertex.getAltitude() - this.altitude) + arrivalVertex.getAltitude());
+        
         this.connections.add(new Edge(arrivalVertex, weight));
+        
     }
 
+    /*
+     * Return a string that represents the adjacency list of the vertex in a specific format.
+     * @return   String   "0: 1 | 2 | 3 | ... | n"
+     */
     public String getAdjacencyListAsString() {
 
-        int quantityOfConnections = this.getQuantityOfConnections();
+        int quantityOfConnections = this.getNumberOfConnections();
 
         StringBuilder str = new StringBuilder(Integer.toString(this.id) + ": ");
 
@@ -75,7 +87,7 @@ public class Vertex {
 
             str.append(getConnectionAt(i).getArrivalVertex().getId());
 
-            if (i + 1 < quantityOfConnections) str.append(" -> ");
+            if (i + 1 < quantityOfConnections) str.append(" | ");
 
         }
 

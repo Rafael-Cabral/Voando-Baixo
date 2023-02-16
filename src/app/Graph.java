@@ -8,7 +8,7 @@ public class Graph {
 
     public Graph() {
 
-        vertices = new ArrayList<Vertex>();
+        this.vertices = new ArrayList<Vertex>();
 
     }
 
@@ -16,7 +16,7 @@ public class Graph {
 
         Vertex vertex = new Vertex(nextVertexId++, latitude, longitude, altitude);
 
-        vertices.add(vertex);
+        this.vertices.add(vertex);
 
         return vertex;
 
