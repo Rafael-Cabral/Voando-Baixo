@@ -60,15 +60,17 @@ public class Vertex {
 
     }
 
+
     /*
      * Add a connection from a departure vertex to an arrival vertex by creating a new edge in connections adjacency list.
      * @param   Vertex   arrivalVertex
-     * @param   Integer  weight
      */
-    public void addConnectionTo(Vertex arrivalVertex, int weight) {
-
+    public void addConnectionTo(Vertex arrivalVertex) {
+    
+        int weight = (int) (Math.abs(arrivalVertex.getAltitude() - this.altitude) + arrivalVertex.getAltitude());
+        
         this.connections.add(new Edge(arrivalVertex, weight));
-
+        
     }
 
     /*
