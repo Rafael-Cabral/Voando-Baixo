@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Graph {
 
@@ -21,11 +22,22 @@ public class Graph {
 
     }
 
+    public void addEdge(int vertexId, int arrivalVertex) {
+
+        this.vertices.get(vertexId).addConnectionTo(this.vertices.get(arrivalVertex));
+
+    }
+
     public ArrayList<Vertex> getVertices() {
 
         return this.vertices;
 
     }
 
+    public LinkedList<Edge> getConnectionsOf(int vertexId) {
+
+        return this.vertices.get(vertexId).getAllConnections();
+
+    }
 
 }

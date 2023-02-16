@@ -60,10 +60,9 @@ public class Vertex {
 
     }
 
-    public void addConnectionTo(Vertex arrivalVertex, int weight) {
-
+    public void addConnectionTo(Vertex arrivalVertex) {
+        int weight = (int) (Math.abs(arrivalVertex.getAltitude() - this.altitude) + arrivalVertex.getAltitude());
         this.connections.add(new Edge(arrivalVertex, weight));
-
     }
 
     public String getAdjacencyListAsString() {
