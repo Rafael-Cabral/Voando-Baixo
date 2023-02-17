@@ -30,4 +30,79 @@ public class Graph {
         return this.vertices.get(vertexId).getAllConnections();
     }
 
+     public void connectVertices() {
+        for (int i = 0; i < vertexMatrix.length(); i++) {
+            for (int j = i + 1; j < vertexMatrix[i].length(); j++) {
+                //Qualquer nó que tenha 8 conexões
+                if ((i > 0 && vertexMatrix[i].length() - 1) && (j > 0 && vertexMatrix[j].length() - 1)) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
+                }
+                //Qualquer nó lateral superior sem os extremos
+                else if (i == 0 && j > 0 && j < (vertexMatrix[j].length() - 1)) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
+                }
+                //Qualquer nó lateral inferior sem os extremos
+                else if (i == vertexMatrix[i].length() && j > 0 && j < (vertexMatrix[j].length() - 1)) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j - 1]);
+                }
+                //Qualquer nó lateral esquerda sem os extremos
+                else if (j == 0 && i > 0 && i < (vertexMatrix[i].length() - 1)) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j + 1]);
+                }
+                //Qualquer nó lateral direita sem os extremos
+                else if (j == vertexMatrix[j].length() && i > 0 && i < (vertexMatrix[i].length() - 1)) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j - 1]);
+                }
+                //Cria conexões nos vértices extremos
+                else if (i == 0 && j == 0) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
+                }
+                //Cria conexões nos vértices extremos
+                else if (i == 0 && vertexMatrix[j].length()) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
+
+                }
+                //Cria conexões nos vértices extremos
+                else if (vertexMatrix[i].length() && j == 0) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
+                }
+                //Cria conexões nos vértices extremos
+                else if (vertexMatrix[i].length() && vertexMatrix[j].length()) {
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
+                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
+                }
+            }
+        }
+    }
+
 }
