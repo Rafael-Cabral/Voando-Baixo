@@ -7,12 +7,25 @@ public class App {
         Graph graph = new Graph();
 
         // Adding vertices to the created graph.
-        graph.addVertex(20.32419, 12.54193, 1000);
-        graph.addVertex(27.87621, 34.91028, 750);
-        graph.addVertex(21.78290, 37.71652, 500);
-        graph.addVertex(45.18927, 54.56391, 1250);
-        graph.addVertex(32.37628, 72.87261, 1500);
-        graph.addVertex(67.46345, 89.28140, 1750);
+        graph.addVertex(200.32419, 120.54193, 1000);
+        graph.addVertex(300.32419, 120.54193, 1000);
+        graph.addVertex(400.32419, 120.54193, 1000);
+        graph.addVertex(500.32419, 120.54193, 1000);
+
+        graph.addVertex(200.32419, 220.54193, 750);
+        graph.addVertex(300.32419, 220.54193, 750);
+        graph.addVertex(400.32419, 220.54193, 750);
+        graph.addVertex(500.32419, 220.54193, 750);
+
+        graph.addVertex(200.32419, 320.54193, 500);
+        graph.addVertex(300.32419, 320.54193, 500);
+        graph.addVertex(400.32419, 320.54193, 500);
+        graph.addVertex(500.32419, 320.54193, 500);
+
+        graph.addVertex(500.32419, 420.54193, 1250);
+        graph.addVertex(300.32419, 420.54193, 1250);
+        graph.addVertex(400.32419, 420.54193, 1250);
+        graph.addVertex(500.32419, 420.54193, 1250);
 
         // Creating directed connections between vertices from a departure vertex to an arrival vertex, eg. a (id) -> b (id).
         graph.addEdge(0, 1);
@@ -31,5 +44,10 @@ public class App {
             System.out.println(connection.getArrivalVertex().getId());
         });
 
+        graph.connectVertices(100);
+
+        graph.getConnectionsOf(0).forEach(connection -> {
+            System.out.println(connection.getArrivalVertex().getId());
+        });
     }
 }

@@ -30,79 +30,43 @@ public class Graph {
         return this.vertices.get(vertexId).getAllConnections();
     }
 
-     public void connectVertices() {
-        for (int i = 0; i < vertexMatrix.length(); i++) {
-            for (int j = i + 1; j < vertexMatrix[i].length(); j++) {
-                //Qualquer nó que tenha 8 conexões
-                if ((i > 0 && vertexMatrix[i].length() - 1) && (j > 0 && vertexMatrix[j].length() - 1)) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
-                }
-                //Qualquer nó lateral superior sem os extremos
-                else if (i == 0 && j > 0 && j < (vertexMatrix[j].length() - 1)) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
-                }
-                //Qualquer nó lateral inferior sem os extremos
-                else if (i == vertexMatrix[i].length() && j > 0 && j < (vertexMatrix[j].length() - 1)) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j - 1]);
-                }
-                //Qualquer nó lateral esquerda sem os extremos
-                else if (j == 0 && i > 0 && i < (vertexMatrix[i].length() - 1)) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j + 1]);
-                }
-                //Qualquer nó lateral direita sem os extremos
-                else if (j == vertexMatrix[j].length() && i > 0 && i < (vertexMatrix[i].length() - 1)) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i - 1][j - 1]);
-                }
-                //Cria conexões nos vértices extremos
-                else if (i == 0 && j == 0) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
-                }
-                //Cria conexões nos vértices extremos
-                else if (i == 0 && vertexMatrix[j].length()) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
+     public void connectVertices(int distance) {
 
+        int x = (int) (this.vertices.get(this.vertices.size() - 1).getLatitude() - this.vertices.get(0).getLatitude());
+        x = (x/distance) - 1;
+
+        int y = (int) (this.vertices.get(this.vertices.size() - 1).getLongitude() - this.vertices.get(0).getLongitude());
+        y = (y/distance) - 1;
+
+        int currentVertex = 0;
+        for (int i = 0; i <= x; i++) {
+            for (int j = 0; j <= y; j++) {
+                if (i > 0) {
+                    this.addEdge(currentVertex, currentVertex - x);
                 }
-                //Cria conexões nos vértices extremos
-                else if (vertexMatrix[i].length() && j == 0) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j + 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j + 1]);
+                if (i < x) {
+                    this.addEdge(currentVertex, currentVertex + x);
                 }
-                //Cria conexões nos vértices extremos
-                else if (vertexMatrix[i].length() && vertexMatrix[j].length()) {
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i][j - 1]);
-                    vertexMatrix[i][j].addEdge(vertexMatrix.getId()[i][j], vertexMatrix.getId()[i + 1][j - 1]);
+                if (j > 0) {
+                    this.addEdge(currentVertex, currentVertex - 1);
                 }
+                if (j < y) {
+                    this.addEdge(currentVertex, currentVertex + 1);
+                }
+                if (i < x && j < y){
+                    this.addEdge(currentVertex, currentVertex + x + 1);
+                }
+                if (i > 0 && j > 0){
+                    this.addEdge(currentVertex, currentVertex - x - 1);
+                }
+                if (i > 0 && j < y){
+                    this.addEdge(currentVertex, currentVertex + x - 1);
+                }
+                if (i < x && j > 0){
+                    this.addEdge(currentVertex, currentVertex - x + 1);
+                }
+                currentVertex ++;
             }
         }
     }
-
 }
