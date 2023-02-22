@@ -7,29 +7,42 @@ public class App {
         Graph graph = new Graph();
 
         // Adding vertices to the created graph.
-        graph.addVertex(20.32419, 12.54193, 1000);
-        graph.addVertex(27.87621, 34.91028, 750);
-        graph.addVertex(21.78290, 37.71652, 500);
-        graph.addVertex(45.18927, 54.56391, 1250);
-        graph.addVertex(32.37628, 72.87261, 1500);
-        graph.addVertex(67.46345, 89.28140, 1750);
+        graph.addVertex(200.32419, 120.54193, 1000);
+        graph.addVertex(300.32419, 120.54193, 750);
+        graph.addVertex(400.32419, 120.54193, 300);
+        graph.addVertex(500.32419, 120.54193, 500);
 
-        // Creating directed connections between vertices from a departure vertex to an arrival vertex, eg. a (id) -> b (id).
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
-        graph.addEdge(1, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(2, 3);
+        graph.addVertex(200.32419, 220.54193, 750);
+        graph.addVertex(300.32419, 220.54193, 1200);
+        graph.addVertex(400.32419, 220.54193, 400);
+        graph.addVertex(500.32419, 220.54193, 1100);
+
+        graph.addVertex(200.32419, 320.54193, 500);
+        graph.addVertex(300.32419, 320.54193, 600);
+        graph.addVertex(400.32419, 320.54193, 900);
+        graph.addVertex(500.32419, 320.54193, 800);
+
+        graph.addVertex(200.32419, 420.54193, 1250);
+        graph.addVertex(300.32419, 420.54193, 1100);
+        graph.addVertex(400.32419, 420.54193, 850);
+        graph.addVertex(500.32419, 420.54193, 700);
+
+        graph.addVertex(200.32419, 520.54193, 1550);
+        graph.addVertex(300.32419, 520.54193, 1200);
+        graph.addVertex(400.32419, 520.54193, 600);
+        graph.addVertex(500.32419, 520.54193, 900);
 
         // Printing all vertices id's.
         graph.getVertices().forEach(vertex -> {
             System.out.println(vertex.getId());
         });
 
-        // Printing the connections of id = 0 vertex.
-        graph.getConnectionsOf(0).forEach(connection -> {
+        // Creating all possible connections in the graph
+        graph.connectVertices(100);
+
+        // Printing the connections of id = 6 vertex.
+        graph.getConnectionsOf(6).forEach(connection -> {
             System.out.println(connection.getArrivalVertex().getId());
         });
-
     }
 }
