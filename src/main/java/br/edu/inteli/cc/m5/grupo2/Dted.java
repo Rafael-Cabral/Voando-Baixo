@@ -5,12 +5,15 @@ import org.gdal.gdal.Dataset;
 import org.gdal.gdal.gdal;
 import org.gdal.gdalconst.gdalconst;
 
-public class DtedReader {
+import java.util.Arrays;
 
-    public static void main(String[] args) {
+public class Dted {
+
+    public static double[][] readDted(String filePath) {
+
         // Abrir o arquivo DTED
         gdal.AllRegister();
-        Dataset dataset = gdal.Open("C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W046_S23.dt2", gdalconst.GA_ReadOnly);
+        Dataset dataset = gdal.Open(filePath, gdalconst.GA_ReadOnly);
 
         // Obter o objeto Band que contém os dados de altitude
         Band altitudeBand = dataset.GetRasterBand(1);
@@ -20,7 +23,7 @@ public class DtedReader {
         int rows = altitudeBand.getYSize();
 
         // Cria a matriz para armazenar os valores de altitude, latitude e longitude
-        double[][] dtedData = new double[rows * cols][3];
+        private double[][] data = new double[rows * cols][3];
 
         // Obter os dados de latitude e longitude usando as funções GetGeoTransform
         double[] geotransform = dataset.GetGeoTransform();
@@ -40,18 +43,29 @@ public class DtedReader {
                 double latitude = yOrigin + i * pixelHeight;
                 double longitude = xOrigin + j * pixelWidth;
                 int index = i * cols + j;
-                dtedData[index][0] = altitude;
-                dtedData[index][1] = latitude;
-                dtedData[index][2] = longitude;
+                data[index][0] = altitude;
+                data[index][1] = latitude;
+                data[index][2] = longitude;
             }
-        }
-
-        // Imprimir os dados da matriz
-        for (int i = 0; i < dtedData.length; i++) {
-            System.out.printf("Altitude: %.2f, Latitude: %.6f, Longitude: %.6f%n", dtedData[i][0], dtedData[i][1], dtedData[i][2]);
         }
 
         // Fechar o objeto Dataset
         dataset.delete();
+        return data;
+    }
+
+    public static double[][] mergeDted(double[][] firstArray, double[][] secondArray){
+        double[][] newArray = new double[firstArray.length + secondArray.length][3];
+        System.arraycopy(firstArray, 0, newArray, 0, firstArray.length);
+        System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length);
+    }
+
+    public static double[][] sortDted(double[][] mapArray){
+        java.util.Arrays.sort(mapArray, new java.util.Comparator<double[]>() {
+            public int compare(double[] a, double[] b) {
+                return Double.compare(a[0], b[0]);
+            }
+        });
+        return mapArray;
     }
 }

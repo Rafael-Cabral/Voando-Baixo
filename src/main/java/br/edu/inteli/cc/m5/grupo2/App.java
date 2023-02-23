@@ -44,5 +44,23 @@ public class App {
         graph.getConnectionsOf(6).forEach(connection -> {
             System.out.println(connection.getArrivalVertex().getId());
         });
+
+        String[] paths = new String[]{"../main/resources/dted/SaoPaulo/W045_S23.dt2", "../main/resources/dted/SaoPaulo/W045_S24.dt2", "../main/resources/dted/SaoPaulo/W046_S23.dt2", "../main/resources/dted/SaoPaulo/W046_S24.dt2", "../main/resources/dted/SaoPaulo/W047_S23.dt2", "../main/resources/dted/SaoPaulo/W047_S24.dt2"};
+
+        double[][] map0 = Dted.readDted(paths[0]);
+        double[][] map1 = Dted.readDted(paths[1]);
+        double[][] map2 = Dted.readDted(paths[2]);
+        double[][] map3 = Dted.readDted(paths[3]);
+        double[][] map4 = Dted.readDted(paths[4]);
+        double[][] map5 = Dted.readDted(paths[5]);
+
+        double[][] map6 = Dted.mergeDted(map0, map1);
+        double[][] map7 = Dted.mergeDted(map6, map2);
+        double[][] map8 = Dted.mergeDted(map7, map3);
+        double[][] map9 = Dted.mergeDted(map8, map4);
+
+        double[][] finalMap = Dted.mergeDted(map9, map5);
+
+        finalMap = Dted.sortDted(finalMap);
     }
 }
