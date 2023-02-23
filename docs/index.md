@@ -17,18 +17,51 @@ Planejador de trajetórias para voos em baixa altitude.
 - [Autores](#autores)
 - [Visão Geral do Projeto](#visão-geral-do-projeto)
   - [Empresa](#empresa)
-  - [O Problema](#o-problema)
+  - [O problema](#o-problema)
+    - [Contexto do problema a ser resolvido](#contexto-do-problema-a-ser-resolvido)
+    - [Modelagem do problema (variáveis consideradas)](#modelagem-do-problema-variáveis-consideradas)
   - [Objetivos](#objetivos)
+    - [Objetivos gerais](#objetivos-gerais)
+    - [Objetivos específicos](#objetivos-específicos)
   - [Partes interessadas](#partes-interessadas)
 - [Análise do Problema](#análise-do-problema)
-  - [Análise da área de atuação](#análise-da-área-de-atuação)
+  - [Contexto da indústria](#contexto-da-indústria)
+  - [As Cinco Forças de Porter:](#as-cinco-forças-de-porter)
+    - [a) Poder de barganha dos clientes:](#a-poder-de-barganha-dos-clientes)
+    - [b) Poder de barganha dos fornecedores](#b-poder-de-barganha-dos-fornecedores)
+    - [c) Risco de entrada de novos competidores:](#c-risco-de-entrada-de-novos-competidores)
+    - [d) Ameaça de produtos substitutos:](#d-ameaça-de-produtos-substitutos)
+    - [e) Rivalidade entre concorrentes:](#e-rivalidade-entre-concorrentes)
   - [Análise do cenário: Matriz SWOT](#análise-do-cenário-matriz-swot)
+    - [Pontos Fortes](#pontos-fortes)
+    - [Pontos Fracos](#pontos-fracos)
+    - [Oportunidades](#oportunidades)
+    - [Ameaças](#ameaças)
+  - [Descrição da solução a ser desenvolvida](#descrição-da-solução-a-ser-desenvolvida)
+    - [Problema a ser resolvido](#problema-a-ser-resolvido)
+    - [Solução proposta (visão de negócios)](#solução-proposta-visão-de-negócios)
+    - [Como a solução deve ser usada](#como-a-solução-deve-ser-usada)
+    - [Benefícios trazidos pela solução proposta](#benefícios-trazidos-pela-solução-proposta)
+    - [Objetivos](#objetivos-1)
+    - [Benefícios](#benefícios)
+    - [Conclusão](#conclusão)
   - [Proposta de Valor: Value Proposition Canvas](#proposta-de-valor-value-proposition-canvas)
   - [Matriz de Risco](#matriz-de-risco)
 - [Requisitos do Sistema](#requisitos-do-sistema)
   - [Personas](#personas)
+    - [Persona primária](#persona-primária)
+    - [Persona secundária](#persona-secundária)
   - [Histórias dos usuários (user stories)](#histórias-dos-usuários-user-stories)
-- [Análise de dados](#análise-de-dados)
+- [Análise de Dados](#análise-de-dados)
+  - [Formato](#formato)
+  - [Biblioteca utilizada](#biblioteca-utilizada)
+  - [Características dos arquivos](#características-dos-arquivos)
+  - [Características dos dados](#características-dos-dados)
+  - [Inputs](#inputs)
+  - [Outputs](#outputs)
+  - [Localização dos dados no github](#localização-dos-dados-no-github)
+  - [Representação visual inicial (Neo4j)](#representação-visual-inicial-neo4j)
+  - [Limitações](#limitações)
 - [Referências](#referências)
 
 
@@ -184,6 +217,8 @@ A implementação deste projeto pode melhorar os percursos de missões críticas
    - Menor altitude
    - Percurso com baixa visibilidade
    - Exclusão de zonas mais perigosas
+   - Ângulo de curva possível para um avião
+   - Demorar menos de um minuto para entregar o output
 2. Desenvolver um algoritmo eficiente
 3. Agregar valor a AEL
 
