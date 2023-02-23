@@ -1,11 +1,22 @@
 ---
 title: Modelo para o artigo do Módulo 5
-author: Professores do Módulo 5 - Inteli
+author: 
+    - "Beny Frid"
+    - "Elias Biondo"
+    - "Luiz Carlos"
+    - "Pedro Munhoz"
+    - "Pedro Romão"
+    - "Rafael Cabral"
+    - "Thomas Barton"
+    - "Vinícius Souza" 
 date: Janeiro de 2023
-abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um texto descrevendo os resultados do projeto no formato de um artigo científico. Este arquivo no formato markdown contém a estrutura básica deste artigo. Cada grupo deverá editar este arquivo com a descrição do projeto que desenvolveu.
+abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um texto  descrevendo os resultados do projeto no formato de um artigo científico. Este arquivo no formato markdown contém a estrutura básica deste artigo. Cada grupo deverá editar este arquivo com a descrição do projeto que desenvolveu.
 ---
 
 # Introdução
+
+O planejamento de trajetórias para voos militares em baixa altitude é uma tarefa complexa e desafiadora, que exige uma série de habilidades e conhecimentos técnicos para garantir a segurança dos pilotos e tripulantes. Dentre os desafios encontrados, podemos citar a necessidade de se evitar obstáculos, minimizar o tempo de exposição aos radares inimigos e garantir a máxima eficácia da missão.
+
 
 # Descrição do problema
 
