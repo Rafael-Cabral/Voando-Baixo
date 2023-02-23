@@ -66,6 +66,8 @@ Planejador de trajetórias para voos em baixa altitude.
     - [Variáveis de decisão](#variáveis-de-decisão)
     - [Função objetivo](#função-objetivo)
     - [Restrições](#restrições)
+    - [Detalhamento das restrições](#detalhamento-das-restrições)
+    - [Conclusão](#conclusão-1)
 - [Referências](#referências)
 
 
@@ -385,8 +387,21 @@ Onde |P| é o número de vértices em P.
 <br>
 <br>
 
-Dessa forma, o problema matemático pode ser resolvido por um algoritmo de caminho mínimo, como o algoritmo de Dijkstra ou o algoritmo de Bellman-Ford, que irá encontrar o caminho mínimo entre o ponto A e o ponto F.
+### Detalhamento das restrições
+A primeira restrição, que afirma que cada vértice deve ter exatamente uma aresta de entrada e uma de saída, exceto pelos vértices A e F, que podem ter apenas uma aresta de entrada ou uma de saída, respectivamente, garante que o caminho encontrado seja uma rota de A a F sem retornos ou desvios desnecessários.
 
+As restrições adicionais referentes a x_Aj e x_iF asseguram que a rota inicie em A e termine em F, pois essas arestas são as únicas que podem ter uma ponta livre e, portanto, devem ser incluídas no caminho.
+
+A restrição de fluxo, por sua vez, evita a formação de ciclos no caminho, garantindo que cada subconjunto de vértices selecionados tenha no máximo |P| - 1 arestas, onde |P| é o número de vértices no subconjunto. Isso significa que o caminho não pode "voltar" em si mesmo, passando por um mesmo vértice duas vezes, por exemplo.
+
+Dessa forma, as restrições garantem que a solução encontrada respeite as regras do problema de caminho mínimo em um grafo e que a solução seja ótima, minimizando a soma dos custos das arestas selecionadas.
+<br>
+<br>
+
+### Conclusão
+Dessa forma, o problema matemático pode ser resolvido por um algoritmo de caminho mínimo, como o algoritmo de Dijkstra ou o algoritmo de Bellman-Ford, que irá encontrar o caminho mínimo entre o ponto A e o ponto F.
+<br>
+<br>
 
 
 # Referências
