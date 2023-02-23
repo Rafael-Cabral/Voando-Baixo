@@ -70,7 +70,7 @@ public class App {
 //        finalMap = Dted.sortDted(finalMap);
 
         for (int i = 0; i < map.length; i++){
-            System.out.println("latitude: " + map[i][1] + "   longitude: " + map[i][2] + "   altitude: " + finalMap[i][0]);
+            System.out.println("latitude: " + map[i][1] + "   longitude: " + map[i][2] + "   altitude: " + map[i][0]);
         }
     }
 }
