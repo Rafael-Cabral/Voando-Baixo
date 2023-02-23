@@ -45,30 +45,17 @@ public class App {
             System.out.println(connection.getArrivalVertex().getId());
         });
 
+        // Setting paths to read
         String[] paths = new String[]{"C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S23.dt2"};
         double[][] map = new double[0][];
 
+        // Loop to read and sort all values
         for (int i = 0; i < paths.length; i++) {
             double[][] newMap = Dted.readDted(paths[0]);
             map = Dted.mergeDted(map, newMap);
         }
 
-//        double[][] map0 = Dted.readDted(paths[0]);
-//        double[][] map1 = Dted.readDted(paths[1]);
-//        double[][] map2 = Dted.readDted(paths[2]);
-//        double[][] map3 = Dted.readDted(paths[3]);
-//        double[][] map4 = Dted.readDted(paths[4]);
-//        double[][] map5 = Dted.readDted(paths[5]);
-//
-//        double[][] map6 = Dted.mergeDted(map0, map1);
-//        double[][] map7 = Dted.mergeDted(map6, map2);
-//        double[][] map8 = Dted.mergeDted(map7, map3);
-//        double[][] map9 = Dted.mergeDted(map8, map4);
-
-//        double[][] finalMap = Dted.mergeDted(map9, map5);
-
-//        finalMap = Dted.sortDted(finalMap);
-
+        // Printing all latitudes, longitudes and altitudes
         for (int i = 0; i < map.length; i++) {
             System.out.println("latitude: " + map[i][1] + "   longitude: " + map[i][2] + "   altitude: " + map[i][0]);
         }
