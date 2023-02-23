@@ -45,10 +45,10 @@ public class App {
             System.out.println(connection.getArrivalVertex().getId());
         });
 
-        String[] paths = new String[]{"../main/resources/dted/SaoPaulo/W045_S23.dt2", "../main/resources/dted/SaoPaulo/W045_S24.dt2", "../main/resources/dted/SaoPaulo/W046_S23.dt2", "../main/resources/dted/SaoPaulo/W046_S24.dt2", "../main/resources/dted/SaoPaulo/W047_S23.dt2", "../main/resources/dted/SaoPaulo/W047_S24.dt2"};
+        String[] paths = new String[]{"C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S23.dt2"};
         double[][] map = new double[0][];
 
-        for (int i = 0; i < paths.length - 1; i++){
+        for (int i = 0; i < paths.length; i++) {
             double[][] newMap = Dted.readDted(paths[0]);
             map = Dted.mergeDted(map, newMap);
         }
@@ -69,7 +69,7 @@ public class App {
 
 //        finalMap = Dted.sortDted(finalMap);
 
-        for (int i = 0; i < map.length; i++){
+        for (int i = 0; i < map.length; i++) {
             System.out.println("latitude: " + map[i][1] + "   longitude: " + map[i][2] + "   altitude: " + map[i][0]);
         }
     }
