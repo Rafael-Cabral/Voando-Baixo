@@ -305,21 +305,21 @@ Outros dados importantes que devem ser incluídos são o ponto de partida e o de
 
 ## Inputs
 
-| CARACTERÍSTICA | TIPO | EXEMPLO |
-|----------------|------|---------|
-| 1 - Longitude  | NUMBER(double) | -23.0696792891117 |
-| 2 - Latitude   | NUMBER(double) | -43.5573428666663 |
-| 3 - Zonas de exclusão | Coordenada | (-23.0696792891117, -43.5573428666663) |
-| 4 - Zonas essenciais | Coordenada | (-23.55666444, -46.653497386) |
-| 5 - Ponto de partida | Coordenada | (-23.588333, -46.658890) |
-| 6 - Ponto de destino | Coordenada | (-23.5767, -46.6878) |
+| CARACTERÍSTICA | TIPO | EXEMPLO | UNIDADE |
+|----------------|------|---------|---------|
+| 1 - Longitude  | NUMBER(double) | -23.0696792891117 | Graus (°), minutos (′) e segundos (″)
+| 2 - Latitude   | NUMBER(double) | -43.5573428666663 |Graus (°), minutos (′) e segundos (″)
+| 3 - Zonas de exclusão | Coordenada | (-23.560228285839322, -46.74303723386254), (-23.55157365449871, -46.731364260272024), (-23.568606999438785, -46.73282338197084), (-23.558969465794238, -46.71578599036997) | Graus (°), minutos (′) e segundos (″)
+| 4 - Zonas essenciais | Coordenada | (-23.544964279357846, -46.73359585813633), (-23.54110865719845, -46.7284460168464), (-23.546774022201166, -46.71660138187955), (-23.551337610929664, -46.7229528528038) | Graus (°), minutos (′) e segundos (″)
+| 5 - Ponto de partida | Coordenada | (-23.588333, -46.658890) | Graus (°), minutos (′) e segundos (″)
+| 6 - Ponto de destino | Coordenada | (-23.5767, -46.6878) | Graus (°), minutos (′) e segundos (″)
 
 ## Outputs
 
-| CARACTERÍSTICA | TIPO | EXEMPLO |
-|----------------|------|---------|
-| Altura(esperada) | NUMBER(double) | 1928 (valor esperado) |
-| Trajetória | Imagem | -------------------------| 
+| CARACTERÍSTICA | TIPO | EXEMPLO | UNIDADE |
+|----------------|------|---------|---------|
+| Altura(esperada) | NUMBER(double) | 1928 (valor esperado) | Metros
+| Trajetória | Imagem | ------------------------| Km
 
 ## Localização dos dados no github
 
