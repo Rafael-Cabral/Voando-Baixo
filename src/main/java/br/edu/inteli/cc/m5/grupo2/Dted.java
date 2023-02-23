@@ -24,7 +24,7 @@ public class Dted {
         int rows = altitudeBand.getYSize();
 
         // Cria a matriz para armazenar os valores de altitude, latitude e longitude
-        private double[][] data = new double[rows * cols][3];
+        double[][] data = new double[rows * cols][3];
 
         // Obter os dados de latitude e longitude usando as funções GetGeoTransform
         double[] geotransform = dataset.GetGeoTransform();
@@ -55,14 +55,14 @@ public class Dted {
         return data;
     }
 
-    public static double[][] mergeDted(double[][] firstArray, double[][] secondArray){
+    public static double[][] mergeDted(double[][] firstArray, double[][] secondArray) {
         double[][] newArray = new double[firstArray.length + secondArray.length][3];
         System.arraycopy(firstArray, 0, newArray, 0, firstArray.length);
         System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length);
         return newArray;
     }
 
-    public static double[][] sortDted(double[][] mapArray){
+    public static double[][] sortDted(double[][] mapArray) {
         Arrays.sort(mapArray, new Comparator<double[]>() {
             public int compare(final double[] a, final double[] b) {
                 if (a[0] < b[0]) {
