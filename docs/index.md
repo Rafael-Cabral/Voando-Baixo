@@ -61,7 +61,11 @@ Planejador de trajetórias para voos em baixa altitude.
   - [Outputs](#outputs)
   - [Localização dos dados no github](#localização-dos-dados-no-github)
   - [Representação visual inicial (Neo4j)](#representação-visual-inicial-neo4j)
-  - [Limitações](#limitações)
+- [Limitações e modelagem matemática](#limitações-e-modelagem-matemática)
+  - [Modelagem matemática](#modelagem-matemática)
+    - [Variáveis de decisão](#variáveis-de-decisão)
+    - [Função objetivo](#função-objetivo)
+    - [Restrições](#restrições)
 - [Referências](#referências)
 
 
@@ -337,10 +341,52 @@ A representação visual inicial do problema pode ser visualizada abaixo ou, se 
 ![Representação visual](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/graph.png?raw=true)
 
 
-## Limitações
+# Limitações e modelagem matemática
 
 Desenvolver uma solução eficaz para o problema de caminho mínimo apresenta complexidade elevada, ainda mais quando adicionamos features como optar pela menor altura possível. A memória é intensivamente usada durante o desenvolvimento dos algoritmos, o que pode causar desempenho lento e dificultar a escalabilidade da solução.
 
 Devido à alta complexidade da solução e à falta de familiaridade da equipe de desenvolvimento com as ferramentas em uso, erros podem ocorrer na escolha do melhor algoritmo e na otimização de sua eficiência. Fatores externos, como dificuldades de terreno e condições climáticas, também devem ser levados em consideração ao planejar o trajeto.
+<br>
+<br>
+## Modelagem matemática
+
+Definimos o grafo como um conjunto de vértices e arestas, onde cada vértice representa um ponto no caminho e cada aresta representa o custo (ou distância) entre dois pontos. O problema consiste em encontrar o caminho mínimo do ponto A ao ponto F, ou seja, o caminho que minimize a soma dos custos das arestas percorridas.
+<br>
+<br>
+### Variáveis de decisão
+As variáveis de decisão são x_ij, variáveis binárias que indicam se a aresta que liga o vértice i ao vértice j faz parte do caminho ou não.
+<br>
+<br>
+### Função objetivo
+O objetivo é minimizar a soma dos custos das arestas selecionadas. Para isso, utilizamos a seguinte fórmula:
+
+min Z = ∑(i,j)∈E c_ij * x_ij
+
+Onde E é o conjunto de todas as arestas do grafo, c_ij é o custo da aresta que liga o vértice i ao vértice j e x_ij é a variável de decisão que indica se a aresta (i,j) é selecionada ou não.
+<br>
+<br>
+
+### Restrições
+Para as restrições, devemos garantir que cada vértice tenha exatamente uma aresta de entrada e uma de saída, exceto pelos vértices A e F, que podem ter apenas uma aresta de entrada ou uma de saída, respectivamente. Para isso, utilizamos as seguintes restrições:
+
+∑(i,j)∈E x_ij = 1, para todo vértice i ≠ A,F
+
+∑(A,j)∈E x_Aj = 1
+
+∑(i,F)∈E x_iF = 1
+
+Onde x_Aj é a variável de decisão que indica se a aresta que liga o ponto A ao vértice j é selecionada e x_iF é a variável de decisão que indica se a aresta que liga o vértice i ao ponto F é selecionada.
+
+Também devemos garantir que não haja ciclos no caminho selecionado, para isso utilizamos a seguinte restrição de fluxo:
+
+∑(i,j)∈P x_ij ≤ |P| - 1, para todo subconjunto de vértices P ⊆ V
+
+Onde |P| é o número de vértices em P.
+<br>
+<br>
+
+Dessa forma, o problema matemático pode ser resolvido por um algoritmo de caminho mínimo, como o algoritmo de Dijkstra ou o algoritmo de Bellman-Ford, que irá encontrar o caminho mínimo entre o ponto A e o ponto F.
+
+
 
 # Referências
