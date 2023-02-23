@@ -52,13 +52,21 @@ public class App {
                 "C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W046_S24.dt2",
                 "C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S23.dt2",
                 "C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S24.dt2"};
-        double[][] map = new double[0][];
 
-        // Loop to read and sort all values
+        double[][] map = new double[paths.length - 1][][];
+
+        // Loop to read files
         for (int i = 0; i < paths.length; i++) {
-            double[][] newMap = Dted.readDted(paths[0]);
-            map = Dted.mergeDted(map, newMap);
+            map[i] = Dted.readDted(paths[0]);
         }
+
+        // Loop to merge all arrays
+        for (int i = 0; i < paths.length; i++) {
+            map = Dted.mergeDted(map, map[i]);
+        }
+
+        // Sort all values
+        map = Dted.sortDted(map);
 
         // Printing all latitudes, longitudes and altitudes
         for (int i = 0; i < map.length; i++) {
