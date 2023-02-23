@@ -62,5 +62,9 @@ public class App {
         double[][] finalMap = Dted.mergeDted(map9, map5);
 
         finalMap = Dted.sortDted(finalMap);
+
+        for (int i = 0; i < finalMap.length; i++){
+            System.out.println("latitude: " + finalMap[i][1] + "   longitude: " + finalMap[i][2] + "   altitude: " + finalMap[i][0]);
+        }
     }
 }

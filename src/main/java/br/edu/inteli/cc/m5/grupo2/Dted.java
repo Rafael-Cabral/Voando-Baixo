@@ -6,6 +6,7 @@ import org.gdal.gdal.gdal;
 import org.gdal.gdalconst.gdalconst;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Dted {
 
@@ -58,14 +59,26 @@ public class Dted {
         double[][] newArray = new double[firstArray.length + secondArray.length][3];
         System.arraycopy(firstArray, 0, newArray, 0, firstArray.length);
         System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length);
+        return newArray;
     }
 
     public static double[][] sortDted(double[][] mapArray){
-        java.util.Arrays.sort(mapArray, new java.util.Comparator<double[]>() {
-            public int compare(double[] a, double[] b) {
-                return Double.compare(a[0], b[0]);
+        Arrays.sort(mapArray, new Comparator<double[]>() {
+            public int compare(final double[] a, final double[] b) {
+                if (a[0] < b[0]) {
+                    return -1;
+                } else if (a[0] > b[0]) {
+                    return 1;
+                } else if (a[1] < b[1]) {
+                    return -1;
+                } else if (a[1] > b[1]) {
+                    return 1;
+                } else {
+                    return 0;
+                }
             }
         });
+
         return mapArray;
     }
 }
