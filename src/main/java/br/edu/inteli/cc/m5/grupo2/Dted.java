@@ -10,7 +10,7 @@ import java.util.Comparator;
 
 public class Dted {
 
-    public static double[][] readDted(String filePath) {
+    public static double[][] readDted(String filePath, int interval) {
 
         // Abrir o arquivo DTED
         gdal.AllRegister();
@@ -24,7 +24,7 @@ public class Dted {
         int rows = altitudeBand.getYSize();
 
         // Cria a matriz para armazenar os valores de altitude, latitude e longitude
-        double[][] data = new double[rows * cols][3];
+        double[][] data = new double[(rows * cols)/(interval/30)][3];
 
         // Obter os dados de latitude e longitude usando as funções GetGeoTransform
         double[] geotransform = dataset.GetGeoTransform();
@@ -47,7 +47,9 @@ public class Dted {
                 data[index][0] = altitude;
                 data[index][1] = latitude;
                 data[index][2] = longitude;
+                j += (int) interval/30;
             }
+            i += (int) interval/30;
         }
 
         // Fechar o objeto Dataset
