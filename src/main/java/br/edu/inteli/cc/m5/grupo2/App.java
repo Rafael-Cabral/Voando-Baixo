@@ -44,5 +44,20 @@ public class App {
         graph.getConnectionsOf(6).forEach(connection -> {
             System.out.println(connection.getArrivalVertex().getId());
         });
+
+        String[] paths = new String[]{"C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S23.dt2"};
+        double[][] map = new double[0][];
+
+        for (int i = 0; i < paths.length; i++) {
+            double[][] newMap = Dted.readDted(paths[0]);
+            map = Dted.mergeDted(map, newMap);
+        }
+
+        map = Dted.sortDted(map);
+
+        // Printing all latitudes, longitudes and altitudes readed
+        for (int i = 0; i < map.length; i++) {
+            System.out.println("latitude: " + map[i][1] + "   longitude: " + map[i][2] + "   altitude: " + map[i][0]);
+        }
     }
 }
