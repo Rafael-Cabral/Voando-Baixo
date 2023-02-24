@@ -6,19 +6,11 @@ public class App {
         // Instancing a new graph.
         Graph graph = new Graph();
 
-        // Creating all possible connections in the graph
-        graph.connectVertices(100);
-
-        // Printing the connections of id = 6 vertex.
-        graph.getConnectionsOf(6).forEach(connection -> {
-            System.out.println(connection.getArrivalVertex().getId());
-        });
-
         String[] paths = new String[]{"C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S23.dt2"};
         double[][] map = new double[0][];
 
         for (int i = 0; i < paths.length; i++) {
-            double[][] newMap = Dted.readDted(paths[0], 200);
+            double[][] newMap = Dted.readDted(paths[0]);
             map = Dted.mergeDted(map, newMap);
         }
 
@@ -26,8 +18,16 @@ public class App {
         map = Dted.sortDted(map);
 
         // Sending all Vertices to the graph created
-        for (double[] doubles : map) {
-            graph.addVertex(doubles[1], doubles[2], doubles[0]);
+        for (int i = 0; i < map.length; i++) {
+            graph.addVertex(map[i][1], map[i][2], map[i][0]);
         }
+
+        // Creating all possible connections in the graph
+        graph.connectVertices(200);
+
+        // Printing the connections of id = 6 vertex.
+        graph.getConnectionsOf(6).forEach(connection -> {
+            System.out.println(connection.getArrivalVertex().getId());
+        });
     }
 }
