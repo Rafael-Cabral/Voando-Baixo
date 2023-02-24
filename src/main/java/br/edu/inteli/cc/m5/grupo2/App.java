@@ -6,14 +6,6 @@ public class App {
         // Instancing a new graph.
         Graph graph = new Graph();
 
-        // Creating all possible connections in the graph
-        graph.connectVertices(100);
-
-        // Printing the connections of id = 6 vertex.
-        graph.getConnectionsOf(6).forEach(connection -> {
-            System.out.println(connection.getArrivalVertex().getId());
-        });
-
         String[] paths = new String[]{"C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S23.dt2"};
         double[][] map = new double[0][];
 
@@ -29,5 +21,13 @@ public class App {
         for (double[] doubles : map) {
             graph.addVertex(doubles[1], doubles[2], doubles[0]);
         }
+
+        // Creating all possible connections in the graph
+        graph.connectVertices(100);
+
+        // Printing the connections of id = 6 vertex.
+        graph.getConnectionsOf(6).forEach(connection -> {
+            System.out.println(connection.getArrivalVertex().getId());
+        });
     }
 }
