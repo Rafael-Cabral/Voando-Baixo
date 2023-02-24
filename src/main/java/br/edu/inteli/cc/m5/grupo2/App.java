@@ -18,8 +18,8 @@ public class App {
         map = Dted.sortDted(map);
 
         // Sending all Vertices to the graph created
-        for (double[] doubles : map) {
-            graph.addVertex(doubles[1], doubles[2], doubles[0]);
+        for (int i = 0; i < map.length; i++) {
+            graph.addVertex(map[i][1], map[i][2], map[i][0]);
         }
 
         // Creating all possible connections in the graph
