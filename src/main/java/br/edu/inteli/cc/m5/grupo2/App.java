@@ -6,7 +6,7 @@ public class App {
         // Instancing a new graph.
         Graph graph = new Graph();
 
-        String[] paths = new String[]{"C:/Users/Beny Frid/Documents/GitHub/grupo2/src/main/resources/dted/SaoPaulo/W047_S23.dt2"};
+        String[] paths = new String[]{"src/main/resources/dted/SaoPaulo/W045_S23.dt2", "src/main/resources/dted/SaoPaulo/W045_S24.dt2", "src/main/resources/dted/SaoPaulo/W046_S23.dt2", "src/main/resources/dted/SaoPaulo/W046_S24.dt2", "src/main/resources/dted/SaoPaulo/W047_S23.dt2", "src/main/resources/dted/SaoPaulo/W047_S24.dt2"};
         double[][] map = new double[0][];
 
         for (int i = 0; i < paths.length; i++) {

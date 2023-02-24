@@ -7,7 +7,6 @@
     <list default="true" id="4ea1af99-436f-4525-9473-d871fef53af1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Dted.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Dted.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Graph.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,15 +73,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.App" />
       <module name="template" />
@@ -102,6 +92,15 @@
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,10 +127,15 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Graph.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="23" />
+          <line>50</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/grupo2$App.ic" NAME="App Coverage Results" MODIFIED="1677016547623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>br.edu.inteli.cc.m5.grupo2.*</FILTER>
+    </SUITE>
   </component>
 </project>

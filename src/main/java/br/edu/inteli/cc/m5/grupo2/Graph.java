@@ -41,11 +41,11 @@ public class Graph {
         double latDistance = latDiff * 111319.9;
 
         double lonDiff = Math.abs(lon1 - lon2);
-        double lonDistance = latDiff * 111319.9;
+        double lonDistance = lonDiff * 111319.9;
 
-        int x = (int) latDistance / distance;
+        int y = (int) latDistance / distance;
 
-        int y = (int) lonDistance / distance;
+        int x = (int) lonDistance / distance;
 
         int currentVertex = 0;
         for (int i = 0; i <= x; i++) {
