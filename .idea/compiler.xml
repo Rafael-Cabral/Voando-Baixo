@@ -11,7 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="grupo2" target="11" />
-      <module name="template" target="11" />
+      <module name="template" target="15" />
     </bytecodeTargetLevel>
   </component>
 </project>
