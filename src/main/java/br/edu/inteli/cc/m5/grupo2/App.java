@@ -3,6 +3,8 @@ package br.edu.inteli.cc.m5.grupo2;
 public class App {
     public static void main(String[] args) {
 
+        int intervalMeters = 200;
+
         // Instancing a new graph.
         Graph graph = new Graph();
 
@@ -10,7 +12,7 @@ public class App {
         double[][] map = new double[0][];
 
         for (int i = 0; i < paths.length; i++) {
-            double[][] newMap = Dted.readDted(paths[0], 200);
+            double[][] newMap = Dted.readDted(paths[0], intervalMeters);
             map = Dted.mergeDted(map, newMap);
         }
 
@@ -23,7 +25,7 @@ public class App {
         }
 
         // Creating all possible connections in the graph
-        graph.connectVertices(100);
+        graph.connectVertices(intervalMeters);
 
         // Printing the connections of id = 6 vertex.
         graph.getConnectionsOf(6).forEach(connection -> {
