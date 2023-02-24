@@ -24,7 +24,7 @@ public class Dted {
         int rows = altitudeBand.getYSize();
 
         // Cria a matriz para armazenar os valores de altitude, latitude e longitude
-        double[][] data = new double[(rows * cols)/(interval/30)][3];
+        double[][] data = new double[(rows * cols) / (interval / 30)][3];
 
         // Obter os dados de latitude e longitude usando as funções GetGeoTransform
         double[] geotransform = dataset.GetGeoTransform();
@@ -38,18 +38,18 @@ public class Dted {
         altitudeBand.ReadRaster(0, 0, cols, rows, buffer);
 
         // Preencher a matriz com os valores de altitude, latitude e longitude
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        for (int i = 0; i < rows - interval / 30; i++) {
+            for (int j = 0; j < cols - interval / 30; j++) {
                 double altitude = buffer[i * cols + j];
                 double latitude = yOrigin + i * pixelHeight;
                 double longitude = xOrigin + j * pixelWidth;
-                int index = i * cols + j;
+                int index = i * cols / (interval / 30) + j;
                 data[index][0] = altitude;
                 data[index][1] = latitude;
                 data[index][2] = longitude;
-                j += (int) interval/30;
+                j += (int) interval / 30;
             }
-            i += (int) interval/30;
+            i += (int) interval / 30;
         }
 
         // Fechar o objeto Dataset

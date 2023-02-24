@@ -10,7 +10,7 @@ public class App {
         double[][] map = new double[0][];
 
         for (int i = 0; i < paths.length; i++) {
-            double[][] newMap = Dted.readDted(paths[0]);
+            double[][] newMap = Dted.readDted(paths[i], 180);
             map = Dted.mergeDted(map, newMap);
         }
 
@@ -23,7 +23,7 @@ public class App {
         }
 
         // Creating all possible connections in the graph
-        graph.connectVertices(200);
+        graph.connectVertices(180);
 
         // Printing the connections of id = 6 vertex.
         graph.getConnectionsOf(6).forEach(connection -> {

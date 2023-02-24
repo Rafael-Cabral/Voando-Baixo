@@ -49,7 +49,7 @@ public class Graph {
 
         int currentVertex = 0;
         for (int i = 0; i <= x; i++) {
-            for (int j = 0; j <= y && currentVertex < this.vertices.size(); j++) {
+            for (int j = 0; j <= y; j++) {
                 if (i > 0 && i < x && j > 0 && j < y) {
                     this.addEdge(currentVertex, currentVertex - x - 2);
                     this.addEdge(currentVertex, currentVertex - x - 1);
