@@ -69,6 +69,28 @@ public class Neo4j implements AutoCloseable {
         }
     }
 
+    public void updateName(final String currentName, final String newName) {
+        var query = new Query(
+                """
+                        MATCH (p:Person {name: $currentName})
+                        WITH p, p {.*} as snapshot
+                        SET p.name = $newName
+                        RETURN p.name AS name, snapshot
+                        """,
+                Map.of("currentName", currentName, "newName", newName));
+
+        try (var session = driver.session(SessionConfig.forDatabase("neo4j"))) {
+            var records = session.executeWrite(tx -> tx.run(query).list());
+            records.forEach(record -> System.out.printf("Updated name from %s to %s%n",
+                    record.get("snapshot").get("name").asString(),
+                    record.get("name").asString()));
+            // You should capture any errors along with the query and data for traceability
+        } catch (Neo4jException ex) {
+            LOGGER.log(Level.SEVERE, query + " raised an exception", ex);
+            throw ex;
+        }
+    }
+
     public void findPerson(final String personName) {
         var query = new Query(
                 """
@@ -98,8 +120,9 @@ public class Neo4j implements AutoCloseable {
         try (var app = new Neo4j(uri, user, password, Config.defaultConfig())) {
             app.createFriendship("Alice", "David");
             app.findPerson("Alice");
-            //app.updateName("Alice");
-            app.deletePerson("Alice");
+            app.updateName("Alice", "Bruno");
+            app.deletePerson("Bruno");
+            app.deletePerson("David");
         }
     }
 }
