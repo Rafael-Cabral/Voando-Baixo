@@ -73,7 +73,7 @@
       <recent name="C:\Users\Elias\Documents\GitHub\Turma-4\grupo2\src\main\java\br\edu\inteli\cc\m5\grupo" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.EdgeTest">
+  <component name="RunManager" selected="TestNG.VertexTest">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2" />
@@ -122,7 +122,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GraphTest.testConnectVertices" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="VertexTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="template" />
       <extension name="coverage">
         <pattern>
@@ -131,9 +131,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
-      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.GraphTest" />
-      <option name="METHOD_NAME" value="testConnectVertices" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.VertexTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
@@ -190,11 +189,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.VertexTest" />
         <item itemvalue="TestNG.EdgeTest" />
         <item itemvalue="TestNG.EdgeTest.assureWeight" />
         <item itemvalue="TestNG.VertexTest.adjacencyList" />
         <item itemvalue="TestNG.VertexTest.testConnection" />
-        <item itemvalue="TestNG.GraphTest.testConnectVertices" />
       </list>
     </recent_temporary>
   </component>
