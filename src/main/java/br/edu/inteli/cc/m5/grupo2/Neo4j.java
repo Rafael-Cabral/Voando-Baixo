@@ -48,18 +48,39 @@ public class Neo4j implements AutoCloseable {
         }
     }
 
+    public void deletePerson(final String person1Name) {
+        // To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
+        // The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
+        var query = new Query(
+                """
+                        MATCH (n:Person { name: $person1_name })
+                        DETACH DELETE n
+                        """,
+                Map.of("person1_name", person1Name));
+
+        try (var session = driver.session(SessionConfig.forDatabase("neo4j"))) {
+            // Write transactions allow the driver to handle retries and transient errors
+            session.executeWrite(tx -> tx.run(query).list());
+            System.out.printf("Deleted person: %s%n", person1Name);
+            // You should capture any errors along with the query and data for traceability
+        } catch (Neo4jException ex) {
+            LOGGER.log(Level.SEVERE, query + " raised an exception: ", ex);
+            throw ex;
+        }
+    }
+
     public void findPerson(final String personName) {
         var query = new Query(
                 """
                         MATCH (p:Person)
                         WHERE p.name = $person_name
-                        RETURN p.name AS name
+                        RETURN DISTINCT p.name AS name
                         """,
                 Map.of("person_name", personName));
 
         try (var session = driver.session(SessionConfig.forDatabase("neo4j"))) {
-            var record = session.executeRead(tx -> tx.run(query).single());
-            System.out.printf("Found person: %s%n", record.get("name").asString());
+            var records = session.executeRead(tx -> tx.run(query).list());
+            records.forEach(record -> System.out.printf("Found person: %s%n", record.get("name").asString()));
             // You should capture any errors along with the query and data for traceability
         } catch (Neo4jException ex) {
             LOGGER.log(Level.SEVERE, query + " raised an exception", ex);
@@ -77,6 +98,8 @@ public class Neo4j implements AutoCloseable {
         try (var app = new Neo4j(uri, user, password, Config.defaultConfig())) {
             app.createFriendship("Alice", "David");
             app.findPerson("Alice");
+            //app.updateName("Alice");
+            app.deletePerson("Alice");
         }
     }
 }
