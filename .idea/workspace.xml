@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ea1af99-436f-4525-9473-d871fef53af1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/GraphTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/EdgeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/VertexTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template.iml" beforeDir="false" afterPath="$PROJECT_DIR$/template.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,19 +73,7 @@
       <recent name="C:\Users\Elias\Documents\GitHub\Turma-4\grupo2\src\main\java\br\edu\inteli\cc\m5\grupo" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.GraphTest.testConnectVertices">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.App" />
-      <module name="template" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="TestNG.EdgeTest">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2" />
@@ -100,7 +85,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GraphTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="EdgeTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="template" />
       <extension name="coverage">
         <pattern>
@@ -109,8 +94,27 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
-      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.GraphTest" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.EdgeTest" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EdgeTest.assureWeight" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.EdgeTest" />
+      <option name="METHOD_NAME" value="assureWeight" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
@@ -137,6 +141,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="VertexTest.adjacencyList" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.VertexTest" />
+      <option name="METHOD_NAME" value="adjacencyList" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VertexTest.testConnection" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.VertexTest" />
+      <option name="METHOD_NAME" value="testConnection" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -148,9 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.EdgeTest" />
+        <item itemvalue="TestNG.EdgeTest.assureWeight" />
+        <item itemvalue="TestNG.VertexTest.adjacencyList" />
+        <item itemvalue="TestNG.VertexTest.testConnection" />
         <item itemvalue="TestNG.GraphTest.testConnectVertices" />
-        <item itemvalue="TestNG.GraphTest" />
-        <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
   </component>
