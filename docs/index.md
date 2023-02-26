@@ -61,7 +61,13 @@ Planejador de trajetórias para voos em baixa altitude.
   - [Outputs](#outputs)
   - [Localização dos dados no github](#localização-dos-dados-no-github)
   - [Representação visual inicial (Neo4j)](#representação-visual-inicial-neo4j)
-  - [Limitações](#limitações)
+- [Limitações e modelagem matemática](#limitações-e-modelagem-matemática)
+  - [Modelagem matemática](#modelagem-matemática)
+    - [Variáveis de decisão](#variáveis-de-decisão)
+    - [Função objetivo](#função-objetivo)
+    - [Restrições](#restrições)
+    - [Detalhamento das restrições](#detalhamento-das-restrições)
+    - [Conclusão](#conclusão-1)
 - [Referências](#referências)
 
 
@@ -305,21 +311,21 @@ Outros dados importantes que devem ser incluídos são o ponto de partida e o de
 
 ## Inputs
 
-| CARACTERÍSTICA | TIPO | EXEMPLO |
-|----------------|------|---------|
-| 1 - Longitude  | NUMBER(double) | -23.0696792891117 |
-| 2 - Latitude   | NUMBER(double) | -43.5573428666663 |
-| 3 - Zonas de exclusão | Coordenada | (-23.0696792891117, -43.5573428666663) |
-| 4 - Zonas essenciais | Coordenada | (-23.55666444, -46.653497386) |
-| 5 - Ponto de partida | Coordenada | (-23.588333, -46.658890) |
-| 6 - Ponto de destino | Coordenada | (-23.5767, -46.6878) |
+| CARACTERÍSTICA | TIPO | EXEMPLO | UNIDADE |
+|----------------|------|---------|---------|
+| 1 - Longitude  | NUMBER(double) | -23.0696792891117 | Graus (°), minutos (′) e segundos (″)
+| 2 - Latitude   | NUMBER(double) | -43.5573428666663 |Graus (°), minutos (′) e segundos (″)
+| 3 - Zonas de exclusão | Coordenada | (-23.560228285839322, -46.74303723386254), (-23.55157365449871, -46.731364260272024), (-23.568606999438785, -46.73282338197084), (-23.558969465794238, -46.71578599036997) | Graus (°), minutos (′) e segundos (″)
+| 4 - Zonas essenciais | Coordenada | (-23.544964279357846, -46.73359585813633), (-23.54110865719845, -46.7284460168464), (-23.546774022201166, -46.71660138187955), (-23.551337610929664, -46.7229528528038) | Graus (°), minutos (′) e segundos (″)
+| 5 - Ponto de partida | Coordenada | (-23.588333, -46.658890) | Graus (°), minutos (′) e segundos (″)
+| 6 - Ponto de destino | Coordenada | (-23.5767, -46.6878) | Graus (°), minutos (′) e segundos (″)
 
 ## Outputs
 
-| CARACTERÍSTICA | TIPO | EXEMPLO |
-|----------------|------|---------|
-| Altura(esperada) | NUMBER(double) | 1928 (valor esperado) |
-| Trajetória | Imagem | -------------------------| 
+| CARACTERÍSTICA | TIPO | EXEMPLO | UNIDADE |
+|----------------|------|---------|---------|
+| Altura(esperada) | NUMBER(double) | 1928 (valor esperado) | Metros
+| Trajetória | Imagem | ------------------------| Km
 
 ## Localização dos dados no github
 
@@ -337,10 +343,65 @@ A representação visual inicial do problema pode ser visualizada abaixo ou, se 
 ![Representação visual](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/graph.png?raw=true)
 
 
-## Limitações
+# Limitações e modelagem matemática
 
 Desenvolver uma solução eficaz para o problema de caminho mínimo apresenta complexidade elevada, ainda mais quando adicionamos features como optar pela menor altura possível. A memória é intensivamente usada durante o desenvolvimento dos algoritmos, o que pode causar desempenho lento e dificultar a escalabilidade da solução.
 
 Devido à alta complexidade da solução e à falta de familiaridade da equipe de desenvolvimento com as ferramentas em uso, erros podem ocorrer na escolha do melhor algoritmo e na otimização de sua eficiência. Fatores externos, como dificuldades de terreno e condições climáticas, também devem ser levados em consideração ao planejar o trajeto.
+<br>
+<br>
+## Modelagem matemática
+
+Definimos o grafo como um conjunto de vértices e arestas, onde cada vértice representa um ponto no caminho e cada aresta representa o custo (ou distância) entre dois pontos. O problema consiste em encontrar o caminho mínimo do ponto A ao ponto F, ou seja, o caminho que minimize a soma dos custos das arestas percorridas.
+<br>
+<br>
+### Variáveis de decisão
+As variáveis de decisão são x_ij, variáveis binárias que indicam se a aresta que liga o vértice i ao vértice j faz parte do caminho ou não.
+<br>
+<br>
+### Função objetivo
+O objetivo é minimizar a soma dos custos das arestas selecionadas. Para isso, utilizamos a seguinte fórmula:
+
+min Z = ∑(i,j)∈E c_ij * x_ij
+
+Onde E é o conjunto de todas as arestas do grafo, c_ij é o custo da aresta que liga o vértice i ao vértice j e x_ij é a variável de decisão que indica se a aresta (i,j) é selecionada ou não.
+<br>
+<br>
+
+### Restrições
+Para as restrições, devemos garantir que cada vértice tenha exatamente uma aresta de entrada e uma de saída, exceto pelos vértices A e F, que podem ter apenas uma aresta de entrada ou uma de saída, respectivamente. Para isso, utilizamos as seguintes restrições:
+
+∑(i,j)∈E x_ij = 1, para todo vértice i ≠ A,F
+
+∑(A,j)∈E x_Aj = 1
+
+∑(i,F)∈E x_iF = 1
+
+Onde x_Aj é a variável de decisão que indica se a aresta que liga o ponto A ao vértice j é selecionada e x_iF é a variável de decisão que indica se a aresta que liga o vértice i ao ponto F é selecionada.
+
+Também devemos garantir que não haja ciclos no caminho selecionado, para isso utilizamos a seguinte restrição de fluxo:
+
+∑(i,j)∈P x_ij ≤ |P| - 1, para todo subconjunto de vértices P ⊆ V
+
+Onde |P| é o número de vértices em P.
+<br>
+<br>
+
+### Detalhamento das restrições
+A primeira restrição, que afirma que cada vértice deve ter exatamente uma aresta de entrada e uma de saída, exceto pelos vértices A e F, que podem ter apenas uma aresta de entrada ou uma de saída, respectivamente, garante que o caminho encontrado seja uma rota de A a F sem retornos ou desvios desnecessários.
+
+As restrições adicionais referentes a x_Aj e x_iF asseguram que a rota inicie em A e termine em F, pois essas arestas são as únicas que podem ter uma ponta livre e, portanto, devem ser incluídas no caminho.
+
+A restrição de fluxo, por sua vez, evita a formação de ciclos no caminho, garantindo que cada subconjunto de vértices selecionados tenha no máximo |P| - 1 arestas, onde |P| é o número de vértices no subconjunto. Isso significa que o caminho não pode "voltar" em si mesmo, passando por um mesmo vértice duas vezes, por exemplo.
+
+Dessa forma, as restrições garantem que a solução encontrada respeite as regras do problema de caminho mínimo em um grafo e que a solução seja ótima, minimizando a soma dos custos das arestas selecionadas.
+<br>
+<br>
+
+### Conclusão
+Dessa forma, o problema matemático pode ser resolvido por um algoritmo de caminho mínimo, como o algoritmo de Dijkstra ou o algoritmo de Bellman-Ford, que irá encontrar o caminho mínimo entre o ponto A e o ponto F.
+<br>
+<br>
+
 
 # Referências
