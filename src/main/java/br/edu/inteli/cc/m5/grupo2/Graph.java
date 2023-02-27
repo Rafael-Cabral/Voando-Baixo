@@ -9,11 +9,16 @@ public class Graph {
     private int nextVertexId = 0;
 
     public Graph() {
-        this.vertices = new ArrayList<Vertex>();
+        this.vertices = new ArrayList<>();
     }
 
     public Vertex addVertex(double latitude, double longitude, double altitude) {
         Vertex vertex = new Vertex(nextVertexId++, latitude, longitude, altitude);
+        this.vertices.add(vertex);
+        return vertex;
+    }
+
+    public Vertex addVertex(Vertex vertex){
         this.vertices.add(vertex);
         return vertex;
     }
