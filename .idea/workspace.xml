@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ea1af99-436f-4525-9473-d871fef53af1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Neo4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Neo4j.java" afterDir="false" />
+    <list default="true" id="4ea1af99-436f-4525-9473-d871fef53af1" name="Changes" comment="Delete Neo4j">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template.iml" beforeDir="false" afterPath="$PROJECT_DIR$/template.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +73,7 @@
       <recent name="C:\Users\Elias\Documents\GitHub\Turma-4\grupo2\src\main\java\br\edu\inteli\cc\m5\grupo" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.VertexTest">
+  <component name="RunManager" selected="TestNG.GraphTest.testConnectVertices">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2" />
@@ -120,6 +122,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GraphTest.testConnectVertices" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.GraphTest" />
+      <option name="METHOD_NAME" value="testConnectVertices" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="VertexTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="template" />
       <extension name="coverage">
@@ -157,25 +178,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VertexTest.testConnection" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="template" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
-      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.VertexTest" />
-      <option name="METHOD_NAME" value="testConnection" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -187,11 +189,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.GraphTest.testConnectVertices" />
         <item itemvalue="TestNG.VertexTest" />
         <item itemvalue="TestNG.EdgeTest" />
         <item itemvalue="TestNG.EdgeTest.assureWeight" />
         <item itemvalue="TestNG.VertexTest.adjacencyList" />
-        <item itemvalue="TestNG.VertexTest.testConnection" />
       </list>
     </recent_temporary>
   </component>
