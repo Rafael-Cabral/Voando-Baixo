@@ -342,6 +342,14 @@ A representação visual inicial do problema pode ser visualizada abaixo ou, se 
 
 ![Representação visual](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/graph.png?raw=true)
 
+## Persistência dos dados
+
+Os dados são salvos e persistidos em uma instância AuraDB do Neo4j. Apenas os caminhos calculados são enviados, e sua representação é feita através de diversas relações "CONNECT_TO" entre os vértices, assim como demonstrado nas imagens abaixo:
+
+![Map](https://user-images.githubusercontent.com/64558682/221622242-c15b6b79-a711-45df-9dbd-33a2f7b17e4d.png)
+![Zoom](https://user-images.githubusercontent.com/64558682/221622318-bbc18bf8-7803-47c6-9fb7-6d5ba7a76582.png)
+![Graph](https://user-images.githubusercontent.com/64558682/221622367-7556c8b9-77e4-4b05-8b52-13c0af0d4d4c.png)
+
 
 # Limitações e modelagem matemática
 
