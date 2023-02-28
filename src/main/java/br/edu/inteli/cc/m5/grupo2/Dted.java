@@ -17,9 +17,6 @@ public class Dted {
         int cols = altitudeBand.getXSize();
         int rows = altitudeBand.getYSize();
 
-        // Creation of a matrix to hold the values of altitude, latitude, and longitude for each vertex
-        double[][] data = new double[rows * cols][3];
-
         // Configuration variables of the file
         double[] geotransform = dataset.GetGeoTransform();
         double xOrigin = geotransform[0];
@@ -27,24 +24,40 @@ public class Dted {
         double pixelWidth = geotransform[1];
         double pixelHeight = geotransform[5];
 
+        // Ammount of vertices needed to sum up to the distance of the interval
+        double lat2 = yOrigin - 1 * pixelHeight;
+        double lon2 = xOrigin - 1 * pixelHeight;
+
+        double latDiff = Math.abs(Math.abs(xOrigin) - Math.abs(lon2));
+        double latDistance = latDiff * 111319.9;
+
+        double lonDiff = Math.abs(Math.abs(yOrigin) - Math.abs(lat2));
+        double lonDistance = lonDiff * 111319.9;
+
+        int y = (int) (interval / latDistance);
+        int x = (int) (interval / lonDistance);
+
+        // Creation of a matrix to hold the values of altitude, latitude, and longitude for each vertex
+        double[][] data = new double[(rows/x) * (cols/y)][3];
+
         // Read the values of altitude in each pixel
         double[] buffer = new double[cols * rows];
         altitudeBand.ReadRaster(0, 0, cols, rows, buffer);
 
-        // Fill the matrix com os valores de altitude, latitude e longitude
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+        // Fill the matrix with the values of each vertex
+        int index = 0;
+        for (int i = 0; i < rows - 1; i+= x) {
+            for (int j = 0; j < cols - 1; j+= y) {
                 double altitude = buffer[i * cols + j];
                 double latitude = yOrigin + i * pixelHeight;
                 double longitude = xOrigin + j * pixelWidth;
-                int index = i * cols + j;
                 data[index][0] = altitude;
                 data[index][1] = latitude;
                 data[index][2] = longitude;
+                index++;
             }
         }
 
-        // Close the Dataset object
         dataset.delete();
         return data;
     }

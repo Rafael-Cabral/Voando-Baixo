@@ -37,7 +37,7 @@ public class Graph {
 
     public void connectVertices(int distance) {
 
-        // Computation to get the ammount of Vertices in latitude (y) and longitude (x)
+        // Ammount of vertices per latitude (y) and longitude (x)
         double lat1 = this.vertices.get(0).getLongitude();
         double lat2 = this.vertices.get(this.vertices.size() - 1).getLatitude();
         double lon1 = this.vertices.get(0).getLongitude();
