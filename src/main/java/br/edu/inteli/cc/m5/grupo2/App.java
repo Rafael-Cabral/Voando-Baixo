@@ -6,16 +6,9 @@ public class App {
         // Instancing a new graph.
         Graph graph = new Graph();
 
-        String[] paths = new String[]{"src/main/resources/dted/SaoPaulo/W045_S23.dt2", "src/main/resources/dted/SaoPaulo/W045_S24.dt2", "src/main/resources/dted/SaoPaulo/W046_S23.dt2", "src/main/resources/dted/SaoPaulo/W046_S24.dt2", "src/main/resources/dted/SaoPaulo/W047_S23.dt2", "src/main/resources/dted/SaoPaulo/W047_S24.dt2"};
-        double[][] map = new double[0][];
+        String path = "src/main/resources/dted/SaoPaulo/W045_S23.dt2";
 
-        for (String path : paths) {
-            double[][] newMap = Dted.readDted(path, 180);
-            map = Dted.mergeDted(map, newMap);
-        }
-
-        // Sorting map
-        map = Dted.sortDted(map);
+        double[][] map = Dted.readDted(path, 180);
 
         // Sending all Vertices to the graph created
         for (double[] doubles : map) {
