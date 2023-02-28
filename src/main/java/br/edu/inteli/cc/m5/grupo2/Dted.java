@@ -5,82 +5,63 @@ import org.gdal.gdal.Dataset;
 import org.gdal.gdal.gdal;
 import org.gdal.gdalconst.gdalconst;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
 public class Dted {
 
-    public static double[][] readDted(String filePath, int interval) {
+    public static double[][] readDted(String filePath, int intervalDistance) {
 
-        // Abrir o arquivo DTED
         gdal.AllRegister();
         Dataset dataset = gdal.Open(filePath, gdalconst.GA_ReadOnly);
-
-        // Obter o objeto Band que contém os dados de altitude
         Band altitudeBand = dataset.GetRasterBand(1);
 
-        // Obter as dimensões da matriz de altitude
+        // Dimensions X and Y of the file
         int cols = altitudeBand.getXSize();
         int rows = altitudeBand.getYSize();
 
-        // Cria a matriz para armazenar os valores de altitude, latitude e longitude
-        double[][] data = new double[(rows * cols) / (interval / 30)][3];
-
-        // Obter os dados de latitude e longitude usando as funções GetGeoTransform
+        // Configuration variables of the file
         double[] geotransform = dataset.GetGeoTransform();
         double xOrigin = geotransform[0];
         double yOrigin = geotransform[3];
         double pixelWidth = geotransform[1];
         double pixelHeight = geotransform[5];
 
-        // Ler os valores de altitude em cada pixel usando a função ReadRaster
+        // Amount of vertices needed to sum up to the distance of the interval
+        double lat2 = yOrigin - 1 * pixelHeight;
+        double lon2 = xOrigin - 1 * pixelHeight;
+
+        double latDiff = Math.abs(Math.abs(xOrigin) - Math.abs(lon2));
+        double latDistance = latDiff * 111319.9;
+
+        double lonDiff = Math.abs(Math.abs(yOrigin) - Math.abs(lat2));
+        double lonDistance = lonDiff * 111319.9;
+
+        int y = (int) (intervalDistance / latDistance);
+        int x = (int) (intervalDistance / lonDistance);
+
+        // Creation of a matrix to hold the values of altitude, latitude, and longitude for each vertex
+        double[][] data = new double[((rows/x) * (cols/y)) + 1][3];
+
+        // Read the values of altitude in each pixel
         double[] buffer = new double[cols * rows];
         altitudeBand.ReadRaster(0, 0, cols, rows, buffer);
 
-        // Preencher a matriz com os valores de altitude, latitude e longitude
-        for (int i = 0; i < rows - interval / 30; i++) {
-            for (int j = 0; j < cols - interval / 30; j++) {
+        // Fill the matrix with the values of each vertex
+        int index = 0;
+        for (int i = 0; i < rows - 1; i+= x) {
+            for (int j = 0; j < cols - 1; j+= y) {
                 double altitude = buffer[i * cols + j];
                 double latitude = yOrigin + i * pixelHeight;
                 double longitude = xOrigin + j * pixelWidth;
-                int index = i * cols / (interval / 30) + j;
                 data[index][0] = altitude;
                 data[index][1] = latitude;
                 data[index][2] = longitude;
-                j += (int) interval / 30;
+                index++;
             }
-            i += (int) interval / 30;
         }
 
-        // Fechar o objeto Dataset
+        data[index][1] = rows/x;
+        data[index][2] = cols/y;
+
         dataset.delete();
         return data;
-    }
-
-    public static double[][] mergeDted(double[][] firstArray, double[][] secondArray) {
-        double[][] newArray = new double[firstArray.length + secondArray.length][3];
-        System.arraycopy(firstArray, 0, newArray, 0, firstArray.length);
-        System.arraycopy(secondArray, 0, newArray, firstArray.length, secondArray.length);
-        return newArray;
-    }
-
-    public static double[][] sortDted(double[][] mapArray) {
-        Arrays.sort(mapArray, new Comparator<double[]>() {
-            public int compare(final double[] a, final double[] b) {
-                if (a[0] < b[0]) {
-                    return -1;
-                } else if (a[0] > b[0]) {
-                    return 1;
-                } else if (a[1] < b[1]) {
-                    return -1;
-                } else if (a[1] > b[1]) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        });
-
-        return mapArray;
     }
 }

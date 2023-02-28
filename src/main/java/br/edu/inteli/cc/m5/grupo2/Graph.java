@@ -35,73 +35,59 @@ public class Graph {
         return this.vertices.get(vertexId).getAllConnections();
     }
 
-    public void connectVertices(int distance) {
+    public void connectVertices(int intervalDistance, int rows, int cols) {
 
-        double lat1 = this.vertices.get(0).getLongitude();
+        // Amount of vertices per latitude (y) and longitude (x)
+        double lat1 = this.vertices.get(0).getLatitude();
         double lat2 = this.vertices.get(this.vertices.size() - 1).getLatitude();
         double lon1 = this.vertices.get(0).getLongitude();
         double lon2 = this.vertices.get(this.vertices.size() - 1).getLongitude();
 
-        double latDiff = Math.abs(lat1 - lat2);
+        double latDiff = Math.abs(Math.abs(lat1) - Math.abs(lat2));
         double latDistance = latDiff * 111319.9;
 
-        double lonDiff = Math.abs(lon1 - lon2);
+        double lonDiff = Math.abs(Math.abs(lon1) - Math.abs(lon2));
         double lonDistance = lonDiff * 111319.9;
 
-        int y = (int) latDistance / distance;
+        int y = (int) latDistance / intervalDistance;
+        int x = (int) lonDistance / intervalDistance;
 
-        int x = (int) lonDistance / distance;
-
+        // Loop to verify where it is possible to add new connections
         int currentVertex = 0;
-        for (int i = 0; i <= x; i++) {
-            for (int j = 0; j <= y; j++) {
-                if (i > 0 && i < x && j > 0 && j < y) {
-                    this.addEdge(currentVertex, currentVertex - x - 2);
-                    this.addEdge(currentVertex, currentVertex - x - 1);
-                    this.addEdge(currentVertex, currentVertex - x);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (i > 0 && i < rows - 1 && j > 0 && j < cols - 1) {
+                    this.addEdge(currentVertex, currentVertex - cols);
                     this.addEdge(currentVertex, currentVertex - 1);
                     this.addEdge(currentVertex, currentVertex + 1);
-                    this.addEdge(currentVertex, currentVertex + x);
-                    this.addEdge(currentVertex, currentVertex + x + 1);
-                    this.addEdge(currentVertex, currentVertex + x + 2);
-                } else if (i == 0 && j > 0 && j < y) {
+                    this.addEdge(currentVertex, currentVertex + cols);
+                } else if (i == 0 && j > 0 && j < cols - 1) {
                     this.addEdge(currentVertex, currentVertex - 1);
                     this.addEdge(currentVertex, currentVertex + 1);
-                    this.addEdge(currentVertex, currentVertex + x);
-                    this.addEdge(currentVertex, currentVertex + x + 1);
-                    this.addEdge(currentVertex, currentVertex + x + 2);
-                } else if (i == x && j > 0 && j < y) {
-                    this.addEdge(currentVertex, currentVertex - x - 2);
-                    this.addEdge(currentVertex, currentVertex - x - 1);
-                    this.addEdge(currentVertex, currentVertex - x);
+                    this.addEdge(currentVertex, currentVertex + cols);
+                } else if (i == rows - 1 && j > 0 && j < cols - 1) {
+                    this.addEdge(currentVertex, currentVertex - cols);
                     this.addEdge(currentVertex, currentVertex - 1);
                     this.addEdge(currentVertex, currentVertex + 1);
-                } else if (j == 0 && i > 0 && i < x) {
-                    this.addEdge(currentVertex, currentVertex - x);
+                } else if (j == 0 && i > 0 && i < rows - 1) {
+                    this.addEdge(currentVertex, currentVertex - cols);
                     this.addEdge(currentVertex, currentVertex + 1);
-                    this.addEdge(currentVertex, currentVertex + x + 1);
-                    this.addEdge(currentVertex, currentVertex + x + 2);
-                } else if (j == y && i > 0 && i < x) {
-                    this.addEdge(currentVertex, currentVertex - x - 2);
-                    this.addEdge(currentVertex, currentVertex - x - 1);
+                    this.addEdge(currentVertex, currentVertex + cols);
+                } else if (j == cols - 1 && i > 0 && i < rows - 1) {
+                    this.addEdge(currentVertex, currentVertex - cols);
                     this.addEdge(currentVertex, currentVertex - 1);
-                    this.addEdge(currentVertex, currentVertex + x);
-                    this.addEdge(currentVertex, currentVertex + x + 1);
+                    this.addEdge(currentVertex, currentVertex + cols);
                 } else if (i == 0 && j == 0) {
                     this.addEdge(currentVertex, currentVertex + 1);
-                    this.addEdge(currentVertex, currentVertex + x + 1);
-                    this.addEdge(currentVertex, currentVertex + x + 2);
-                } else if (i == 0 && j < y) {
+                    this.addEdge(currentVertex, currentVertex + cols);
+                } else if (i == 0 && j == cols - 1) {
                     this.addEdge(currentVertex, currentVertex - 1);
-                    this.addEdge(currentVertex, currentVertex + x);
-                    this.addEdge(currentVertex, currentVertex + x + 1);
-                } else if (i == x && j == 0) {
-                    this.addEdge(currentVertex, currentVertex - x - 1);
-                    this.addEdge(currentVertex, currentVertex - x);
+                    this.addEdge(currentVertex, currentVertex + cols);
+                } else if (i == rows - 1 && j == 0) {
+                    this.addEdge(currentVertex, currentVertex - cols);
                     this.addEdge(currentVertex, currentVertex + 1);
-                } else if (i == x && j == y) {
-                    this.addEdge(currentVertex, currentVertex - x - 2);
-                    this.addEdge(currentVertex, currentVertex - x - 1);
+                } else if (i == rows - 1 && j == cols - 1) {
+                    this.addEdge(currentVertex, currentVertex - cols);
                     this.addEdge(currentVertex, currentVertex - 1);
                 }
                 currentVertex++;

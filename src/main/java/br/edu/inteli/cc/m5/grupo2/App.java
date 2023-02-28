@@ -6,27 +6,24 @@ public class App {
         // Instancing a new graph.
         Graph graph = new Graph();
 
-        String[] paths = new String[]{"src/main/resources/dted/SaoPaulo/W045_S23.dt2", "src/main/resources/dted/SaoPaulo/W045_S24.dt2", "src/main/resources/dted/SaoPaulo/W046_S23.dt2", "src/main/resources/dted/SaoPaulo/W046_S24.dt2", "src/main/resources/dted/SaoPaulo/W047_S23.dt2", "src/main/resources/dted/SaoPaulo/W047_S24.dt2"};
-        double[][] map = new double[0][];
+        // path to DTED file
+        String path = "src/main/resources/dted/SaoPaulo/W045_S23.dt2";
 
-        for (String path : paths) {
-            double[][] newMap = Dted.readDted(path, 180);
-            map = Dted.mergeDted(map, newMap);
-        }
-
-        // Sorting map
-        map = Dted.sortDted(map);
+        double[][] map = Dted.readDted(path, 180);
 
         // Sending all Vertices to the graph created
-        for (double[] doubles : map) {
-            graph.addVertex(doubles[1], doubles[2], doubles[0]);
+        for (int i = 0;i < map.length - 1; i++) {
+            graph.addVertex(map[i][1], map[i][2], map[i][0]);
         }
 
+        int rows = (int) map[map.length - 1][1];
+        int cols = (int) map[map.length - 1][2];
+
         // Creating all possible connections in the graph
-        graph.connectVertices(180);
+        graph.connectVertices(180, rows, cols);
 
         // Printing the connections of id = 6 vertex.
-        graph.getConnectionsOf(6).forEach(connection -> {
+        graph.getConnectionsOf(19000).forEach(connection -> {
             System.out.println(connection.getArrivalVertex().getId());
         });
     }
