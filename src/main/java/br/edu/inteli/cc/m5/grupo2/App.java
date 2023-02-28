@@ -6,6 +6,7 @@ public class App {
         // Instancing a new graph.
         Graph graph = new Graph();
 
+        // path to DTED file
         String path = "src/main/resources/dted/SaoPaulo/W045_S23.dt2";
 
         double[][] map = Dted.readDted(path, 180);

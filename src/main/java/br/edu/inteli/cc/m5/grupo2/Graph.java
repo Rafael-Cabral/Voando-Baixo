@@ -37,6 +37,7 @@ public class Graph {
 
     public void connectVertices(int distance) {
 
+        // Computation to get the ammount of Vertices in latitude (y) and longitude (x)
         double lat1 = this.vertices.get(0).getLongitude();
         double lat2 = this.vertices.get(this.vertices.size() - 1).getLatitude();
         double lon1 = this.vertices.get(0).getLongitude();
@@ -49,9 +50,9 @@ public class Graph {
         double lonDistance = lonDiff * 111319.9;
 
         int y = (int) latDistance / distance;
-
         int x = (int) lonDistance / distance;
 
+        // Loop to verify where it is possible to add new connections
         int currentVertex = 0;
         for (int i = 0; i <= x; i++) {
             for (int j = 0; j <= y; j++) {
