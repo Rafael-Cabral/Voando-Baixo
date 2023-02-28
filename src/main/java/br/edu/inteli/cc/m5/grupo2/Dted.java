@@ -7,7 +7,7 @@ import org.gdal.gdalconst.gdalconst;
 
 public class Dted {
 
-    public static double[][] readDted(String filePath, int interval) {
+    public static double[][] readDted(String filePath, int intervalDistance) {
 
         gdal.AllRegister();
         Dataset dataset = gdal.Open(filePath, gdalconst.GA_ReadOnly);
@@ -24,7 +24,7 @@ public class Dted {
         double pixelWidth = geotransform[1];
         double pixelHeight = geotransform[5];
 
-        // Ammount of vertices needed to sum up to the distance of the interval
+        // Amount of vertices needed to sum up to the distance of the interval
         double lat2 = yOrigin - 1 * pixelHeight;
         double lon2 = xOrigin - 1 * pixelHeight;
 
@@ -34,11 +34,11 @@ public class Dted {
         double lonDiff = Math.abs(Math.abs(yOrigin) - Math.abs(lat2));
         double lonDistance = lonDiff * 111319.9;
 
-        int y = (int) (interval / latDistance);
-        int x = (int) (interval / lonDistance);
+        int y = (int) (intervalDistance / latDistance);
+        int x = (int) (intervalDistance / lonDistance);
 
         // Creation of a matrix to hold the values of altitude, latitude, and longitude for each vertex
-        double[][] data = new double[(rows/x) * (cols/y)][3];
+        double[][] data = new double[((rows/x) * (cols/y)) + 1][3];
 
         // Read the values of altitude in each pixel
         double[] buffer = new double[cols * rows];
@@ -57,6 +57,9 @@ public class Dted {
                 index++;
             }
         }
+
+        data[index][1] = rows/x;
+        data[index][2] = cols/y;
 
         dataset.delete();
         return data;
