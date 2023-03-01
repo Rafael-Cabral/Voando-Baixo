@@ -7,7 +7,7 @@ import static org.testng.AssertJUnit.assertNotNull;
 
 public class VertexTest {
 
-    @Test
+    @Test // Tests creating a vertex
     private void getAttributes(){
         Vertex vertex = new Vertex(1, 1.0, 1.0, 100.0);
 
@@ -17,7 +17,7 @@ public class VertexTest {
         assertEquals(100.0, vertex.getAltitude());
     }
 
-    @Test
+    @Test // Tests getting the connection of a vertex on number X
     private void getConnectionAt(){
         Vertex vertex = new Vertex(1, 1.0, 1.0, 100.0);
         Vertex vertex2 = new Vertex(2, 2.0, 2.0, 200.0);
@@ -27,7 +27,7 @@ public class VertexTest {
         assertNotNull(vertex.getConnectionAt(0));
     }
 
-    @Test
+    @Test // Tests getting all vertexes connected to one specific vertex
     private void getAllConnections(){
         Vertex vertex = new Vertex(1, 1.0, 1.0, 100.0);
         Vertex vertex2 = new Vertex(2, 2.0, 2.0, 200.0);
@@ -39,7 +39,7 @@ public class VertexTest {
         assertNotNull(vertex.getAllConnections());
     }
 
-    @Test
+    @Test // Tests the number of connections of a vertex
     private void getNumberOfConnections(){
         Vertex vertex = new Vertex(1, 1.0, 1.0, 100.0);
         Vertex vertex2 = new Vertex(2, 2.0, 2.0, 200.0);
@@ -51,7 +51,7 @@ public class VertexTest {
         assertEquals(2, vertex.getNumberOfConnections());
     }
 
-    @Test
+    @Test // Tests the connection of two vertexes
     private void testConnection(){
         Vertex v1 = new Vertex(1, 1.0, 1.0, 100.0);
         Vertex v2 = new Vertex(2, 2.0, 2.0, 200.0);
@@ -61,7 +61,7 @@ public class VertexTest {
         assertEquals(v2, v1.getConnectionAt(0).getArrivalVertex());
     }
 
-    @Test
+    @Test // Tests the adjacency list of a vertex
     private void assureAdjacencyList(){
         Vertex v1 = new Vertex(1, 1.0, 1.0, 100.0);
         Vertex v2 = new Vertex(2, 2.0, 2.0, 200.0);

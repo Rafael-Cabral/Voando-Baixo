@@ -11,10 +11,10 @@ public class GraphTest {
 
     String path = "src/main/resources/dted/SaoPaulo/W045_S23.dt2";
     double[][] newMap = Dted.readDted(path, 180);
-    Graph graph = createGraph();
+    Graph graph = createGraphForTests();
 
 
-    private Graph createGraph(){
+    private Graph createGraphForTests(){
         Graph graph = new Graph();
 
         for (int i = 0;i < newMap.length - 1; i++) {
@@ -30,7 +30,7 @@ public class GraphTest {
         return graph;
     }
 
-    @Test
+    @Test // Tests add vertex function using doubles
     public void addVertexWithDoubles(){
         Graph graph = new Graph();
 
@@ -39,13 +39,13 @@ public class GraphTest {
         assertNotNull(graph.getVertices());
     }
 
-    @Test
+    @Test // Tests getting the number of columns in graph
     public void getColsNumber(){ assertEquals((int) newMap[newMap.length - 1][2], graph.getCols()); }
 
-    @Test
+    @Test // Tests getting the number of rows in graph
     public void getRowsNumber(){ assertEquals((int) newMap[newMap.length - 1][1], graph.getCols()); }
 
-    @Test
+    @Test // Tests add a vertex with a vertex type parameter
     private void addVertexWithExistingVertex(){
         Graph graph = new Graph();
 
@@ -56,7 +56,7 @@ public class GraphTest {
         assertNotNull(graph.getVertices());
     }
 
-    @Test
+    @Test // Tests adding an edge between two vertexes
     private void addEdge(){
         Graph graph = new Graph();
 
@@ -71,7 +71,7 @@ public class GraphTest {
         assertEquals(1, vertex.getNumberOfConnections());
     }
 
-    @Test
+    @Test // Tests getting all vertexes from a graph
     private void getVertices(){
         Graph graph = new Graph();
 
@@ -90,7 +90,7 @@ public class GraphTest {
         assertEquals(listOfVertices, graph.getVertices());
     }
 
-    @Test
+    @Test // Tests getting all connections from a vertex of a graph
     private void getAllConections(){
         Graph graph = new Graph();
 
@@ -104,19 +104,19 @@ public class GraphTest {
         assertEquals(vertex.getAllConnections(), graph.getConnectionsOf(0));
     }
 
-    @Test
+    @Test // Tests the number of connections from top or bottom corners vertexes
     public void vertexTwoConnections() {
         // Check that each vertex has the correct number of edges
         assertEquals(2, graph.getVertices().get(0).getAllConnections().size());
     }
 
-    @Test
+    @Test // Tests the number of connections from a vertex on the edge but not on corner
     public void vertexThreeConnections() {
         // Check that each vertex has the correct number of edges
         assertEquals(3, graph.getVertices().get(2).getAllConnections().size());
     }
 
-    @Test
+    @Test // Tests the number of connections from a vertex that is not on edges
     public void vertexFourConnections() {
         int cols = graph.getCols();
 
