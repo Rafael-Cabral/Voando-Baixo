@@ -72,14 +72,23 @@ public class Vertex {
         return str.toString();
     }
 
-    private double distance;
+    private double distance = Double.POSITIVE_INFINITY;
+    private Vertex previous = null;
+
+    public double getDistance() {
+        return distance;
+    }
 
     public void setDistance(double distance) {
         this.distance = distance;
     }
 
-    public double getDistance() {
-        return distance;
+    public Vertex getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Vertex previous) {
+        this.previous = previous;
     }
 
 }

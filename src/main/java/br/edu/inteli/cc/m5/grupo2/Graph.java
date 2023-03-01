@@ -1,9 +1,7 @@
 package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 
 public class Graph {
 
@@ -95,19 +93,6 @@ public class Graph {
                 currentVertex++;
             }
         }
-    }
-
-    public LinkedList<Vertex> findPath(Vertex initial, Vertex arrival) {
-        LinkedList<Vertex> path = new LinkedList<>();
-        PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparing(Vertex::getDistance));
-
-        initial.setDistance(0);
-        queue.add(initial);
-
-
-        return path;
-
-
     }
 
 
