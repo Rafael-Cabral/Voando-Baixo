@@ -27,15 +27,14 @@ public class Graph {
     public int getRows(){return this.rows;}
 
     // Remove before deploy
-    public Vertex addVertex(Vertex vertex){
+    public void addVertex(Vertex vertex){
         for (int i = 0; i < this.getVertices().size(); i++){
             if (vertex.getId() == this.getVertices().get(i).getId()){
                 LOGGER.log(Level.WARNING, "Vertex with id == " + vertex.getId() + " already exists");
-                return null;
+                return;
             }
         }
         this.vertices.add(vertex);
-        return vertex;
     }
 
     public void addEdge(int vertexId, int arrivalVertexId) {
@@ -48,6 +47,15 @@ public class Graph {
 
     public LinkedList<Edge> getConnectionsOf(int vertexId) {
         return this.vertices.get(vertexId).getAllConnections();
+    }
+
+    public String getAdjacencyListForEachVertex(){
+        StringBuilder str = new StringBuilder();
+        for (Vertex vertex : this.vertices) {
+            str.append(vertex.getAdjacencyListAsString());
+            str.append("\n");
+        }
+        return str.toString();
     }
 
     public void connectVertices(int intervalDistance, int rows, int cols) {
