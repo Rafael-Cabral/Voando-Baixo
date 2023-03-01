@@ -39,7 +39,7 @@ public class Vertex {
     }
 
     public LinkedList<Edge> getAllConnections() {
-        return new LinkedList<Edge>(this.connections);
+        return this.connections;
     }
 
     public int getNumberOfConnections() {
