@@ -101,7 +101,7 @@ public class GraphTest {
         graph.addVertex(vertex2);
         graph.addEdge(vertex.getId() - 1, vertex2.getId() - 1);
 
-        System.out.println(graph.getConnectionsOf(1));
+        assertEquals(vertex.getAllConnections(), graph.getConnectionsOf(0));
     }
 
     @Test
