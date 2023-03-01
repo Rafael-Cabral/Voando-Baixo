@@ -1,7 +1,9 @@
 package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class Graph {
 
@@ -101,4 +103,6 @@ public class Graph {
         }
         initial.setDistance(0);
     }
+
+    PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparing(Vertex::getDistance));
 }
