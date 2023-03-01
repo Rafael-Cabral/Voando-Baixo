@@ -72,4 +72,14 @@ public class Vertex {
         return str.toString();
     }
 
+    private double distance;
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
 }

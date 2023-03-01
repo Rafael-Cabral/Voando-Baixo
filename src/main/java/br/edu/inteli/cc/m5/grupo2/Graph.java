@@ -97,14 +97,18 @@ public class Graph {
         }
     }
 
-    public ArrayLis<Vertex> findPath(Vertex Initial, Vertex arrival) {
-        for (Vertex v : this.vertices) {
-            v.setDistance(Double.POSITIVE_INFINITY);
-        }
+    public LinkedList<Vertex> findPath(Vertex initial, Vertex arrival) {
+        LinkedList<Vertex> path = new LinkedList<>();
+        PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparing(Vertex::getDistance));
+
         initial.setDistance(0);
+        queue.add(initial);
+
+
+        return path;
+
+
     }
 
-    PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparing(Vertex::getDistance));
 
-    queue.add(initial);
 }
