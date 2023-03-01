@@ -18,7 +18,7 @@ public class Graph {
         return vertex;
     }
 
-    public Vertex addVertex(Vertex vertex){
+    public Vertex addVertex(Vertex vertex) {
         this.vertices.add(vertex);
         return vertex;
     }
@@ -93,5 +93,12 @@ public class Graph {
                 currentVertex++;
             }
         }
+    }
+
+    public ArrayLis<Vertex> findPath(Vertex Initial, Vertex arrival) {
+        for (Vertex v : this.vertices) {
+            v.setDistance(Double.POSITIVE_INFINITY);
+        }
+        initial.setDistance(0);
     }
 }
