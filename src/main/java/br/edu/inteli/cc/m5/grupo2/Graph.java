@@ -105,4 +105,6 @@ public class Graph {
     }
 
     PriorityQueue<Vertex> queue = new PriorityQueue<>(Comparator.comparing(Vertex::getDistance));
+
+    queue.add(initial);
 }
