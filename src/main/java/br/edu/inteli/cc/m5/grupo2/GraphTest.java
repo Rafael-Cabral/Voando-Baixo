@@ -45,6 +45,18 @@ public class GraphTest {
     @Test // Tests getting the number of rows in graph
     public void getRowsNumber(){ assertEquals((int) newMap[newMap.length - 1][1], graph.getCols()); }
 
+    @Test
+    private void addVertexWithSameId(){
+        Graph graph = new Graph();
+
+        Vertex vertex = new Vertex(1,100.00, 100.00, 100.00);
+
+        graph.addVertex(vertex);
+        graph.addVertex(vertex);
+
+        assertEquals(1, graph.getVertices().size());
+    }
+
     @Test // Tests add a vertex with a vertex type parameter
     private void addVertexWithExistingVertex(){
         Graph graph = new Graph();

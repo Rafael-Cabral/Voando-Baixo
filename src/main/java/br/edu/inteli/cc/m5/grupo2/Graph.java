@@ -2,9 +2,12 @@ package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Graph {
 
+    private static final Logger LOGGER = Logger.getLogger(Graph.class.getName());
     private final ArrayList<Vertex> vertices;
     private int nextVertexId = 0;
 
@@ -23,7 +26,14 @@ public class Graph {
 
     public int getRows(){return this.rows;}
 
+    // Remove before deploy
     public Vertex addVertex(Vertex vertex){
+        for (int i = 0; i < this.getVertices().size(); i++){
+            if (vertex.getId() == this.getVertices().get(i).getId()){
+                LOGGER.log(Level.WARNING, "Vertex with id == " + vertex.getId() + " already exists");
+                return null;
+            }
+        }
         this.vertices.add(vertex);
         return vertex;
     }
