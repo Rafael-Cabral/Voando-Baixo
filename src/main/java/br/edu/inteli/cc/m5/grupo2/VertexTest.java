@@ -17,6 +17,10 @@ public class VertexTest {
         assertEquals(100.0, vertex.getAltitude());
     }
 
+    /*
+        This test two vertexes are created and vertex 1 is connected to vertex 2 and the method
+        getConnectionAt is called to return the edge connecting these vertexes
+     */
     @Test // Tests getting the connection of a vertex on number X
     private void getConnectionAt(){
         Vertex vertex = new Vertex(1, 1.0, 1.0, 100.0);
@@ -27,6 +31,11 @@ public class VertexTest {
         assertNotNull(vertex.getConnectionAt(0));
     }
 
+    /*
+        3 vertexes are created and vertexes 2 and 3 are connected to vertex 1.
+        Method getAllConnections is called to return all edges connecting to
+        vertex 1
+     */
     @Test // Tests getting all vertexes connected to one specific vertex
     private void getAllConnections(){
         Vertex vertex = new Vertex(1, 1.0, 1.0, 100.0);
@@ -39,6 +48,11 @@ public class VertexTest {
         assertNotNull(vertex.getAllConnections());
     }
 
+    /*
+        3 vertexes are created and vertexes 2 and 3 are connected to vertex 1.
+        Method getNumberOfConnections is called to check how many edges connect
+        to vertex 1
+     */
     @Test // Tests the number of connections of a vertex
     private void getNumberOfConnections(){
         Vertex vertex = new Vertex(1, 1.0, 1.0, 100.0);
@@ -51,6 +65,11 @@ public class VertexTest {
         assertEquals(2, vertex.getNumberOfConnections());
     }
 
+    /*
+        2 vertexes are created and vertex 2 is connected to vertex 1.
+        Method getWeight is called to get the weight of the edge
+        and getArrivalVertex checks the other vertex connected to that edge
+     */
     @Test // Tests the connection of two vertexes
     private void testConnection(){
         Vertex v1 = new Vertex(1, 1.0, 1.0, 100.0);
@@ -61,6 +80,10 @@ public class VertexTest {
         assertEquals(v2, v1.getConnectionAt(0).getArrivalVertex());
     }
 
+    /*
+     2 vertexes are created and vertex 2 is connected to vertex 1.
+     Method getAdjacencyListAsString is called to return the adjacency list of vertex 1.
+     */
     @Test // Tests the adjacency list of a vertex
     private void assureAdjacencyList(){
         Vertex v1 = new Vertex(1, 1.0, 1.0, 100.0);
