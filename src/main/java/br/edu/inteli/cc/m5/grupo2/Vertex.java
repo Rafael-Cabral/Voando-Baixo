@@ -88,4 +88,11 @@ public class Vertex {
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
+
+    public double getHeuristicCost(Vertex end) {
+        double d1 = Math.abs(latitude - end.getLatitude());
+        double d2 = Math.abs(longitude - end.getLongitude());
+        double d3 = Math.abs(altitude - end.getAltitude());
+        return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2) + Math.pow(d3, 2));
+    }
 }
