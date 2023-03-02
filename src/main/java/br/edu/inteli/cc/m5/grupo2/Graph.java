@@ -104,6 +104,14 @@ public class Graph {
                 return Double.compare(o1.getTotalCost(), o2.getTotalCost());
             }
         });
+
+        LinkedList<Vertex> path = new LinkedList<>();
+        boolean pathFound = false;
+
+        initial.setCostFromStart(0);
+        initial.setTotalCost(initial.getHeuristicCost(arrival));
+
+        queue.add(initial);
         
         return path;
     }
