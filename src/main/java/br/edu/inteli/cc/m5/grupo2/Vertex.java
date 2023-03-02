@@ -81,5 +81,7 @@ public class Vertex {
         this.costFromStart = CostFromStart;
     }
 
-    
+    public double getTotalCost() {
+        return totalCost;
+    }
 }
