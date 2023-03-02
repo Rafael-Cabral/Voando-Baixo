@@ -95,5 +95,8 @@ public class Graph {
         }
     }
 
-    
+    public LinkedList<Vertex> findPath(Vertex initial, Vertex arrival) {
+        
+        return path;
+    }
 }
