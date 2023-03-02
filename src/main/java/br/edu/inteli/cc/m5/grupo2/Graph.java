@@ -121,6 +121,10 @@ public class Graph {
                 path.add(current);
                 break;
             }
+
+            for (Edge edge : current.getAllConnections()) {
+                
+            }
         }
 
         if (pathFound) {
