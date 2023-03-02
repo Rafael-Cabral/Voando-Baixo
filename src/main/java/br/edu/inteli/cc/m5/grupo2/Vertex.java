@@ -72,23 +72,14 @@ public class Vertex {
         return str.toString();
     }
 
-    private double distance = Double.POSITIVE_INFINITY;
-    private Vertex previous = null;
+    private double costFromStart;
+    private double heuristicCost;
+    private double totalCost;
+    private Vertex cameFrom;
 
-    public double getDistance() {
-        return distance;
+    public void setCostFromStart(double CostFromStart) {
+        this.costFromStart = CostFromStart;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
-    public Vertex getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(Vertex previous) {
-        this.previous = previous;
-    }
-
+    
 }
