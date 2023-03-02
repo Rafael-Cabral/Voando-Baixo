@@ -1,7 +1,9 @@
 package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -118,5 +120,61 @@ public class Graph {
                 currentVertex++;
             }
         }
+    }
+
+    public LinkedList<Vertex> findPath(Vertex initial, Vertex arrival) {
+
+        PriorityQueue<Vertex> queue = new PriorityQueue<>(new Comparator<Vertex>() {
+            public int compare(Vertex o1, Vertex o2) {
+                return Double.compare(o1.getTotalCost(), o2.getTotalCost());
+            }
+        });
+
+        LinkedList<Vertex> path = new LinkedList<>();
+        boolean pathFound = false;
+
+        initial.setCostFromStart(0);
+        initial.setTotalCost(initial.getHeuristicCost(arrival));
+
+        queue.add(initial);
+
+        while (!queue.isEmpty()) {
+            Vertex current = queue.poll();
+
+            if (current.equals(arrival)) {
+                pathFound = true;
+                path.add(current);
+                break;
+            }
+
+            for (Edge edge : current.getAllConnections()) {
+                Vertex neighbor = edge.getArrivalVertex();
+
+                double cost = edge.getWeight();
+                double tentativeG = current.getCostFromStart() + cost;
+                if (tentativeG < neighbor.getCostFromStart()) {
+                    neighbor.setCameFrom(current);
+                    neighbor.setCostFromStart(tentativeG);
+                    neighbor.setTotalCost(neighbor.getCostFromStart() + neighbor.getHeuristicCost(arrival));
+                    if (!queue.contains(neighbor)) {
+                        queue.add(neighbor);
+                    } else {
+                        queue.remove(neighbor);
+                        queue.add(neighbor);
+                    }
+
+                }
+            }
+        }
+
+        if (pathFound) {
+            Vertex current = arrival;
+            while (current != null) {
+                path.addFirst(current);
+                current = current.getCameFrom();
+            }
+        }
+
+        return path;
     }
 }
