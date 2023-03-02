@@ -123,7 +123,10 @@ public class Graph {
             }
 
             for (Edge edge : current.getAllConnections()) {
-                
+                Vertex neighbor = edge.getArrivalVertex();
+
+                double cost = edge.getWeight();
+                double tentativeG = current.getCostFromStart() + cost;
             }
         }
 
