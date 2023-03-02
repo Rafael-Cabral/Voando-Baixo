@@ -1,7 +1,9 @@
 package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class Graph {
 
@@ -96,6 +98,12 @@ public class Graph {
     }
 
     public LinkedList<Vertex> findPath(Vertex initial, Vertex arrival) {
+
+        PriorityQueue<Vertex> queue = new PriorityQueue<>(new Comparator<Vertex>() {
+            public int compare(Vertex o1, Vertex o2) {
+                return Double.compare(o1.getTotalCost(), o2.getTotalCost());
+            }
+        });
         
         return path;
     }
