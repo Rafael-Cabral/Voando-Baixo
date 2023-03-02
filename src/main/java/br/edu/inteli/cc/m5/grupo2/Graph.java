@@ -127,6 +127,13 @@ public class Graph {
 
                 double cost = edge.getWeight();
                 double tentativeG = current.getCostFromStart() + cost;
+                if (tentativeG < neighbor.getCostFromStart()) {
+                    neighbor.setCameFrom(current);
+                    neighbor.setCostFromStart(tentativeG);
+                    neighbor.setTotalCost(neighbor.getCostFromStart() + neighbor.getHeuristicCost(arrival));
+
+
+                }
             }
         }
 
