@@ -99,4 +99,8 @@ public class Vertex {
     public double getCostFromStart() {
         return this.costFromStart;
     }
+
+    public Vertex getCameFrom() {
+        return cameFrom;
+    }
 }
