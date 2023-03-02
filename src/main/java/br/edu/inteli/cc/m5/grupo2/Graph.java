@@ -114,7 +114,13 @@ public class Graph {
         queue.add(initial);
 
         while (!queue.isEmpty()) {
-            
+            Vertex current = queue.poll();
+
+            if (current.equals(arrival)) {
+                pathFound = true;
+                path.add(current);
+                break;
+            }
         }
 
         if (pathFound) {
