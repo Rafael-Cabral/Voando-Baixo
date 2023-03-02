@@ -113,6 +113,9 @@ public class Graph {
 
         queue.add(initial);
 
+        while (!queue.isEmpty()) {
+            
+        }
 
         if (pathFound) {
             Vertex current = arrival;
@@ -121,7 +124,7 @@ public class Graph {
                 current = current.getCameFrom();
             }
         }
-        
+
         return path;
     }
 }
