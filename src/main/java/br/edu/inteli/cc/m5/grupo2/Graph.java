@@ -131,7 +131,12 @@ public class Graph {
                     neighbor.setCameFrom(current);
                     neighbor.setCostFromStart(tentativeG);
                     neighbor.setTotalCost(neighbor.getCostFromStart() + neighbor.getHeuristicCost(arrival));
-
+                    if (!queue.contains(neighbor)) {
+                        queue.add(neighbor);
+                    } else {
+                        queue.remove(neighbor);
+                        queue.add(neighbor);
+                    }
 
                 }
             }
