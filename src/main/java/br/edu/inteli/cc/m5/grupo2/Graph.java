@@ -112,6 +112,15 @@ public class Graph {
         initial.setTotalCost(initial.getHeuristicCost(arrival));
 
         queue.add(initial);
+
+
+        if (pathFound) {
+            Vertex current = arrival;
+            while (current != null) {
+                path.addFirst(current);
+                current = current.getCameFrom();
+            }
+        }
         
         return path;
     }
