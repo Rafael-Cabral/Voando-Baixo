@@ -95,4 +95,8 @@ public class Vertex {
         double d3 = Math.abs(altitude - end.getAltitude());
         return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2) + Math.pow(d3, 2));
     }
+
+    public double getCostFromStart() {
+        return this.costFromStart;
+    }
 }
