@@ -2,29 +2,43 @@ package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Graph {
 
+    private static final Logger LOGGER = Logger.getLogger(Graph.class.getName());
     private final ArrayList<Vertex> vertices;
     private int nextVertexId = 0;
+
+    private int cols, rows;
 
     public Graph() {
         this.vertices = new ArrayList<>();
     }
 
-    public Vertex addVertex(double latitude, double longitude, double altitude) {
+    public void addVertex(double latitude, double longitude, double altitude) {
         Vertex vertex = new Vertex(nextVertexId++, latitude, longitude, altitude);
         this.vertices.add(vertex);
-        return vertex;
     }
 
-    public Vertex addVertex(Vertex vertex){
+    public int getCols(){return this.cols;}
+
+    public int getRows(){return this.rows;}
+
+    // Remove before deploy
+    public void addVertex(Vertex vertex){
+        for (int i = 0; i < this.getVertices().size(); i++){
+            if (vertex.getId() == this.getVertices().get(i).getId()){
+                LOGGER.log(Level.WARNING, "Vertex with id == " + vertex.getId() + " already exists");
+                return;
+            }
+        }
         this.vertices.add(vertex);
-        return vertex;
     }
 
-    public void addEdge(int vertexId, int arrivalVertex) {
-        this.vertices.get(vertexId).addConnectionTo(this.vertices.get(arrivalVertex));
+    public void addEdge(int vertexId, int arrivalVertexId) {
+        this.vertices.get(vertexId).addConnectionTo(this.vertices.get(arrivalVertexId));
     }
 
     public ArrayList<Vertex> getVertices() {
@@ -35,7 +49,18 @@ public class Graph {
         return this.vertices.get(vertexId).getAllConnections();
     }
 
+    public String getAdjacencyListForEachVertex(){
+        StringBuilder str = new StringBuilder();
+        for (Vertex vertex : this.vertices) {
+            str.append(vertex.getAdjacencyListAsString());
+            str.append("\n");
+        }
+        return str.toString();
+    }
+
     public void connectVertices(int intervalDistance, int rows, int cols) {
+        this.cols = cols;
+        this.rows = rows;
 
         // Amount of vertices per latitude (y) and longitude (x)
         double lat1 = this.vertices.get(0).getLatitude();
