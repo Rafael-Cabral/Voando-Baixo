@@ -3,16 +3,14 @@ body {
 }
 
 .node {
-    height: 25px;
-    width: 25px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
   }
 
 .link {
-    stroke: #999;
-    stroke-opacity: 0.6;
+    stroke: #000000;
+    stroke-opacity: 1;
 }
 
 .sidebar {
@@ -23,4 +21,10 @@ body {
   width: 20%;
   background-color: white;
   padding: 20px;
+  float: left;
+}
+
+.visualization {
+  width: 80%;
+  float: right;
 }

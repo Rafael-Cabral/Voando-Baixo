@@ -7,22 +7,22 @@
 
     <body>
 
-        <div id="visualization"><button onclick="createPath()"></button></div>
-
         <div class="sidebar">
             <a href="#"> Voltar</a>
             <form>
-                <label for="latitude">Origem A:</label>
+                <label>Origem A:</label>
                 <input type="text" id="latitude" name="latitude">
                 <input type="text" id="longitude" name="longitude">
                 <br><br>
-                <label for="latitude2">Origem B:</label>
+                <label>Origem B:</label>
                 <input type="text" id="latitude2" name="latitude2">
                 <input type="text" id="longitude2" name="longitude2">
               </form>
               <br><br><br><br>
-              <button id="getPathButton">Melhor trajeto encontrado</button>
+              <button id="getPathButton" onclick="createPath()">Melhor trajeto encontrado</button>
         </div>
+
+        <div id="visualization" class="visualization"></div>
 
     </body>
     <script src="script.js"></script>
