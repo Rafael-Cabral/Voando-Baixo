@@ -8,21 +8,30 @@
     <body>
 
         <div class="sidebar">
-            <a href="#"> Voltar</a>
+            <a href="#" id="returnButton"> Voltar</a>
+            <br><br>Você está em
+            <h2>Operação 1</h2>
+            <br>
             <form>
                 <label>Origem A:</label>
-                <input type="text" id="latitude" name="latitude">
-                <input type="text" id="longitude" name="longitude">
+                <input type="text" id="latitude" name="latitude" class="coordinatesInput" placeholder="latitude">
+                <input type="text" id="longitude" name="longitude" class="coordinatesInput" placeholder="longitude">
                 <br><br>
                 <label>Origem B:</label>
-                <input type="text" id="latitude2" name="latitude2">
-                <input type="text" id="longitude2" name="longitude2">
+                <input type="text" id="latitude2" name="latitude2" class="coordinatesInput" placeholder="latitude">
+                <input type="text" id="longitude2" name="longitude2" class="coordinatesInput" placeholder="longitude">
               </form>
-              <br><br><br><br>
+              <br><br>
               <button id="getPathButton" onclick="createPath()">Melhor trajeto encontrado</button>
         </div>
 
         <div id="visualization" class="visualization"></div>
+        
+        <div class="bottom-nav">
+            <label id="viewLabel">Visualização</label>
+            <button class="nav-option">Mapa</button>
+            <button class="nav-option">Grafo</button>
+        </div>
 
     </body>
     <script src="script.js"></script>
