@@ -73,7 +73,6 @@ public class Vertex {
     }
 
     private double costFromStart;
-    private double heuristicCost;
     private double totalCost;
     private Vertex cameFrom;
 
@@ -98,6 +97,10 @@ public class Vertex {
 
     public double getCostFromStart() {
         return this.costFromStart;
+    }
+
+    public void setCameFrom(Vertex cameFrom) {
+        this.cameFrom = cameFrom;
     }
 
     public Vertex getCameFrom() {
