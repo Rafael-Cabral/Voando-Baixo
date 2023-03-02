@@ -33,6 +33,14 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+		"padded-blocks": [
+			"error",
+			"always"
+		],
+		"comma-dangle": [
+			"error",
+			"never"
+		]
     }
 }
