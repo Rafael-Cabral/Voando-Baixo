@@ -34,9 +34,11 @@ body {
 }
 
 .visualization {
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 70%;
-  float: right;
-  margin-left: 1px;
+  height: 95%;
 }
 
 .coordinatesInput {
@@ -76,4 +78,14 @@ body {
   margin-left: 2%;
   padding-right: 2%;
   margin-top: 0.5%;
+}
+
+#vertexInfo {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 10px;
+  z-index: 1;
 }
