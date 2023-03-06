@@ -6,30 +6,33 @@ public class App {
     public static void main(String[] args) {
         Graph graph = new Graph();
 
-        Vertex v1 = new Vertex(1, 0, 0, 0);
-        Vertex v2 = new Vertex(2, 0, 0, 10);
-        Vertex v3 = new Vertex(3, 0, 0, 20);
-        Vertex v4 = new Vertex(4, 0, 0, 30);
-        Vertex v5 = new Vertex(5, 0, 0, 40);
+        // criação dos vértices
+        Vertex vertex1 = new Vertex(1, 0, 0, 0);
+        Vertex vertex2 = new Vertex(2, 0, 1, 0);
+        Vertex vertex3 = new Vertex(3, 0, 2, 0);
+        Vertex vertex4 = new Vertex(4, 0, 3, 0);
+        Vertex vertex5 = new Vertex(5, 0, 4, 0);
 
-        graph.addVertex(v1);
-        graph.addVertex(v2);
-        graph.addVertex(v3);
-        graph.addVertex(v4);
-        graph.addVertex(v5);
+        // adição dos vértices no grafo
+        graph.addVertex(vertex1);
+        graph.addVertex(vertex2);
+        graph.addVertex(vertex3);
+        graph.addVertex(vertex4);
+        graph.addVertex(vertex5);
 
+        // conexão dos vértices em linha reta
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(2, 3);
         graph.addEdge(3, 4);
 
-        v1.addConnectionTo(v2);
-        v2.addConnectionTo(v3);
-        v3.addConnectionTo(v4);
-        v4.addConnectionTo(v5);
-        v1.addConnectionTo(v5);
+        // busca do menor caminho entre o vértice 1 e o vértice 5
+        LinkedList<Vertex> path = graph.findPath(vertex1, vertex5);
 
-        LinkedList<Vertex> path = graph.findPath(v1, v5);
-        System.out.println(path);
+        // impressão do caminho encontrado
+        System.out.println("Caminho encontrado:");
+        //for (Vertex vertex : path) {
+          //  System.out.println(vertex.getId());
+        //}
     }
 }

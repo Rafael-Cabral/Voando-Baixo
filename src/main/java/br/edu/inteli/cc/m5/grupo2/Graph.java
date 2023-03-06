@@ -140,6 +140,7 @@ public class Graph {
 
         while (!queue.isEmpty()) {
             Vertex current = queue.poll();
+            System.out.println(current.getId());
 
             if (current.equals(arrival)) {
                 pathFound = true;
