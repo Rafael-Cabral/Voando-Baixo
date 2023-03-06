@@ -3,10 +3,12 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import core from "./routes/index";
+import Database from "./database";
 
 export default class App {
 
 	public app : Application;
+	public database : Database;
 
 	constructor() {
 
@@ -18,11 +20,14 @@ export default class App {
 
 	private config() : void {
 
+		dotenv.config();
+
+		this.database = new Database();
+		
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: true }));
 		this.app.use(cors());
 		this.app.use(helmet());
-		dotenv.config();
 	
 	}
 
