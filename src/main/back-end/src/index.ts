@@ -24,4 +24,6 @@ class Setup {
 
 }
 
-export default new Setup();
+const setup = new Setup();
+
+export default setup;
