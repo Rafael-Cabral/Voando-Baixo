@@ -173,6 +173,8 @@ public class Graph {
                 path.addFirst(current);
                 current = current.getCameFrom();
             }
+        } else {
+            path.add(initial);
         }
 
         return path;
