@@ -27,7 +27,7 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Trabalhos relacionados
 
-<p> Nosso projeto leva em conta a otimização de uma trajetória para aviões com a menor altitude possível, fazendo uso do algoritmo A* (A estrela), sendo parecido com o artigo de T. Chen et al. (2018) que faz uso do mesmo algoritmo para aeronaves não tripuladas e considera consumo de combustível e menor perigo possível para a criação do seu algoritmo.</p>
+<p> Nosso projeto leva em conta a otimização de uma trajetória para aviões com a menor altitude possível, fazendo uso do algoritmo A* (A estrela), sendo parecido com o artigo de T. Chen et al. (2018) [3] que faz uso do mesmo algoritmo para aeronaves não tripuladas e considera consumo de combustível e menor perigo possível para a criação do seu algoritmo.</p>
 
 # Descrição da estratégia adotada para resolver o problema
 
