@@ -2,10 +2,13 @@ import { Application } from "express";
 import App from "./app";
 import HttpServer from "./httpServer";
 import dotenv from "dotenv";
+import RabbitMQServer from "./rabbitmqSever";
 
 class Setup {
 
 	public app : App;
+	public httpServer : HttpServer;
+	public rabbitmqServer : RabbitMQServer;
 
 	constructor() {
 
@@ -21,7 +24,8 @@ class Setup {
 
 	private up(app : Application) {
 
-		new HttpServer(app, 3000);
+		this.httpServer = new HttpServer(app, 3000);
+		this.rabbitmqServer = new RabbitMQServer(`amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`);
 
 	}
 
