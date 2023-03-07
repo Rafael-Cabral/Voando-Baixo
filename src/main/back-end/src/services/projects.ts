@@ -23,6 +23,8 @@ class ProjectsService {
 
 		session.close();
 
+		await setup.rabbitMQServer.publishInQueue("process", JSON.stringify(res.records[0].get(0).properties));
+
 		return res.records[0].get(0).properties;
 
 	}

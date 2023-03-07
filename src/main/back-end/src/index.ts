@@ -8,7 +8,7 @@ class Setup {
 
 	public app : App;
 	public httpServer : HttpServer;
-	public rabbitmqServer : RabbitMQServer;
+	public rabbitMQServer : RabbitMQServer;
 
 	constructor() {
 
@@ -25,7 +25,7 @@ class Setup {
 	private up(app : Application) {
 
 		this.httpServer = new HttpServer(app, 3000);
-		this.rabbitmqServer = new RabbitMQServer(`amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`);
+		this.rabbitMQServer = new RabbitMQServer(`amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`);
 
 	}
 
