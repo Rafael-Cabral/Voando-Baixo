@@ -14,6 +14,7 @@ class ProjectsService {
 				id: "${uuid()}", 
 				name: "${project.name}",
 				dt2File: "${project.dt2File}",
+				status: "processing",
 				createdAt: "${new Date()}"})
 			
 			RETURN p
@@ -67,7 +68,9 @@ class ProjectsService {
 		const res = await session.run(
 			`
 			MATCH (p:Project {id: "${projectId}"})
-			SET p.name = "${project.name}"
+			SET p.name = "${project.name}", 
+				p.updatedAt = "${new Date()}",
+				p.status = "${project.status || "processing"}"
 			RETURN p
 			`
 		);
