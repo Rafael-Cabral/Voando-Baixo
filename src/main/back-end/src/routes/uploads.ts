@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer";
 import { success } from "../constants/success";
 import { responseBuilder } from "../helpers/responseBuilder";
-import { uploadToS3 } from "../utils/upload";
+import { uploadToS3 } from "../utils/uploadToS3";
 
 const upload = multer({});
 
