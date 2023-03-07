@@ -22,5 +22,11 @@ export const success = {
 		code: 1003,
 		title: "Projects Retrieved Successfully.",
 		description: "Projects have been retrieved successfully."
+	},
+	projectRetrievedSuccessfully: {
+		status: 200,
+		code: 1004,
+		title: "Project Retrieved Successfully.",
+		description: "Project has been retrieved successfully."
 	}
 };

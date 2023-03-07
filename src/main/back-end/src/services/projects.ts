@@ -1,5 +1,6 @@
 import setup from "..";
 import { IProject } from "../interfaces/IProject";
+import { v4 as uuid } from "uuid";
 
 class ProjectsService {
 
@@ -9,7 +10,8 @@ class ProjectsService {
 
 		const res = await session.run(
 			`
-			MERGE (p:Project { 
+			MERGE (p:Project {
+				id: "${uuid()}", 
 				name: "${project.name}",
 				dt2File: "${project.dt2File}",
 				createdAt: "${new Date()}"})
@@ -38,6 +40,23 @@ class ProjectsService {
 		session.close();
 
 		return res.records.map((record) => record.get(0).properties);
+
+	}
+
+	public async get(projectId: string) {
+		
+		const session = setup.app.database.driver.session();
+
+		const res = await session.run(
+			`
+			MATCH (p:Project {id: "${projectId}"})
+			RETURN p
+			`
+		);
+
+		session.close();
+
+		return res.records[0].get(0).properties;
 
 	}
 

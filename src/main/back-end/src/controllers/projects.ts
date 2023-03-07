@@ -44,6 +44,26 @@ class ProjectsController {
 
 	}
 
+	public async getProject(req : Request, res : Response) : Promise<Response> {
+		
+		const { projectId } = req.params;
+
+		try {
+
+			const project = await ProjectsService.get(projectId);
+			
+			return responseBuilder(res, "success", success.projectRetrievedSuccessfully, project);
+		
+		} catch (err) {
+
+			console.error(err);
+
+			return responseBuilder(res, "error", error.unableToRetrieveProject);
+		
+		}
+
+	}
+
 }
 
 export default new ProjectsController();
