@@ -1,10 +1,25 @@
 package br.edu.inteli.cc.m5.grupo2;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         // Instancing a new graph.
         Graph graph = new Graph();
+
+        // Instanciando rabbitmq.
+        Recv recv = new Recv();
+
+        // Cria uma conexão com o RabbitMQ
+        Connection connection = recv.createConnection();
+        // Cria um canal para comunicação com o RabbitMQ
+        Channel channel = recv.createChannel(connection);
+        // Declara a fila a ser consumida
+        recv.declareQueue(channel);
+        // Inicia o consumo de mensagens da fila
+        recv.consumeMessages(channel);
 
         // path to DTED file
         String path = "src/main/resources/dted/SaoPaulo/W045_S23.dt2";
@@ -23,8 +38,8 @@ public class App {
         graph.connectVertices(180, rows, cols);
 
         // Printing the connections of id = 6 vertex.
-        graph.getConnectionsOf(19000).forEach(connection -> {
-            System.out.println(connection.getArrivalVertex().getId());
+        graph.getConnectionsOf(720).forEach(graphConnection -> {
+            System.out.println(graphConnection.getArrivalVertex().getId());
         });
     }
 }
