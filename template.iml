@@ -37,5 +37,7 @@
     <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.86.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-tcnative-classes:2.0.54.Final" level="project" />
     <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.4.26" level="project" />
+    <orderEntry type="library" name="Maven: org.jgrapht:jgrapht-core:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jheaps:jheaps:0.13" level="project" />
   </component>
 </module>
