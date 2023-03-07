@@ -16,5 +16,11 @@ export const error = {
 		code: 1503,
 		title: "Internal server error.",
 		description: "Unable to retrieve project."
+	},
+	unableToUpdateProject: {
+		status: 500,
+		code: 1504,
+		title: "Internal server error.",
+		description: "Unable to update project."
 	}
 };

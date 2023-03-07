@@ -64,6 +64,27 @@ class ProjectsController {
 
 	}
 
+	public async updateProject(req : Request, res : Response) : Promise<Response> {
+		
+		const { projectId } = req.params;
+		const { project } = req.body;
+
+		try {
+
+			const updatedProject = await ProjectsService.update(projectId, project);
+			
+			return responseBuilder(res, "success", success.projectUpdatedSuccessfully, updatedProject);
+		
+		} catch (err) {
+
+			console.error(err);
+
+			return responseBuilder(res, "error", error.unableToUpdateProject);
+		
+		}
+
+	}
+
 }
 
 export default new ProjectsController();

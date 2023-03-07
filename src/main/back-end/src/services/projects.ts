@@ -60,6 +60,24 @@ class ProjectsService {
 
 	}
 
+	public async update(projectId: string, project: IProject) {
+		
+		const session = setup.app.database.driver.session();
+
+		const res = await session.run(
+			`
+			MATCH (p:Project {id: "${projectId}"})
+			SET p.name = "${project.name}"
+			RETURN p
+			`
+		);
+
+		session.close();
+
+		return res.records[0].get(0).properties;
+
+	}
+
 }
 
 export default new ProjectsService();
