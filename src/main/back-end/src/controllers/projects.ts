@@ -85,6 +85,26 @@ class ProjectsController {
 
 	}
 
+	public async deleteProject(req : Request, res : Response) : Promise<Response> {
+
+		const { projectId } = req.params;
+
+		try {
+
+			const deletedProject = await ProjectsService.delete(projectId);
+			
+			return responseBuilder(res, "success", success.projectDeletedSuccessfully, deletedProject);
+		
+		} catch (err) {
+
+			console.error(err);
+
+			return responseBuilder(res, "error", error.unableToDeleteProject);
+		
+		}
+
+	}
+
 }
 
 export default new ProjectsController();

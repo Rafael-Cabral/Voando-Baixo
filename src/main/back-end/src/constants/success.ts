@@ -34,5 +34,11 @@ export const success = {
 		code: 1005,
 		title: "Project Updated Successfully.",
 		description: "Project has been updated successfully."
+	},
+	projectDeletedSuccessfully: {
+		status: 200,
+		code: 1006,
+		title: "Project Deleted Successfully.",
+		description: "Project has been deleted successfully."
 	}
 };

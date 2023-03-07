@@ -22,5 +22,11 @@ export const error = {
 		code: 1504,
 		title: "Internal server error.",
 		description: "Unable to update project."
+	},
+	unableToDeleteProject: {
+		status: 500,
+		code: 1505,
+		title: "Internal server error.",
+		description: "Unable to delete project."
 	}
 };

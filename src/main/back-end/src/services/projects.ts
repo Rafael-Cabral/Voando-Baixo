@@ -78,6 +78,24 @@ class ProjectsService {
 
 	}
 
+	public async delete(projectId: string) {
+		
+		const session = setup.app.database.driver.session();
+
+		const res = await session.run(
+			`
+			MATCH (p:Project {id: "${projectId}"})
+			DETACH DELETE p
+			RETURN p
+			`
+		);
+
+		session.close();
+
+		return res.records[0].get(0).properties;
+
+	}
+
 }
 
 export default new ProjectsService();
