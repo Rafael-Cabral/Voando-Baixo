@@ -41,33 +41,18 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Análise da complexidade da solução proposta
 
-<p> Definimos o grafo como um conjunto de vértices e arestas, onde cada vértice representa um ponto no caminho e cada aresta representa o custo (ou distância) entre dois pontos. O problema consiste em encontrar o caminho mínimo do ponto A ao ponto F, ou seja, o caminho que minimize a soma dos custos das arestas percorridas.</p>
+<p> Definimos o grafo como um conjunto de vértices e arestas, onde cada vértice representa um ponto no caminho e cada aresta representa o custo (ou distância) entre dois pontos. O problema consiste em encontrar o caminho mínimo do ponto $A$ ao ponto $F$, ou seja, o caminho que minimize a soma dos custos das arestas percorridas.</p>
 
-<p> O objetivo é minimizar a soma dos custos das arestas selecionadas. Para isso, utilizamos a seguinte fórmula: $\min Z = ∑_{(i,j)∈E} c_{ij} * x_{ij}$. Onde E é o conjunto de todas as arestas do grafo, c_ij é o custo da aresta que liga o vértice i ao vértice j e x_ij é a variável de decisão que indica se a aresta (i,j) é selecionada ou não. As variáveis de decisão são x_ij, variáveis binárias que indicam se a aresta que liga o vértice i ao vértice j faz parte do caminho ou não.</p>
+<p> O objetivo é minimizar a soma dos custos das arestas selecionadas. Para isso, utilizamos a seguinte fórmula: $\min Z = \sum_{(i,j)\inE} c_{ij} \cdot x_{ij}$. Onde $E$ é o conjunto de todas as arestas do grafo, $c_{ij}$ é o custo da aresta que liga o vértice $i$ ao vértice $j$ e $x_{ij}$ é a variável de decisão que indica se a aresta (i,j) é selecionada ou não. As variáveis de decisão são $x_{ij}$, variáveis binárias que indicam se a aresta que liga o vértice $i$ ao vértice $j$ faz parte do caminho ou não.</p>
 
-<p> Para as restrições, devemos garantir que cada vértice tenha exatamente uma aresta de entrada e uma de saída, exceto pelos vértices A e F, que podem ter apenas uma aresta de entrada ou uma de saída, respectivamente. Para isso, utilizamos as seguintes restrições:</p>
-<p> - ∑(i,j)∈E x_ij = 1, para todo vértice i ≠ A,F</p>
-<p> - ∑(A,j)∈E x_Aj = 1</p>
-<p> - ∑(i,F)∈E x_iF = 1</p>
-<p> Onde x_Aj é a variável de decisão que indica se a aresta que liga o ponto A ao vértice j é selecionada e x_iF é a variável de decisão que indica se a aresta que liga o vértice i ao ponto F é selecionada.</p>
+<p> Para as restrições, devemos garantir que cada vértice tenha exatamente uma aresta de entrada e uma de saída, exceto pelos vértices $A$ e $F$, que podem ter apenas uma aresta de entrada ou uma de saída, respectivamente. Para isso, utilizamos as seguintes restrições:</p>
+<p> - $\sum_{(i,j)\inE} x_{ij} = 1$, para todo vértice $i \neq A,F$</p>
+<p> - $\sum_{(A,j)\inE} x_{Aj} = 1$</p>
+<p> - $\sum_{(i,F)\inE} x_{iF} = 1$</p>
+<p> Onde $x_{Aj}$ é a variável de decisão que indica se a aresta que liga o ponto $A$ ao vértice $j$ é selecionada e $x_{iF}$ é a variável de decisão que indica se a aresta que liga o vértice $i$ ao ponto $F$ é selecionada.</p>
 
-<p>Também devemos garantir que não haja ciclos no caminho selecionado, para isso utilizamos a seguinte restrição de fluxo:
-
-∑(i,j)∈P x_ij ≤	P	- 1, para todo subconjunto de vértices P ⊆ V
-Onde |P| é o número de vértices em P.</p>
-
-////////////////////
-Neste artigo, cada grupo precisará fazer a análise de complexidade da solução proposta, utilizando as notações $O(.)$, $\Omega(.)$ e $\Theta(.)$.
-
-A seguir temos a citação de alguns trechos de DASGUPTA et. al. (2011) para mostrar como estas notações são em \LaTeX. 
-
-> Sejam $f(n)$ e $g(n)$ duas funções de inteiros positivos em reais positivos. Dizemos que $f = O(g)$ (que significa que "$f$ não cresce mais rápido do que $g$") se existe uma constante $c > 0$ tal que $f(n) \leq c \cdot g(n)$.
-
-Ainda em outro trecho de DASGUPTA et. al. (2011), temos:
-
-> Assim como $O(.)$ é análogo a $\leq$, podemos definir análogos de $\geq$ e $=$ como se segue:
-
-> $f = \Omega(g)$ significa $g = O(f)$
+<p>Também devemos garantir que não haja ciclos no caminho selecionado, para isso utilizamos a seguinte restrição de fluxo:</p>
+<p>$\sum_{(i,j)\inP} x_{ij} \leq P - 1$, para todo subconjunto de vértices $P \subseteq V$ onde $\lVert P \rVert$ é o número de vértices em $P$.</p>
 
 # Análise da corretude da solução proposta
 
