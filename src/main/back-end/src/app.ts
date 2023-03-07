@@ -1,10 +1,10 @@
 import cors from "cors";
 import helmet from "helmet";
-import dotenv from "dotenv";
 import express, { Application } from "express";
 import core from "./routes/index";
 import projects from "./routes/projects";
 import Database from "./database";
+import uploads from "./routes/uploads";
 
 export default class App {
 
@@ -21,8 +21,6 @@ export default class App {
 
 	private config() : void {
 
-		dotenv.config();
-
 		this.database = new Database();
 
 		this.app.use(express.json());
@@ -36,6 +34,7 @@ export default class App {
 
 		this.app.use("/api/", core);
 		this.app.use("/api/projects", projects);
+		this.app.use("/api/uploads", uploads);
 	
 	}
 

@@ -1,12 +1,15 @@
 import { Application } from "express";
 import App from "./app";
 import HttpServer from "./httpServer";
+import dotenv from "dotenv";
 
 class Setup {
 
 	public app : App;
 
 	constructor() {
+
+		dotenv.config();
 
 		this.app = new App();
 
