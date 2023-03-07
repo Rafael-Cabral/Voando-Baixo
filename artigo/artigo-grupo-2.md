@@ -29,8 +29,34 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Descrição da estratégia adotada para resolver o problema
 
+<p> Começamos o nosso trabalho nesse projeto por entender melhor o contexto que cerca nosso software e utilizando metódos ágeis, divindo o trabalho em sprints. Fizemos uma análise da indústria, a fim de entender todos os pontos do mercado em que a empresa AEL Sistemas está envolvida, uma análise SWOT, para entendermos o contexto do cliente inserido na respectiva arena competitiva, um value proposition canvas e também escrevemos na documentação do projeto uma descrição da solução a ser desenvolvida, com o objetivo de entendermos ainda melhor o nosso projeto, e uma matriz de riscos, para ajudar a equipe no processo de decisões.</p>
+
+<p> Após isso, fizemos uma modelagem e representação do problema. Estudamos os tipos existentes de grafos, desenvolvemos um modelo matemático inicial para conseguirmos entender a parte formal do projeto e utilizamos o a biblioteca Neo4J para ter uma vizualizaçaão de como seria o nosso banco de dados, assim como para compreendemos como seria a entrega e o que o nosso cliente veria no produto final.</p>
+
+<p> A nível de experiência do usuário, fizemos personas e user stories. Nossas duas personas são Gabriel Elfer, 35 anos, piloto militar que interage com nossa aplicação pela sua necessidade de ter uma trajetória eficiente e segura, e também Fernando Alberto de 45 anos, um militar na área de reconhecimento, que tem seu contato com nosso projeto pelo desafio atual que ele enfrenta, desenhar um caminho que ele acredite ser o mais seguro possível para que sua equipe de pilotos consiga fazer suas missões. As user stories foram feitas no modelo INVEST (independente, negociável, de valor, estimável, pequena e testável) tendo como foco nossas personas e suas necessidades específicas para atingir a satisfação do usuário.</p>
+
+<p> Uma vez feito esse primeiro contato com a solução, partimos nessa segunda sprint para a criação em Java do que seria o começo do algoritmo. Fizemos o uso da biblioteca GDAL para fazer a leitura dos arquivos de altitura no formato DTED nível 2, que nos foi fornecido pela empresa parceira. Esse arquivo nos gera vértices em todo o arquivo, com uma distância que definimos de 180 metros entre cada ponto, que usamos para criar um grafo utilizando tipos de dados criados por nós, vértices e arestas.</p>
+
+<p> O próximo passo natural seria a criação de um algoritmo que faça uma busca entre o menor caminho do vértice A até o B, então fizemos uso do algoritmo A* (A estrela). O algoritmo A*, se trata de um algoritmo cuja finalidade é de busca entre vértices para grafos, baseado em funções heurísticas. O objetivo em cada resolução de problema está na definição da função heurística que retorne um menor custo de deslocamento de um ponto de origem A até o destino B.</p>
+
 # Análise da complexidade da solução proposta
 
+<p> Definimos o grafo como um conjunto de vértices e arestas, onde cada vértice representa um ponto no caminho e cada aresta representa o custo (ou distância) entre dois pontos. O problema consiste em encontrar o caminho mínimo do ponto A ao ponto F, ou seja, o caminho que minimize a soma dos custos das arestas percorridas.</p>
+
+<p> O objetivo é minimizar a soma dos custos das arestas selecionadas. Para isso, utilizamos a seguinte fórmula: min Z = ∑(i,j)∈E c_ij * x_ij. Onde E é o conjunto de todas as arestas do grafo, c_ij é o custo da aresta que liga o vértice i ao vértice j e x_ij é a variável de decisão que indica se a aresta (i,j) é selecionada ou não. As variáveis de decisão são x_ij, variáveis binárias que indicam se a aresta que liga o vértice i ao vértice j faz parte do caminho ou não.</p>
+
+<p> Para as restrições, devemos garantir que cada vértice tenha exatamente uma aresta de entrada e uma de saída, exceto pelos vértices A e F, que podem ter apenas uma aresta de entrada ou uma de saída, respectivamente. Para isso, utilizamos as seguintes restrições:
+- ∑(i,j)∈E x_ij = 1, para todo vértice i ≠ A,F
+- ∑(A,j)∈E x_Aj = 1
+- ∑(i,F)∈E x_iF = 1
+Onde x_Aj é a variável de decisão que indica se a aresta que liga o ponto A ao vértice j é selecionada e x_iF é a variável de decisão que indica se a aresta que liga o vértice i ao ponto F é selecionada.</p>
+
+<p>Também devemos garantir que não haja ciclos no caminho selecionado, para isso utilizamos a seguinte restrição de fluxo:
+
+∑(i,j)∈P x_ij ≤	P	- 1, para todo subconjunto de vértices P ⊆ V
+Onde |P| é o número de vértices em P.</p>
+
+////////////////////
 Neste artigo, cada grupo precisará fazer a análise de complexidade da solução proposta, utilizando as notações $O(.)$, $\Omega(.)$ e $\Theta(.)$.
 
 A seguir temos a citação de alguns trechos de DASGUPTA et. al. (2011) para mostrar como estas notações são em \LaTeX. 
