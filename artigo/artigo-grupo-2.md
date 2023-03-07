@@ -27,6 +27,8 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Trabalhos relacionados
 
+<p> Nosso projeto leva em conta a otimização de uma trajetória para aviões com a menor altitude possível, fazendo uso do algoritmo A* (A estrela), sendo parecido com o artigo de T. Chen et al. (2018) que faz uso do mesmo algoritmo para aeronaves não tripuladas e considera consumo de combustível e menor perigo possível para a criação do seu algoritmo.</p>
+
 # Descrição da estratégia adotada para resolver o problema
 
 <p> Começamos o nosso trabalho nesse projeto por entender melhor o contexto que cerca nosso software e utilizando metódos ágeis, divindo o trabalho em sprints. Fizemos uma análise da indústria, a fim de entender todos os pontos do mercado em que a empresa AEL Sistemas está envolvida, uma análise SWOT, para entendermos o contexto do cliente inserido na respectiva arena competitiva, um value proposition canvas e também escrevemos na documentação do projeto uma descrição da solução a ser desenvolvida, com o objetivo de entendermos ainda melhor o nosso projeto, e uma matriz de riscos, para ajudar a equipe no processo de decisões.</p>
@@ -65,3 +67,6 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 <p> [1] M. Ryll, J. Ware, J. Carter and N. Roy, "Efficient Trajectory Planning for High Speed Flight in Unknown Environments," 2019 International Conference on Robotics and Automation (ICRA), Montreal, QC, Canada, 2019, pp. 732-738, doi: 10.1109/ICRA.2019.8793930. </p>
 
 <p> [2] Y. Hao, Z. Shen and Y. Zhao, "Path Planning for Aircraft Based on MAKLINK Graph Theory and Multi Colony Ant Algorithm," 2009 International Joint Conference on Computational Sciences and Optimization, Sanya, China, 2009, pp. 232-235, doi: 10.1109/CSO.2009.315. </p>
+
+<p> [3] T. Chen, G. Zhang, X. Hu and J. Xiao, "Unmanned aerial vehicle route planning method based on a star algorithm," 2018 13th IEEE Conference on Industrial Electronics and Applications (ICIEA), Wuhan, China, 2018, pp. 1510-1514, doi: 10.1109/ICIEA.2018.8397948.
+</p>
