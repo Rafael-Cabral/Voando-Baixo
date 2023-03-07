@@ -18,7 +18,26 @@ class ProjectsService {
 			`
 		);
 
+		session.close();
+
 		return res.records[0].get(0).properties;
+
+	}
+
+	public async getAll() {
+
+		const session = setup.app.database.driver.session();
+
+		const res = await session.run(
+			`
+			MATCH (p:Project)
+			RETURN p
+			`
+		);
+
+		session.close();
+
+		return res.records.map((record) => record.get(0).properties);
 
 	}
 
