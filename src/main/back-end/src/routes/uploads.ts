@@ -1,5 +1,7 @@
 import express from "express";
 import multer from "multer";
+import { success } from "../constants/success";
+import { responseBuilder } from "../helpers/responseBuilder";
 import { uploadToS3 } from "../utils/upload";
 
 const upload = multer({});
@@ -12,7 +14,8 @@ router.post("/", upload.single("file"), async (req, res) => {
 
 	const uploadedFile = await uploadToS3(file);
 
-	res.send(uploadedFile);
+	return responseBuilder(res, "success", success.fileUploadedSuccessfully, uploadedFile);
+
 
 });
 

@@ -11,8 +11,8 @@ class ProjectsService {
 			`
 			MERGE (p:Project { 
 				name: "${project.name}",
-				createdAt: "${new Date()}",
-				updatedAt: "${new Date()}"})
+				dt2File: "${project.dt2File}",
+				createdAt: "${new Date()}"})
 			
 			RETURN p
 			`

@@ -10,5 +10,11 @@ export const success = {
 		code: 1001,
 		title: "Project Created Successfully.",
 		description: "Project has been created successfully."
+	},
+	fileUploadedSuccessfully: {
+		status: 201,
+		code: 1002,
+		title: "File Uploaded Successfully.",
+		description: "File has been uploaded successfully."
 	}
 };
