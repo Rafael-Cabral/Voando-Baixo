@@ -30,7 +30,7 @@ public class AStar {
         start.setCustoEstimadoTotal(heuristica(start, end));
 
         //Condição que verifica, passo a passo qual o vértice mais barato
-        while(!visited.isEmpty()) {
+        while (!visited.isEmpty()) {
             //Pega o vértice com menor custo da fila
             Vertex current = notVisited.poll();
 
@@ -55,7 +55,7 @@ public class AStar {
 
                 //Se o vizinho não foi visitado ou se o custo for menor
                 if (!visited.contains(neighbor) || custoTentativo < neighbor.getCustoDoInicio()) {
-                    //Define o custo do inicio e o estimado
+                    //Define o custo do inicio e o   estimado
                     neighbor.setCustoDoInicio(custoTentativo);
                     neighbor.setCustoEstimadoTotal(custoTentativo + heuristica(neighbor, end));
 
@@ -68,18 +68,23 @@ public class AStar {
                     }
                 }
 
+            }
 
 
-                }
-
-            //Retorna vazio se não houver caminho
-            return null;
         }
+        //Retorna vazio se não houver caminho
+        return null;
 
-
+    }
         //Condição que cria o caminho
+    private static List<Vertex> getPath(Vertex vertice){
+
 
 
     }
+
+
+
+
 
 }
