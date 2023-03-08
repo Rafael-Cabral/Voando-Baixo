@@ -18,6 +18,7 @@ public class AStar {
         PriorityQueue<Vertex> visited = new PriorityQueue<>();
 
         //Inicia com o ponto de partida
+        visited.add(start);
 
         //Inicia o custo inicial
         //Inicia o custo estimado total
