@@ -13,9 +13,6 @@ public class Vertex implements Comparable<Vertex> {
     private double custoEstimadoTotal;
     private Vertex pai;
 
-
-
-
     public Vertex(int id, double latitude, double longitude, double altitude) {
         this.id = id;
         this.latitude = latitude;
@@ -47,6 +44,10 @@ public class Vertex implements Comparable<Vertex> {
     public LinkedList<Edge> getAllConnections() {
         return this.connections;
     }
+    public LinkedList<Edge> getConnections() {
+        return this.connections;
+    }
+
 
     public int getNumberOfConnections() {
         return this.connections.size();
@@ -98,6 +99,7 @@ public class Vertex implements Comparable<Vertex> {
     public double getCustoEstimadoTotal() {
         return this.custoEstimadoTotal;
     }
+
 
 
 }

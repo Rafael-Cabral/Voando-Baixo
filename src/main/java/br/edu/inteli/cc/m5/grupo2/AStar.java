@@ -13,12 +13,14 @@ public class AStar {
         return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2));
     }
 
+
     public static List<Vertex> findPath(Vertex start, Vertex end) {
         //Lista de prioridade vazia
         PriorityQueue<Vertex> notVisited = new PriorityQueue<>();
 
         //Lista de prioridade com vértices vizitados
         Set<Vertex> visited = new HashSet<>();
+
 
         //Inicia com o ponto de partida
         notVisited.add(start);
@@ -34,17 +36,21 @@ public class AStar {
             //Pega o vértice com menor custo da fila
             Vertex current = notVisited.poll();
 
+
             //Verifica se esse vértice é o final
             if (current == end) {
                 return getPath(current);
+
             }
 
             //Adiciona o vértice atual ao visitados
             visited.add(current);
 
             //Verifica as conexões do vértice atual
-            for (Edge edge : current.getAllConnections()) {
+            for (Edge edge : current.getConnections()) {
+
                 Vertex neighbor = edge.getArrivalVertex();
+
                 //Ignora se o vizinho já foi vizitado
                 if (visited.contains(neighbor)) {
                     continue;
@@ -55,6 +61,7 @@ public class AStar {
 
                 //Se o vizinho não foi visitado ou se o custo for menor
                 if (!visited.contains(neighbor) || custoTentativo < neighbor.getCustoDoInicio()) {
+
                     //Define o custo do inicio e o   estimado
                     neighbor.setCustoDoInicio(custoTentativo);
                     neighbor.setCustoEstimadoTotal(custoTentativo + heuristica(neighbor, end));
@@ -64,8 +71,9 @@ public class AStar {
 
                     //Adiciona o vizinho na fila de prioridade
                     if (!visited.contains(neighbor)) {
-                        visited.add(neighbor);
+                        notVisited.add(neighbor);
                     }
+
                 }
 
             }
