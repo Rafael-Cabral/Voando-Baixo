@@ -54,10 +54,13 @@ public class AStar {
                 double tentativeCost = current.getCustoDoInicio() + edge.getWeight();
 
                 //Se o vizinho não foi visitado ou se o custo for menor
+                if (!visited.contains(neighbor) || custoTentativo < neighbor.getCustoDoInicio()) {
+
+                }
 
 
 
-            }
+                }
 
             //Retorna vazio se não houver caminho
             return null;
