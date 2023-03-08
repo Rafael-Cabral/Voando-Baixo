@@ -71,5 +71,8 @@ public class Vertex {
 
         return str.toString();
     }
+    public void setCustoDoInicio(double custo) {
+        this.custoDoInicio = custo;
+    }
 
 }
