@@ -2,13 +2,16 @@ package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.LinkedList;
 
-public class Vertex {
+public class Vertex implements Comparable<Vertex> {
 
     private final int id;
     private final double latitude;
     private final double longitude;
     private final double altitude;
     private final LinkedList<Edge> connections;
+    private double custoDoInicio = Double.POSITIVE_INFINITY;
+    private double custoEstimadoTotal;
+    private Vertex pai;
 
     public Vertex(int id, double latitude, double longitude, double altitude) {
         this.id = id;
@@ -41,6 +44,10 @@ public class Vertex {
     public LinkedList<Edge> getAllConnections() {
         return this.connections;
     }
+    public LinkedList<Edge> getConnections() {
+        return this.connections;
+    }
+
 
     public int getNumberOfConnections() {
         return this.connections.size();
@@ -71,39 +78,28 @@ public class Vertex {
 
         return str.toString();
     }
-
-    private double costFromStart;
-    private double totalCost;
-    private Vertex cameFrom;
-
-    public void setCostFromStart(double CostFromStart) {
-        this.costFromStart = CostFromStart;
+    public void setCustoDoInicio(double custo) {
+        this.custoDoInicio = custo;
+    }
+    public void setCustoEstimadoTotal(double custoEstimadoTotal) {
+        this.custoEstimadoTotal = custoEstimadoTotal;
+    }
+    public double getCustoDoInicio() {
+        return custoDoInicio;
+    }
+    public void setPai(Vertex pai) {
+        this.pai = pai;
+    }
+    public Vertex getPai() {
+        return pai;
+    }
+    public int compareTo(Vertex other) {
+        return Double.compare(this.getCustoEstimadoTotal(), other.getCustoEstimadoTotal());
+    }
+    public double getCustoEstimadoTotal() {
+        return this.custoEstimadoTotal;
     }
 
-    public double getTotalCost() {
-        return totalCost;
-    }
 
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
-    }
 
-    public double getHeuristicCost(Vertex end) {
-        double d1 = Math.abs(latitude - end.getLatitude());
-        double d2 = Math.abs(longitude - end.getLongitude());
-        double d3 = Math.abs(altitude - end.getAltitude());
-        return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2) + Math.pow(d3, 2));
-    }
-
-    public double getCostFromStart() {
-        return this.costFromStart;
-    }
-
-    public void setCameFrom(Vertex cameFrom) {
-        this.cameFrom = cameFrom;
-    }
-
-    public Vertex getCameFrom() {
-        return cameFrom;
-    }
 }
