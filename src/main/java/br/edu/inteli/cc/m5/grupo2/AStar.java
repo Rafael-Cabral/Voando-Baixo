@@ -1,5 +1,6 @@
 package br.edu.inteli.cc.m5.grupo2;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -31,6 +32,7 @@ public class AStar {
         //Condição que verifica, passo a passo qual o vértice mais barato
         while(!visited.isEmpty()) {
             //Pega o vértice com menor custo da fila
+            Vertex current = notVisited.poll();
             //Verifica se esse vértice é o final
             //Adiciona o vértice atual ao visitados
             //Verifica as conexões do vértice atual
