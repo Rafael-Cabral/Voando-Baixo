@@ -9,6 +9,8 @@ public class Vertex {
     private final double longitude;
     private final double altitude;
     private final LinkedList<Edge> connections;
+    private double custoDoInicio = Double.POSITIVE_INFINITY;
+
 
     public Vertex(int id, double latitude, double longitude, double altitude) {
         this.id = id;
