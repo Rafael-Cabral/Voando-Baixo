@@ -21,7 +21,7 @@ public class AStar {
         Set<Vertex> visited = new HashSet<>();
 
         //Inicia com o ponto de partida
-        visited.add(start);
+        notVisited.add(start);
 
         //Inicia o custo inicial
         start.setCustoDoInicio(0);
@@ -30,7 +30,7 @@ public class AStar {
         start.setCustoEstimadoTotal(heuristica(start, end));
 
         //Condição que verifica, passo a passo qual o vértice mais barato
-        while (!visited.isEmpty()) {
+        while (!notVisited.isEmpty()) {
             //Pega o vértice com menor custo da fila
             Vertex current = notVisited.poll();
 
