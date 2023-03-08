@@ -11,6 +11,8 @@ public class Vertex {
     private final LinkedList<Edge> connections;
     private double custoDoInicio = Double.POSITIVE_INFINITY;
     private double custoEstimadoTotal;
+    private Vertex pai;
+
 
 
 
@@ -84,6 +86,10 @@ public class Vertex {
     public double getCustoDoInicio() {
         return custoDoInicio;
     }
+    public void setPai(Vertex pai) {
+        this.pai = pai;
+    }
+
 
 
 }
