@@ -63,6 +63,9 @@ public class AStar {
                     neighbor.setPai(current);
 
                     //Adiciona o vizinho na fila de prioridade
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                    }
                 }
 
 
