@@ -62,7 +62,6 @@ public class Neo4j implements AutoCloseable {
             throw exception;
 
         }
-
     }
 
     public void createVertex(Vertex vertex) {
@@ -73,7 +72,8 @@ public class Neo4j implements AutoCloseable {
                                 id: $id,
                                 latitude: $latitude,
                                 longitude: $longitude,
-                                altitude: $altitude
+                                altitude: $altitude,
+                                connections: $connections
                             })
                             
                         RETURN vertex
@@ -82,7 +82,8 @@ public class Neo4j implements AutoCloseable {
                         "id",vertex.getId(),
                         "latitude", vertex.getLatitude(),
                         "longitude", vertex.getLongitude(),
-                        "altitude", vertex.getAltitude()));
+                        "altitude", vertex.getAltitude(),
+                        "connections", vertex.getAllConnections()));
 
         try {
 
