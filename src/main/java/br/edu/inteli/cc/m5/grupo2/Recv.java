@@ -48,11 +48,58 @@ public class Recv {
             String message = new String(delivery.getBody(), "UTF-8");
 
             JsonObject json = gson.fromJson(message, JsonObject.class);
-            System.out.println(" [x] Received new processing request for project " + json.get("id") + ".");
 
-            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+            String objectKey = json.get("objectKey").getAsString();
+            String projectId = json.get("id").getAsString();
+
+            System.out.println(" [*] Received new processing request for project " + json.get("id") + ".");
+            System.out.println(" [ ] Downloading file from S3...");
+
+            DownloadFileFromS3 downloadFileFromS3 = new DownloadFileFromS3();
+            downloadFileFromS3.downloadFileFromS3(objectKey, projectId);
+
+            // Exiba uma mensagem de confirmação
+            System.out.println(" [*] File downloaded successfully.");
+
+            // Instancing a new graph.
+            Graph graph = new Graph();
+
+            // Path to DTED file.
+            String path = System.getProperty("user.dir") + "/downloads/" + projectId + ".dt2";;
+
+            double[][] map = Dted.readDted(path, 180);
+
+            System.out.println(" [*] File read  successfully.");
+            System.out.println(" [ ] Loading graph instance...");
+
+            // Sending all Vertices to the graph created.
+            for (int i = 0;i < map.length - 1; i++) {
+                graph.addVertex(map[i][1], map[i][2], map[i][0]);
+            }
+
+            System.out.println(" [*] Graph loaded successfully.");
+
+            int rows = (int) map[map.length - 1][1];
+            int cols = (int) map[map.length - 1][2];
+
+            // Creating all possible connections in the graph.
+            graph.connectVertices(180, rows, cols);
+
+            System.out.println(" [ ] Connecting graph vertices...");
+
+            System.out.println(" [*] Graph vertices connected successfully.");
+
+            /* graph.getVertices().forEach(vertex -> {
+                System.out.println(vertex.getId());
+            }); /*
+
+            /* Printing the connections of id = 6 vertex.
+            graph.getConnectionsOf(720).forEach(graphConnection -> {
+                System.out.println(graphConnection.getArrivalVertex().getId());
+            }); */
+
         };
-        channel.basicConsume(QUEUE_NAME, false, deliverCallback, consumerTag -> { });
+        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
     }
 
 }
