@@ -26,6 +26,17 @@ public class Neo4j implements AutoCloseable {
 
     }
 
+    public void createGraph(Graph graph){
+        for (int i = 0; i < graph.getVertices().size(); i++){
+            Vertex vertex = graph.getVertices().get(i);
+            createVertex(vertex);
+            for (int j = 0; j < vertex.getNumberOfConnections(); j++){
+                Vertex arrivalVertex = vertex.getAllConnections().get(j).getArrivalVertex();
+                linkVertices(vertex, arrivalVertex);
+            }
+        }
+    }
+
     public void createVertex(Vertex vertex) {
 
         Query query = new Query(
@@ -34,7 +45,8 @@ public class Neo4j implements AutoCloseable {
                                 id: $id,
                                 latitude: $latitude,
                                 longitude: $longitude,
-                                altitude: $altitude
+                                altitude: $altitude,
+                                connections: $connections
                             })
                             
                         RETURN vertex
@@ -43,7 +55,8 @@ public class Neo4j implements AutoCloseable {
                         "id",vertex.getId(),
                         "latitude", vertex.getLatitude(),
                         "longitude", vertex.getLongitude(),
-                        "altitude", vertex.getAltitude()));
+                        "altitude", vertex.getAltitude(),
+                        "connections", vertex.getAllConnections()));
 
         try {
 
