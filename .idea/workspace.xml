@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ea1af99-436f-4525-9473-d871fef53af1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_rabbitmq_amqp_client_5_16_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Recv.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_36.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_32.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/AStarTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/AStar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/AStar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.iml" beforeDir="false" afterPath="$PROJECT_DIR$/template.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +75,7 @@
       <recent name="C:\Users\Elias\Documents\GitHub\Turma-4\grupo2\src\main\java\br\edu\inteli\cc\m5\grupo" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager" selected="TestNG.AStarTest.findPathOneMap">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.App" />
       <module name="template" />
@@ -115,6 +111,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AStarTest.findPath" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.AStarTest" />
+      <option name="METHOD_NAME" value="findPath" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AStarTest.findPathOneMap" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.AStarTest" />
+      <option name="METHOD_NAME" value="findPathOneMap" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -126,6 +160,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.AStarTest.findPathOneMap" />
+        <item itemvalue="TestNG.AStarTest.findPath" />
         <item itemvalue="Application.App" />
         <item itemvalue="Application.Recv" />
       </list>
