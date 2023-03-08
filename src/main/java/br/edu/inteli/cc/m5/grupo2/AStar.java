@@ -44,6 +44,10 @@ public class AStar {
 
             //Verifica as conexões do vértice atual
             for (Edge edge : current.getAllConnections()) {
+                Vertex neighbor = edge.getArrivalVertex();
+                //Ignora se o vizinho já foi vizitado
+                //Calcula o custo do vizinho
+                //Se o vizinho não foi visitado ou se o custo for menor
 
 
 
