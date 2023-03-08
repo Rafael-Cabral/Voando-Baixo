@@ -15,7 +15,7 @@ public class AStar {
         PriorityQueue<Vertex> notVisited = new PriorityQueue<>();
 
         //Lista de prioridade com vértices vizitados
-
+        PriorityQueue<Vertex> visited = new PriorityQueue<>();
 
         //Inicia com o ponto de partida
 
