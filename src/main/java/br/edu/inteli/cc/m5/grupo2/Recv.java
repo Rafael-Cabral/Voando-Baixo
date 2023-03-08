@@ -3,6 +3,10 @@ package br.edu.inteli.cc.m5.grupo2;
 import com.rabbitmq.client.*;
 import com.google.gson.*;
 
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Recv {
 
     // Nome da fila a ser consumida
@@ -39,7 +43,7 @@ public class Recv {
         // de política de fila, por exemplo.
         AMQP.Queue.DeclareOk declareOk = channel.queueDeclare(QUEUE_NAME, durable, exclusive, autoDelete, null);
         // Imprime uma mensagem informando que a fila foi declarada com sucesso
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        System.out.println(" [*] Waiting for new items in queue to process.");
     }
 
     public void consumeMessages(Channel channel) throws Exception {
@@ -82,21 +86,36 @@ public class Recv {
             int rows = (int) map[map.length - 1][1];
             int cols = (int) map[map.length - 1][2];
 
+            System.out.println(" [ ] Connecting graph vertices...");
+
             // Creating all possible connections in the graph.
             graph.connectVertices(180, rows, cols);
 
-            System.out.println(" [ ] Connecting graph vertices...");
-
             System.out.println(" [*] Graph vertices connected successfully.");
 
-            /* graph.getVertices().forEach(vertex -> {
-                System.out.println(vertex.getId());
-            }); /*
+            Neo4j neo4j = new Neo4j();
 
-            /* Printing the connections of id = 6 vertex.
-            graph.getConnectionsOf(720).forEach(graphConnection -> {
-                System.out.println(graphConnection.getArrivalVertex().getId());
-            }); */
+            ArrayList<Vertex> graphVertices = graph.getVertices();
+            AtomicInteger currentVertex = new AtomicInteger();
+            int quantityOfVertices = graphVertices.size();
+
+            graphVertices.forEach(vertex -> {
+                neo4j.createVertex(vertex);
+                System.out.print("\r [ ] Persisting vertices in Neo4j: " +  String.format(Locale.US, "%.4f", ((double) currentVertex.get() / quantityOfVertices)) + "%");
+                currentVertex.getAndIncrement();
+            });
+
+            System.out.println(" [*] Vertices persisted successfully.");
+
+            currentVertex.set(0);
+
+            graph.getVertices().forEach(vertex -> {
+                neo4j.connectVertex(vertex);
+                System.out.print("\r [ ] Linking vertices in Neo4j: " + String.format(Locale.US, "%.4f", ((double) currentVertex.get() / quantityOfVertices)) + "%");
+                currentVertex.getAndIncrement();
+            });
+
+            System.out.println(" [*] Vertices linked successfully.");
 
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });

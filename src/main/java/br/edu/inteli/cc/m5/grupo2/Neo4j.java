@@ -1,28 +1,67 @@
 package br.edu.inteli.cc.m5.grupo2;
 
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.*;
 import org.neo4j.driver.exceptions.Neo4jException;
+import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Neo4j implements AutoCloseable {
-    private static final Logger LOGGER = Logger.getLogger(Neo4j.class.getName());
     private final Driver driver;
 
     public Neo4j() {
 
-        String uri = "neo4j+s://5eaa9547.databases.neo4j.io";
+        String uri = "neo4j://localhost:7687";
         String user = "neo4j";
-        String password = "VDNwitjeUAHVXVbQwjTzdLCiL5uFfYIxOfkMqPRtvp0";
+        String password = "x5aG^RSZz!zetdlM19XsJEsa227GsC32";
+
+        LoggerContext loggerContext = (LoggerContext)LoggerFactory.getILoggerFactory();
+        Logger rootLogger = loggerContext.getLogger("io.netty");
+        rootLogger.setLevel(ch.qos.logback.classic.Level.OFF);
+
 
         this.driver = GraphDatabase.driver(
                 uri,
                 AuthTokens.basic(user, password),
                 Config.defaultConfig());
+
+    }
+
+    public void createVertices(Graph graph) throws FileNotFoundException {
+
+        StringBuilder queryStr = new StringBuilder();
+
+        graph.getVertices().forEach(vertex -> {
+
+            queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
+                    vertex.getId(),
+                    vertex.getLatitude(),
+                    vertex.getLongitude(),
+                    vertex.getAltitude()));
+
+        });
+
+        Query query = new Query(queryStr.toString());
+
+        try {
+
+            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+
+            Record record = session.executeWrite(tx -> tx.run(query).single());
+
+            System.out.println("Graph persisted successfully.");
+
+        } catch (Neo4jException exception) {
+
+            throw exception;
+
+        }
 
     }
 
@@ -51,11 +90,8 @@ public class Neo4j implements AutoCloseable {
 
             Record record = session.executeWrite(tx -> tx.run(query).single());
 
-            System.out.println("Vertex created successfully.");
-
         } catch (Neo4jException exception) {
 
-            LOGGER.log(Level.SEVERE, query + " raised an exception", exception);
             throw exception;
 
         }
@@ -88,59 +124,61 @@ public class Neo4j implements AutoCloseable {
 
         } catch (Neo4jException exception) {
 
-            LOGGER.log(Level.SEVERE, query + " raised an exception", exception);
             throw exception;
 
         }
 
     }
 
-    public void linkVertices(Vertex vertexA, Vertex vertexB) {
+    public void connectVertex(Vertex vertexA) {
 
-        Query query = new Query(
-                """
-                        MERGE (vertexA:Vertex) {
-                                id: $vertexA_id,
-                                latitude: $vertexA_latitude,
-                                longitude: $vertexA_longitude,
-                                altitude: $vertexA_altitude
-                            })
+        vertexA.getAllConnections().forEach(connection -> {
+
+            Vertex vertexB = connection.getArrivalVertex();
+
+            Query query = new Query(
+                    """
+                            MERGE (vertexA:Vertex {
+                                    id: $vertexA_id,
+                                    latitude: $vertexA_latitude,
+                                    longitude: $vertexA_longitude,
+                                    altitude: $vertexA_altitude
+                                })
+                                
+                            MERGE (vertexB:Vertex {
+                                    id: $vertexB_id,
+                                    latitude: $vertexB_latitude,
+                                    longitude: $vertexB_longitude,
+                                    altitude: $vertexB_altitude
+                                })
+                                
+                            MERGE (vertexA)-[:CONNECT_TO]->(vertexB)
                             
-                        MERGE (vertexB:Vertex) {
-                                id: $vertexB_id,
-                                latitude: $vertexB_latitude,
-                                longitude: $vertexB_longitude,
-                                altitude: $vertexB_altitude
-                            })
-                            
-                        MERGE (vertexA)-[:CONNECT_TO]->(vertexB)
-                        
-                        RETURN vertexA, vertexB
-                        """,
-                Map.of(
-                        "vertexA_id", vertexA.getId(),
-                        "vertexA_latitude", vertexA.getLatitude(),
-                        "vertexA_longitude", vertexA.getLongitude(),
-                        "vertexA_altitude", vertexA.getAltitude(),
-                        "vertexB_id", vertexB.getId(),
-                        "vertexB_latitude", vertexB.getLatitude(),
-                        "vertexB_longitude", vertexB.getLongitude(),
-                        "vertexB_altitude", vertexB.getAltitude()));
+                            RETURN vertexA, vertexB
+                            """,
+                    Map.of(
+                            "vertexA_id", vertexA.getId(),
+                            "vertexA_latitude", vertexA.getLatitude(),
+                            "vertexA_longitude", vertexA.getLongitude(),
+                            "vertexA_altitude", vertexA.getAltitude(),
+                            "vertexB_id", vertexB.getId(),
+                            "vertexB_latitude", vertexB.getLatitude(),
+                            "vertexB_longitude", vertexB.getLongitude(),
+                            "vertexB_altitude", vertexB.getAltitude()));
 
-        try {
+            try {
 
-            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+                Session session = driver.session(SessionConfig.forDatabase("neo4j"));
 
-            List records = session.executeWrite(tx -> tx.run(query).list());
+                List records = session.executeWrite(tx -> tx.run(query).list());
 
-            System.out.println("Vertices linked successfully.");
+            } catch (Neo4jException exception) {
 
-        } catch (Neo4jException exception) {
+                throw exception;
 
-            LOGGER.log(Level.SEVERE, query + " raised an exception", exception);
-            throw exception;
+            }
 
-        }
+        });
 
     }
 
@@ -166,7 +204,6 @@ public class Neo4j implements AutoCloseable {
 
         } catch (Neo4jException exception) {
 
-            LOGGER.log(Level.SEVERE, query + " raised an exception", exception);
             throw exception;
 
         }
@@ -203,7 +240,6 @@ public class Neo4j implements AutoCloseable {
 
         } catch (Neo4jException exception) {
 
-            LOGGER.log(Level.SEVERE, query + " raised an exception", exception);
             throw exception;
 
         }
