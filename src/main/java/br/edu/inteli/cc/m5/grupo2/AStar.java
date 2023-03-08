@@ -60,6 +60,8 @@ public class AStar {
                     neighbor.setCustoEstimadoTotal(custoTentativo + heuristica(neighbor, end));
 
                     //Define o vértice atual como nó pai do vizinho
+                    neighbor.setPai(current);
+
                     //Adiciona o vizinho na fila de prioridade
                 }
 
