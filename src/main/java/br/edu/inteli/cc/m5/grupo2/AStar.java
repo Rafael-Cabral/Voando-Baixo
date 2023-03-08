@@ -1,7 +1,9 @@
 package br.edu.inteli.cc.m5.grupo2;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 public class AStar {
     public static double heuristica(Vertex start, Vertex end) {
@@ -15,7 +17,7 @@ public class AStar {
         PriorityQueue<Vertex> notVisited = new PriorityQueue<>();
 
         //Lista de prioridade com vértices vizitados
-        PriorityQueue<Vertex> visited = new PriorityQueue<>();
+        Set<Vertex> visited = new HashSet<>();
 
         //Inicia com o ponto de partida
         visited.add(start);
@@ -27,6 +29,15 @@ public class AStar {
         start.setCustoEstimadoTotal(heuristica(start, end));
 
         //Condição que verifica, passo a passo qual o vértice mais barato
+        while(!visited.isEmpty()) {
+            //Pega o vértice com menor custo da fila
+            //Verifica se esse vértice é o final
+            //Adiciona o vértice atual ao visitados
+            //Verifica as conexões do vértice atual
+            //Retorna vazio se não houver caminho
+        }
+
+
         //Condição que cria o caminho
 
 

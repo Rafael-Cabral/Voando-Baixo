@@ -10,6 +10,8 @@ public class Vertex {
     private final double altitude;
     private final LinkedList<Edge> connections;
     private double custoDoInicio = Double.POSITIVE_INFINITY;
+    private double custoEstimadoTotal;
+
 
 
     public Vertex(int id, double latitude, double longitude, double altitude) {
