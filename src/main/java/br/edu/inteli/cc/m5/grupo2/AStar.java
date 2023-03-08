@@ -37,6 +37,7 @@ public class AStar {
             //Adiciona o vértice atual ao visitados
             //Verifica as conexões do vértice atual
             //Retorna vazio se não houver caminho
+            return null;
         }
 
 
