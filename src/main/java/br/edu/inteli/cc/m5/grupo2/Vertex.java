@@ -81,5 +81,9 @@ public class Vertex {
     public void setCustoEstimadoTotal(double custoEstimadoTotal) {
         this.custoEstimadoTotal = custoEstimadoTotal;
     }
+    public double getCustoDoInicio() {
+        return custoDoInicio;
+    }
+
 
 }
