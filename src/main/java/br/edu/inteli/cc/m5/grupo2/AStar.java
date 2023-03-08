@@ -78,6 +78,8 @@ public class AStar {
     }
         //Condição que cria o caminho
     private static List<Vertex> getPath(Vertex vertice){
+        List<Vertex> caminho = new ArrayList<>();
+
         //Adicina o vértice atual ao caminho
         //Adiciona os pais do vértice até chegar no inicio
 
