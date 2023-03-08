@@ -43,6 +43,12 @@ public class AStar {
             visited.add(current);
 
             //Verifica as conexões do vértice atual
+            for (Edge edge : current.getAllConnections()) {
+
+
+
+            }
+
             //Retorna vazio se não houver caminho
             return null;
         }
