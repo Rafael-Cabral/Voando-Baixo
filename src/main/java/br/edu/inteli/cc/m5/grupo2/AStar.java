@@ -21,6 +21,8 @@ public class AStar {
         visited.add(start);
 
         //Inicia o custo inicial
+        start.setCustoDoInicio(0);
+
         //Inicia o custo estimado total
         //Condição que verifica, passo a passo qual o vértice mais barato
         //Condição que cria o caminho
