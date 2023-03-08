@@ -72,38 +72,4 @@ public class Vertex {
         return str.toString();
     }
 
-    private double costFromStart;
-    private double totalCost;
-    private Vertex cameFrom;
-
-    public void setCostFromStart(double CostFromStart) {
-        this.costFromStart = CostFromStart;
-    }
-
-    public double getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    public double getHeuristicCost(Vertex end) {
-        double d1 = Math.abs(latitude - end.getLatitude());
-        double d2 = Math.abs(longitude - end.getLongitude());
-        double d3 = Math.abs(altitude - end.getAltitude());
-        return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2) + Math.pow(d3, 2));
-    }
-
-    public double getCostFromStart() {
-        return this.costFromStart;
-    }
-
-    public void setCameFrom(Vertex cameFrom) {
-        this.cameFrom = cameFrom;
-    }
-
-    public Vertex getCameFrom() {
-        return cameFrom;
-    }
 }
