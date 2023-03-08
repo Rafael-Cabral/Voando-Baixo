@@ -33,11 +33,15 @@ public class AStar {
         while(!visited.isEmpty()) {
             //Pega o vértice com menor custo da fila
             Vertex current = notVisited.poll();
+
             //Verifica se esse vértice é o final
             if (current == end) {
                 return getPath(current);
             }
+
             //Adiciona o vértice atual ao visitados
+            visited.add(current);
+
             //Verifica as conexões do vértice atual
             //Retorna vazio se não houver caminho
             return null;
