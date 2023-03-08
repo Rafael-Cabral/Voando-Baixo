@@ -83,6 +83,10 @@ public class AStar {
         //Adicina o vértice atual ao caminho
         caminho.add(vertice);
         //Adiciona os pais do vértice até chegar no inicio
+        while (vertice.getPai() != null) {
+            vertice = vertice.getPai();
+            caminho.add(0, vertice);
+        }
 
 
     }
