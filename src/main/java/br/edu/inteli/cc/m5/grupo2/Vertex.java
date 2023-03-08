@@ -12,6 +12,7 @@ public class Vertex {
     private double custoDoInicio = Double.POSITIVE_INFINITY;
     private double custoEstimadoTotal;
     private Vertex pai;
+    private double estimatedTotalCost;
 
 
 
@@ -91,6 +92,19 @@ public class Vertex {
     }
     public Vertex getPai() {
         return pai;
+    }
+    public int compareTo(Vertex other) {
+        double diff = this.getEstimatedTotalCost() - other.getEstimatedTotalCost();
+        if (diff > 0) {
+            return 1;
+        } else if (diff < 0) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+    public double getEstimatedTotalCost() {
+        return this.estimatedTotalCost;
     }
 
 
