@@ -81,6 +81,7 @@ public class AStar {
         List<Vertex> caminho = new ArrayList<>();
 
         //Adicina o vértice atual ao caminho
+        caminho.add(vertice);
         //Adiciona os pais do vértice até chegar no inicio
 
 
