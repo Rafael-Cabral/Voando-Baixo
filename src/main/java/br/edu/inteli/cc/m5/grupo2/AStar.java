@@ -1,6 +1,7 @@
 package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class AStar {
     public double Heuristica(Vertex start, Vertex end) {
@@ -11,8 +12,13 @@ public class AStar {
 
     public static List<Vertex> findPath(Vertex start, Vertex end) {
         //Lista de prioridade vazia
+        PriorityQueue<Vertex> notVisited = new PriorityQueue<>();
+
         //Lista de prioridade com vértices vizitados
+
+
         //Inicia com o ponto de partida
+
         //Inicia o custo inicial
         //Inicia o custo estimado total
         //Condição que verifica, passo a passo qual o vértice mais barato
