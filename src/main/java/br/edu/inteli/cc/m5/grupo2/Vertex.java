@@ -89,6 +89,10 @@ public class Vertex {
     public void setPai(Vertex pai) {
         this.pai = pai;
     }
+    public Vertex getPai() {
+        return pai;
+    }
+
 
 
 
