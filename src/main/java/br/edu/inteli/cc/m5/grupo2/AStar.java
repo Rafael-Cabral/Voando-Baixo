@@ -56,6 +56,9 @@ public class AStar {
                 //Se o vizinho não foi visitado ou se o custo for menor
                 if (!visited.contains(neighbor) || custoTentativo < neighbor.getCustoDoInicio()) {
                     //Define o custo do inicio e o estimado
+                    neighbor.setCustoDoInicio(custoTentativo);
+                    neighbor.setCustoEstimadoTotal(custoTentativo + heuristica(neighbor, end));
+
                     //Define o vértice atual como nó pai do vizinho
                     //Adiciona o vizinho na fila de prioridade
                 }
