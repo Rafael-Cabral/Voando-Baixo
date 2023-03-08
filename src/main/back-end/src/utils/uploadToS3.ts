@@ -26,6 +26,7 @@ export const uploadToS3 = async (aFile : Express.Multer.File) => {
 	await s3.send(command);
 
 	return {
+		objectKey: params.Key,
 		uri: `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${params.Key}`
 	};
 

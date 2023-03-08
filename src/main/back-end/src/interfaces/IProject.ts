@@ -3,7 +3,7 @@ export interface IProject {
     name: string;
     image?: string;
     status: "processing" | "processed";
-    dt2File?: string;
+    objectKey?: string;
     createdAt?: Date;
     updatedAt?: Date;
 }

@@ -13,7 +13,7 @@ class ProjectsService {
 			MERGE (p:Project {
 				id: "${uuid()}", 
 				name: "${project.name}",
-				dt2File: "${project.dt2File}",
+				objectKey: "${project.objectKey}",
 				status: "processing",
 				createdAt: "${new Date()}"})
 			
