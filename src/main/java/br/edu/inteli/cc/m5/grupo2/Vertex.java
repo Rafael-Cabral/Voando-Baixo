@@ -2,7 +2,7 @@ package br.edu.inteli.cc.m5.grupo2;
 
 import java.util.LinkedList;
 
-public class Vertex {
+public class Vertex implements Comparable<Vertex> {
 
     private final int id;
     private final double latitude;
@@ -12,7 +12,6 @@ public class Vertex {
     private double custoDoInicio = Double.POSITIVE_INFINITY;
     private double custoEstimadoTotal;
     private Vertex pai;
-    private double estimatedTotalCost;
 
 
 
@@ -94,20 +93,11 @@ public class Vertex {
         return pai;
     }
     public int compareTo(Vertex other) {
-        double diff = this.getEstimatedTotalCost() - other.getEstimatedTotalCost();
-        if (diff > 0) {
-            return 1;
-        } else if (diff < 0) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return Double.compare(this.getCustoEstimadoTotal(), other.getCustoEstimadoTotal());
     }
-    public double getEstimatedTotalCost() {
-        return this.estimatedTotalCost;
+    public double getCustoEstimadoTotal() {
+        return this.custoEstimadoTotal;
     }
-
-
 
 
 }
