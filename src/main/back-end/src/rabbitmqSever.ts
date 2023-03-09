@@ -2,7 +2,7 @@ import { Connection, Channel, connect, Message } from "amqplib";
 
 export default class RabbitMQServer {
 
-	private conn: Connection;
+	public conn: Connection;
 	private channel: Channel;
 	private uri: string;
 
