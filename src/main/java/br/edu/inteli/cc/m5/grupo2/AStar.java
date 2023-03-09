@@ -34,7 +34,10 @@ public class AStar {
             Vertex current = notVisited.pollFirst();
 
             //Verifica se esse vértice é o final
-            if (current == end) return getPath(current);
+            if (current == end) {
+                System.out.println(visited.size());
+                return getPath(current);
+            }
 
             //Adiciona o vértice atual ao visitados
             visited.add(current);
