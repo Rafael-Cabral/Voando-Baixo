@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TextoInicial from "./components/TextoInicial";
+import BotaoInicial from "./components/BotaoInicial";
+import Cards from "./components/Cards"
+import Texto2 from "./components/Texto2"
+import BotaoPg2 from "./components/BotaoPg2";
+import BarraPesquisa from "./components/BarraPesquisa";
+import { Route, BrowserRouter, Navigate, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import CriarProjeto from "./pages/CriarProjeto";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+function App () {
+  return(
+    <BrowserRouter>
+  <BotaoPg2 />
+  <Cards />
+  <Texto2 />
+  <BarraPesquisa />
+  </BrowserRouter>
+  )
 }
 
 export default App;
+
+/*
+return(
+  <BrowserRouter>
+  <BotaoPg2 />
+  <Cards />
+  <Texto2 />
+  </BrowserRouter>
+)*/

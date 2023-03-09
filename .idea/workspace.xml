@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4ea1af99-436f-4525-9473-d871fef53af1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/AStarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/AStarTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Neo4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Neo4j.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Recv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/Recv.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +70,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Elias\Documents\GitHub\grupo2" />
       <recent name="C:\Users\Elias\Documents\GitHub\Turma-4\grupo2\src\main\java\br\edu\inteli\cc\m5\grupo" />
     </key>
   </component>
@@ -103,7 +105,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AStarTest.findPathInTime" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="DownloadFileFromS3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.DownloadFileFromS3" />
+      <module name="template" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2" />
+    </configuration>
+    <configuration name="Neo4j" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.Neo4j" />
+      <module name="template" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2" />
+    </configuration>
+    <configuration name="Recv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.Recv" />
       <module name="template" />
       <extension name="coverage">
         <pattern>
@@ -190,11 +217,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.AStarTest.findPathOneDted" />
-        <item itemvalue="TestNG.AStarTest.findPathWithWeights" />
-        <item itemvalue="TestNG.AStarTest.findPathInTime" />
-        <item itemvalue="TestNG.AStarTest.findPathOneMap" />
-        <item itemvalue="TestNG.AStarTest.findPath" />
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.Neo4j" />
+        <item itemvalue="Application.DownloadFileFromS3" />
+        <item itemvalue="Application.Recv" />
       </list>
     </recent_temporary>
   </component>
