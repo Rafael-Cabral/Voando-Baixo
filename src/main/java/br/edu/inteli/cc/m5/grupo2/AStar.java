@@ -9,8 +9,11 @@ import java.util.Set;
 public class AStar {
     public static double heuristica(Vertex start, Vertex end) {
         double d1 = Math.abs(end.getLatitude() - start.getLatitude());
+        double latDistance = d1 * 111319.9;
         double d2 = Math.abs(end.getLongitude() - start.getLongitude());
-        return Math.sqrt(Math.pow(d1, 2) + Math.pow(d2, 2));
+        double lonDistance = d2 * 111319.9;
+
+        return (Math.sqrt(Math.pow(latDistance, 2) + Math.pow(lonDistance, 2)));
     }
 
     public static List<Vertex> findPath(Vertex start, Vertex end) {
@@ -27,7 +30,7 @@ public class AStar {
         start.setCustoDoInicio(0);
 
         //Inicia o custo estimado total
-        start.setCustoEstimadoTotal(heuristica(start, end));
+        start.setCustoEstimadoTotal(0.6 * start.getCustoDoInicio() + 0.4 * heuristica(start, end));
 
         //Condição que verifica, passo a passo qual o vértice mais barato
         while (!notVisited.isEmpty()) {
@@ -56,7 +59,7 @@ public class AStar {
 
                     //Define o custo do inicio e o   estimado
                     neighbor.setCustoDoInicio(custoTentativo);
-                    neighbor.setCustoEstimadoTotal(custoTentativo + heuristica(neighbor, end));
+                    neighbor.setCustoEstimadoTotal(0.6 * custoTentativo + 0.4 * heuristica(neighbor, end));
 
                     //Define o vértice atual como nó pai do vizinho
                     neighbor.setPai(current);
