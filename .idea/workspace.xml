@@ -74,18 +74,36 @@
       <recent name="C:\Users\Elias\Documents\GitHub\Turma-4\grupo2\src\main\java\br\edu\inteli\cc\m5\grupo" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.App" />
-      <module name="template" />
+  <component name="RunManager" selected="TestNG.AStarTest.findPathOneDted">
+    <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AStarTest.findPath" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2" />
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.AStarTest" />
+      <option name="METHOD_NAME" value="findPath" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="DownloadFileFromS3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.DownloadFileFromS3" />
@@ -114,22 +132,76 @@
     <configuration name="Recv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.Recv" />
       <module name="template" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.AStarTest" />
+      <option name="METHOD_NAME" value="findPathInTime" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AStarTest.findPathOneDted" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.AStarTest" />
+      <option name="METHOD_NAME" value="findPathOneDted" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AStarTest.findPathOneMap" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.AStarTest" />
+      <option name="METHOD_NAME" value="findPathOneMap" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AStarTest.findPathWithWeights" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="template" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.edu.inteli.cc.m5.grupo2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="br.edu.inteli.cc.m5.grupo2" />
+      <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.AStarTest" />
+      <option name="METHOD_NAME" value="findPathWithWeights" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -170,6 +242,17 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/AStar.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/grupo2$App.ic" NAME="App Coverage Results" MODIFIED="1677016547623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -55,4 +55,7 @@
     <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.12.421" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.32" level="project" />
     <orderEntry type="library" name="Maven: com.rabbitmq:amqp-client:5.16.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jgrapht:jgrapht-core:1.5.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jheaps:jheaps:0.13" level="project" />
+  </component>
 </module>
