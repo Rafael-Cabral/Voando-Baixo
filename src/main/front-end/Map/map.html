@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Topographic Map</title>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #input-container { position: absolute; top: 10px; left: 10px; z-index: 1; background-color: white; padding: 10px; border-radius: 5px; }
+        #submit-button { margin-top: 10px; }
+        #marker-container { position: absolute; top: 10px; left: 10px; z-index: 1; background-color: white; padding: 10px; border-radius: 5px; }
+        #add-markers-button { margin-top: 10px; }
+        #scale { position: absolute; bottom: 10px; left: 10px; z-index: 1; background-color: white; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div id='input-container'>
+        <p>Enter the coordinates of the map boundaries:</p>
+        <form>
+            <label for='xmin'>Xmin:</label>
+            <input type='number' id='xmin' name='xmin' step='any' required />
+            <label for='ymin'>Ymin:</label>
+            <input type='number' id='ymin' name='ymin' step='any' required />
+            <label for='xmax'>Xmax:</label>
+            <input type='number' id='xmax' name='xmax' step='any' required />
+            <label for='ymax'>Ymax:</label>
+            <input type='number' id='ymax' name='ymax' step='any' required />
+            <br />
+            <button type='submit' id='submit-button'>Submit</button>
+            <button type='button' id='add-markers-button'>Add markers</button>
+        </form>
+    </div>
+    <div id='marker-container' style='display: none;'>
+        <p>Enter the coordinates of the markers:</p>
+        <form>
+            <label for='origin'>Origin:</label>
+            <input type='text' id='origin' name='origin' required />
+            <label for='destiny'>Destiny:</label>
+            <input type='text' id='destiny' name='destiny' required />
+            <br />
+            <button type='submit' id='submit-markers'>Submit</button>
+        </form>
+    </div>
+    <div id='map'></div>
+    <div id='scale'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYmVueWludGVsaSIsImEiOiJjbGYwM25oaWMwMjRwM3Vta2tiMjd2eGk3In0.yAOpHb-ul9chFeWMM1KOeg'
+        var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/outdoors-v11',
+        center: [-122.4194, 37.7749],
+        zoom: 10,
+        maxBounds: [[-180, -90], [180, 90]] // Default max bounds
+    });
+
+    // Update the map bounds when the user submits the form
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var xmin = parseFloat(document.querySelector('#xmin').value);
+        var ymin = parseFloat(document.querySelector('#ymin').value);
+        var xmax = parseFloat(document.querySelector('#xmax').value);
+        var ymax = parseFloat(document.querySelector('#ymax').value);
+        var bounds = [[xmin, ymin], [xmax, ymax]];
+        map.setMaxBounds(bounds);
+        map.fitBounds(bounds);
+        document.querySelector('#input-container').style.display = 'none';
+        document.querySelector('#marker-container').style.display = 'block';
+    });
+
+    // Add markers to the map when the user submits the marker form
+    document.querySelector('#submit-markers').addEventListener('click', function (event) {
+        event.preventDefault();
+        var origin = document.querySelector('#origin').value;
+        var destiny = document.querySelector('#destiny').value;
+
+        // Split the coordinates into separate longitude and latitude values
+        var originCoords = origin.split(',');
+        var destinyCoords = destiny.split(',');
+
+        // Create the markers and add them to the map
+        var originMarker = new mapboxgl.Marker()
+            .setLngLat(originCoords)
+            .addTo(map);
+
+        var destinyMarker = new mapboxgl.Marker()
+            .setLngLat(destinyCoords)
+            .addTo(map);
+
+        // Add the origin and destiny coordinates to the animated line source
+        var lineCoordinates = [originCoords, destinyCoords];
+        map.getSource('animated-line').setData({
+            'type': 'Feature',
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': lineCoordinates
+            }
+        });
+
+        // Start the animation by setting the layer's visibility to 'visible'
+        map.setLayoutProperty('animated-line', 'visibility', 'visible');
+
+        // Zoom the map to show both markers and the animated line
+        var bounds = new mapboxgl.LngLatBounds()
+            .extend(originCoords)
+            .extend(destinyCoords);
+
+        map.fitBounds(bounds, { padding: 50 });
+
+        // Animate the line
+        var previousTimestamp = performance.now();
+        var counter = 0;
+        requestAnimationFrame(animateLine);
+
+        function animateLine(timestamp) {
+            var animatedLineSource = map.getSource('animated-line');
+            var lineCoordinates = animatedLineSource._data.geometry.coordinates;
+
+            if (counter < lineCoordinates.length - 1) {
+                // Calculate the distance and bearing between the two points
+                var start = lineCoordinates[counter];
+                var end = lineCoordinates[counter + 1];
+                var distance = turf.distance(turf.point(start), turf.point(end));
+                var bearing = turf.bearing(turf.point(start), turf.point(end));
+
+                // Calculate the new point along the line
+                var distanceFromStart = distance * (timestamp - previousTimestamp) / 1000;
+                var newPoint = turf.destination(turf.point(start), distanceFromStart, bearing);
+
+                // Update the line coordinates and source data
+                lineCoordinates.splice(counter + 1, 0, newPoint.geometry.coordinates);
+                animatedLineSource.setData({
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': lineCoordinates
+                    }
+                });
+
+                // Move to the next point if the distance to the new
+                // point is less than the distance to the end point
+                if (turf.distance(turf.point(newPoint), turf.point(end)) < turf.distance(turf.point(start), turf.point(end))) {
+                    counter++;
+                }
+            }
+
+            // Schedule the next animation frame if there are still points left on the line
+            if (counter < lineCoordinates.length - 1) {
+                previousTimestamp = timestamp;
+                requestAnimationFrame(animateLine);
+            }
+        }
+    });
+
+    map.on('load', function () {
+        map.addSource('mapbox-dem', {
+            'type': 'raster-dem',
+            'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+            'tileSize': 512,
+            'maxzoom': 14
+        });
+
+        map.addLayer({
+            'id': 'hillshading',
+            'source': 'mapbox-dem',
+            'type': 'hillshade'
+        }, 'waterway-river-canal-shadow');
+
+        map.addLayer({
+            'id': 'contours',
+            'type': 'line',
+            'source': 'mapbox-dem',
+            'layout': {},
+            'paint': {
+                'line-color': '#ff69b4',
+                'line-opacity': 0.7,
+                'line-width': 2
+            },
+            'filter': ['all',
+                ['>', 'ele', 0],  // Only show contours with elevations greater than 0 meters
+                ['<=', 'ele', 3000] // Only show contours with elevations less than or equal to 3000 meters
+            ]
+        });
+
+        map.addLayer({
+            'id': 'contour-labels',
+            'type': 'symbol',
+            'source': 'mapbox-dem',
+            'layout': {
+                'text-field': '{ele}',
+                'text-font': ['Open Sans Regular'],
+                'text-size': 12
+            },
+            'paint': {
+                'text-color': '#fff'
+            },
+            'filter': ['>', 'ele', 0] // Only show labels for contours with elevations greater than 0 meters
+        });
+
+        // Add a scale that updates with zoom level
+        var scale = new mapboxgl.ScaleControl({
+            maxWidth: 100,
+            unit: 'metric'
+        });
+        map.addControl(scale);
+
+        // Limit max zoom and max bounds for the map
+        // map.setMaxZoom(16);
+        // map.setMinZoom(10);
+
+        // Add the animated line source and layer
+        map.addSource('animated-line', {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': []
+                }
+            }
+        });
+
+        map.addLayer({
+            'id': 'animated-line',
+            'type': 'line',
+            'source': 'animated-line',
+            'layout': {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            'paint': {
+                'line-color': '#007fff',
+                'line-width': 5,
+                'line-opacity': 0.8
+            },
+            'visibility': 'none'
+        });
+    });
+</script>
+</body>
+</html>
