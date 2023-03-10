@@ -53,7 +53,7 @@
         });
 
         document.querySelector('form').addEventListener('submit', function (event) {
-    event.preventDefault();
+            event.preventDefault();
     var xmin = parseFloat(document.querySelector('#xmin').value);
     var ymin = parseFloat(document.querySelector('#ymin').value);
     var xmax = parseFloat(document.querySelector('#xmax').value);
@@ -63,52 +63,88 @@
     document.querySelector('#input-container').style.display = 'none';
 
     // Add drag ability to restrict the map within the bounds
-    map.dragPan.enable();
-    map.on('dragend', function() {
-        if (!map.getBounds().within(bounds)) {
-            var center = map.getCenter();
-            var x = center.lng;
-            var y = center.lat;
+    dragWithinBounds(map, bounds);
+});
 
-            x = Math.max(xmin, Math.min(xmax, x));
-            y = Math.max(ymin, Math.min(ymax, y));
+function dragWithinBounds(map, bounds) {
+    // Disable default drag behavior
+    map.dragPan.disable();
+
+    // When the user starts dragging the map, store the initial coordinates
+    var start = { x: 0, y: 0 };
+    map.on('dragstart', function (event) {
+        start.x = event.originalEvent.clientX;
+        start.y = event.originalEvent.clientY;
+    });
+
+    // When the user stops dragging the map, check if it's within the bounds
+    map.on('dragend', function () {
+        var end = map.getCenter();
+        var x = end.lng;
+        var y = end.lat;
+
+        // If the map is outside the bounds, pan back to the center
+        if (!map.getBounds().within(bounds)) {
+            x = Math.max(bounds[0][0], Math.min(bounds[1][0], x));
+            y = Math.max(bounds[0][1], Math.min(bounds[1][1], y));
 
             map.panTo([x, y]);
         }
     });
-});
 
+    // When the user is dragging the map, update the coordinates and check if it's within the bounds
+    map.on('drag', function (event) {
+        var deltaX = event.originalEvent.clientX - start.x;
+        var deltaY = event.originalEvent.clientY - start.y;
+        var center = map.getCenter();
+        var x = center.lng - deltaX * 0.01;
+        var y = center.lat + deltaY * 0.01;
 
-    // Add markers to the map when the user submits the marker form
-    document.querySelector('#submit-markers').addEventListener('click', function (event) {
-        event.preventDefault();
-        var origin = document.querySelector('#origin').value;
-        var destiny = document.querySelector('#destiny').value;
+        // If the map is outside the bounds, prevent dragging in that direction
+        if (!map.getBounds().within(bounds)) {
+            x = Math.max(bounds[0][0], Math.min(bounds[1][0], x));
+            y = Math.max(bounds[0][1], Math.min(bounds[1][1], y));
+            map.panTo([x, y]);
+            start.x += (x - center.lng) / 0.01;
+            start.y -= (y - center.lat) / 0.01;
+        }
+    });
+}
 
-        // Split the coordinates into separate longitude and latitude values
-        var originCoords = origin.split(',');
-        var destinyCoords = destiny.split(',');
+// Add markers to the map when the user submits the marker form
+document.querySelector('#submit-markers').addEventListener('click', function (event) {
+    event.preventDefault();
+    var origin = document.querySelector('#origin').value;
+    var destiny = document.querySelector('#destiny').value;
 
-        // Create the markers and add them to the map
-        var originMarker = new mapboxgl.Marker()
-            .setLngLat(originCoords)
-            .addTo(map);
+    // Split the coordinates into separate longitude and latitude values
+    var originCoords = origin.split(',');
+    var destinyCoords = destiny.split(',');
 
-        var destinyMarker = new mapboxgl.Marker()
-            .setLngLat(destinyCoords)
-            .addTo(map);
+    // Create the markers and add them to the map
+    var originMarker = new mapboxgl.Marker()
+        .setLngLat(originCoords)
+        .addTo(map);
 
-        // Add the origin and destiny coordinates to the animated line source
-        var lineCoordinates = [            originCoords,            destinyCoords        ];
-        map.getSource('animated-line').setData({
-            'type': 'Feature',
-            'geometry': {
-                'type': 'LineString',
-                'coordinates': lineCoordinates
-            }
-        });
+    var destinyMarker = new mapboxgl.Marker()
+        .setLngLat(destinyCoords)
+        .addTo(map);
 
-        // Start the animation by setting the layer's visibility to 'visible'
+    // Add the origin and destiny coordinates to the animated line source
+    var lineCoordinates = [
+        originCoords,
+        destinyCoords
+    ];
+    map.getSource('animated-line').setData({
+        'type': 'Feature',
+        'geometry': {
+            'type': 'LineString',
+            'coordinates': lineCoordinates
+        }
+    });
+
+    // Start the animation by setting the layer's visibility to 'visible'
+
         map.setLayoutProperty('animated-line', 'visibility', 'visible');
 
         // Zoom the map to show both markers and the animated line
@@ -215,7 +251,7 @@ map.addLayer({
 
         // Limit max zoom and max bounds for the map
         map.setMaxZoom(16);
-        map.setMinZoom(7);
+        map.setMinZoom(8);
 
         // Add the animated line source and layer
         map.addSource('animated-line', {
@@ -230,21 +266,36 @@ map.addLayer({
         });
 
         map.addLayer({
-            'id': 'animated-line',
-            'type': 'line',
-            'source': 'animated-line',
-            'layout': {
-                'line-cap': 'round',
-                'line-join': 'round'
-            },
-            'paint': {
-                'line-color': '#007fff',
-                'line-width': 5,
-                'line-opacity': 0.8
-            },
-            'visibility': 'none'
-        });
+        'id': 'animated-line',
+        'type': 'line',
+        'source': 'animated-line',
+        'layout': {
+            'line-cap': 'round',
+            'line-join': 'round'
+        },
+        'paint': {
+            'line-color': '#007fff',
+            'line-width': 5,
+            'line-opacity': 0.8
+        },
+        'visibility': 'none'
     });
+
+    // Add a drag restriction that snaps the map back to the bounds when the user drags outside of them
+    map.dragPan.enable();
+    map.on('dragend', function() {
+        if (!map.getBounds().within(bounds)) {
+            var center = map.getCenter();
+            var x = center.lng;
+            var y = center.lat;
+
+            x = Math.max(xmin, Math.min(xmax, x));
+            y = Math.max(ymin, Math.min(ymax, y));
+
+            map.panTo([x, y]);
+        }
+    });
+});
 
     var previousTimestamp = 0;
     
