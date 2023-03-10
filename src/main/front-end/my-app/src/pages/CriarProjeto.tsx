@@ -5,16 +5,15 @@ import BarraPesquisa from "../components/BarraPesquisa";
 import BotaoPg2 from "../components/BotaoPg2";
 
 
-function CriarProjeto () {
-    return(
-        <BrowserRouter>
-        <Cards />
-        <Texto2 />
-        <BarraPesquisa />
-        <BotaoPg2 />
-    
-        </BrowserRouter>
-      )
+function CriarProjeto() {
+  return (
+    <BrowserRouter>
+      <Cards />
+      <Texto2 />
+      <BarraPesquisa />
+      <BotaoPg2 />
+    </BrowserRouter>
+  )
 }
 
 export default CriarProjeto;
