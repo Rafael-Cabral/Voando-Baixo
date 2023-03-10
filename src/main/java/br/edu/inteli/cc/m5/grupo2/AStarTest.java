@@ -19,7 +19,7 @@ public class AStarTest {
         graph.addVertex(vertex);
         graph.addVertex(vertex4);
 
-        assertEquals(424.26406871192853, AStar.heuristica(vertex, vertex4));
+        assertEquals(424.26406871192853, AStar.heuristic(vertex, vertex4));
     }
 
     @Test(timeOut = 60000)
