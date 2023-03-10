@@ -152,20 +152,20 @@ export default App;
 // }
 
 // .coordinatesInput {
-//   width: 300px;
-//   border-radius: 5px;
-//   margin-top: 5%;
-//   height: 45px;
-//   padding-left: 20px;
+  // width: 300px;
+  // border-radius: 5px;
+  // margin-top: 5%;
+  // height: 45px;
+  // padding-left: 20px;
 
 // }
 
 // #getPathButton {
-//   width: 90%;
-//   height: 10%;
-//   border-radius: 5px;
-//   background-color: #000000;
-//   color: var(--whiteTextColor);
+  // width: 90%;
+  // height: 10%;
+  // border-radius: 5px;
+  // background-color: #000000;
+  // color: var(--whiteTextColor);
 // }
 
 // .bottom-nav {

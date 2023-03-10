@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-function VisualizationMap() {
+function VisualizationGraph() {
     return (
         <div id='visualization' className='visualization'
         style={{
@@ -30,4 +30,4 @@ function VisualizationMap() {
     );
 }
 
-export default VisualizationMap;
+export default VisualizationGraph;

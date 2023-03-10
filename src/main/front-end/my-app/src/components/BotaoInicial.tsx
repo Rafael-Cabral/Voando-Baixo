@@ -2,7 +2,6 @@ import { Button } from "@mui/material";
 import { Link, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import App from "../App";
 import React from "react";
 
 const theme = createTheme({
