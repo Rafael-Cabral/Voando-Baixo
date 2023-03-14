@@ -94,4 +94,8 @@ public class Vertex implements Comparable<Vertex> {
         return pai;
     }
 
+    @Override
+    public int compareTo(Vertex o) {
+        return 0;
+    }
 }
