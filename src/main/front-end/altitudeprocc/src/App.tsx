@@ -6,6 +6,7 @@ import { Logo } from './components/atoms/Logo/Logo'
 import { Text } from './components/atoms/Text/Text'
 import { Home } from './pages/Home/Home'
 import { Route, Routes } from 'react-router-dom'
+import { Projects } from './pages/Projects/Projects'
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     <GlobalStyle/>
     <Routes>
       <Route path="/" element={<Home />}/>
-      <Route path="/projects" element={<h1>Hello</h1>}/>
+      <Route path="/projects" element={<Projects />}/>
     </Routes>
   </>
   )
