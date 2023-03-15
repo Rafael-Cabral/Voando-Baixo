@@ -9,6 +9,10 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class AStarTest {
 
+    /*
+        This tests if the heuristic function is correct, by giving two vertexes
+        to be calculated
+     */
     @Test
     private void heuristica(){
         Graph graph = new Graph();
@@ -22,6 +26,9 @@ public class AStarTest {
         assertEquals(424.26406871192853, AStar.heuristic(vertex, vertex4));
     }
 
+    /*
+        This tests if the best path, giving our considerations such as altitude and distance, is being calculated
+     */
     @Test(timeOut = 60000)
     private void findCorrectPath(){
         Graph graph = new Graph();
@@ -51,6 +58,10 @@ public class AStarTest {
         assertEquals(caminho, AStar.findPath(vertex, vertex4));
     }
 
+    /*
+        This tests finding a path in a graph created by one of the input files we expect to use,
+        then prints the time it took to calculate in milliseconds
+     */
     @Test(timeOut = 60000)
     private void findPathOneDted(){
         String path = "src/main/resources/dted/SaoPaulo/W045_S23.dt2";
