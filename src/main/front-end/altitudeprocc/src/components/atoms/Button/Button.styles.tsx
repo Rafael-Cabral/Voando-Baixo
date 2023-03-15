@@ -4,6 +4,7 @@ export interface ButtonProps {
 
     variant: string;
     icon?: any;
+    type: "submit" | "button" | "reset"
 
 }
 
