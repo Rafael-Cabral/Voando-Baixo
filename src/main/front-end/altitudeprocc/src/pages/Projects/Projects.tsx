@@ -5,7 +5,7 @@ import { ReactComponent as Search} from "../../assets/search.svg"
 export const Projects = () => {
     return (
         <StyledProjects>
-            <Input placeholder="Pesquisar" icon={<Search />}/>
+            <Input type="text" placeholder="Pesquisar" icon={<Search />}/>
         </StyledProjects>
     )
 }

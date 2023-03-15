@@ -1,10 +1,10 @@
 import { InputProps, StyledInput } from "./Input.styles"
 
-export const Input = ({placeholder, icon} : InputProps) => {
+export const Input = ({placeholder, icon, type} : InputProps) => {
     return (
         <StyledInput>
             {icon && icon}
-            <input type="text" placeholder={placeholder}/>
+            <input type={type} placeholder={placeholder}/>
         </StyledInput>
     )
 }
