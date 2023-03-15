@@ -1,12 +1,12 @@
-import { Input } from "../../components/atoms/Input/Input"
 import { StyledProjects } from "./Projects.style"
-import { ReactComponent as Search} from "../../assets/search.svg"
-import { ProjectsHeader } from "../../components/molecules/ProjectsHeader/ProjectsHeader"
+import { ProjectsHeader } from "../../components/organisms/ProjectsHeader/ProjectsHeader"
+import { ProjectList } from "../../components/organisms/ProjectList/ProjectList"
 
 export const Projects = () => {
     return (
         <StyledProjects>
             <ProjectsHeader />
+            <ProjectList projects={[{id: "1", name:"Operação 1", data:"20/02/2023" }, {id: "2", name:"Operação 2", data:"20/02/2023" }]} mt="6.4rem"></ProjectList>
         </StyledProjects>
     )
 }

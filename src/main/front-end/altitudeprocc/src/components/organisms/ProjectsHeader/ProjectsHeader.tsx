@@ -3,6 +3,7 @@ import { Text } from "../../atoms/Text/Text"
 import { StyledHeaderLeft, StyledHeaderRight, StyledProjectsHeader } from "./ProjectsHeader.styles"
 import { ReactComponent as Search } from "../../../assets/search.svg"
 import { Input } from "../../atoms/Input/Input"
+import { ReactComponent as Plus } from "../../../assets/plus.svg"
 
 const HeaderLeft = () => {
     return (
@@ -17,7 +18,7 @@ const HeaderRight = () => {
     return (
         <StyledHeaderRight>
             <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem"/>
-            <Button type="button" variant="primary">Criar novo projeto</Button>
+            <Button type="button" variant="primary" icon={<Plus />}>Criar novo projeto</Button>
         </StyledHeaderRight>
     )
 }
