@@ -14,6 +14,9 @@ public class GraphTest {
     Graph graph = createGraphForTests();
 
 
+    /*
+        This creats a graph to be used in the following tests
+     */
     private Graph createGraphForTests(){
         Graph graph = new Graph();
 

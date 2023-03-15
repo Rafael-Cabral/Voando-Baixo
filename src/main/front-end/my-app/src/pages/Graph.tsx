@@ -1,12 +1,12 @@
 import FooterGraph from "../components/FooterGraph";
-import SidebarMap from "../components/SideBarMap";
+import SidebarGraph from "../components/SideBarGraph";
 import VisualizationGraph from "../components/VisualizationGraph";
 
 
 function Graph() {
     return(
         <div>
-            <SidebarMap />
+            <SidebarGraph />
             <VisualizationGraph/>       
             <FooterGraph/>
         </div>
