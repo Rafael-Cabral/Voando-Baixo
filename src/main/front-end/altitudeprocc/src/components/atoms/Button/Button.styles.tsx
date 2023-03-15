@@ -2,7 +2,7 @@ import styled, {css} from 'styled-components';
 
 export interface ButtonProps {
 
-    variant: string;
+    variant: "primary" | "secondary";
     icon?: any;
     type: "submit" | "button" | "reset"
 

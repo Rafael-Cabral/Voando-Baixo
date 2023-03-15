@@ -1,16 +1,21 @@
 import styled from 'styled-components';
 
-export interface InputProps {
-    placeholder: string;
-    icon: any;
-    type: "button" | "checkbox" | "color" | "date" | "datetime-local" | "email" | "file" | "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "search" | "submit" | "tel" | "text" | "time" | "url" | "week"
+export interface StyledInputProps {
+    mb?: string;
+    mt?: string;
+    ml?: string;
+    mr?: string;
 }
 
-export const StyledInput = styled.div`
+export const StyledInput = styled.div<StyledInputProps>`
     
     width: 36rem;
     height: 6.4rem;
     position: relative;
+    margin-bottom: ${(props: StyledInputProps) => props.mb ? props.mb : "0"};
+    margin-top: ${(props: StyledInputProps) => props.mt ? props.mt : "0"};
+    margin-left: ${(props: StyledInputProps) => props.ml ? props.ml : "0"};
+    margin-right: ${(props: StyledInputProps) => props.mr ? props.mr : "0"};
 
     & > svg {
         position: absolute;
