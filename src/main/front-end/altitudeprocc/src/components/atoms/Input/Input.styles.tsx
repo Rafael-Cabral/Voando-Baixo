@@ -36,4 +36,9 @@ export const StyledInput = styled.div<StyledInputProps>`
         font-weight: 400;
     }
 
+    & > input:disabled {
+        background-color: #F5F5F5;
+        cursor: not-allowed;
+    }
+
 `

@@ -5,6 +5,7 @@ import { ModalMenu, ModalMenuItem } from "../../atoms/ModalMenu/ModalMenu";
 import { Home } from "../../../pages/Home/Home";
 import { useEffect, useState } from "react";
 import { RenameProjectPopup } from "../RenameProjectPopup/RenameProjectPopup";
+import { DeleteProjectPopup } from "../DeleteProjectPopup/DeleteProjectPopup";
 
 export interface ProjectCardProps extends StyledProjectCardProps {
     id: string;
@@ -91,7 +92,7 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
                 <ModalMenuItem componentToBeRendered={<RenameProjectPopup id={id} name={name} closePopup={setFirstComponentVisibility}/>} componentVisibility={firstComponentVisibility} setComponentVisibility={setFirstComponentVisibility}>
                     <Text size="medium" weight="regular" color="#000">Renomear</Text>
                 </ModalMenuItem>
-                <ModalMenuItem componentToBeRendered={<Home />} componentVisibility={secondComponentVisibility} setComponentVisibility={setSecondComponentVisibility}>
+                <ModalMenuItem componentToBeRendered={<DeleteProjectPopup id={id} name={name} closePopup={setSecondComponentVisibility} />} componentVisibility={secondComponentVisibility} setComponentVisibility={setSecondComponentVisibility}>
                     <Text size="medium" weight="regular" color="#000">Excluir</Text>
                 </ModalMenuItem>
             </ModalMenu>
