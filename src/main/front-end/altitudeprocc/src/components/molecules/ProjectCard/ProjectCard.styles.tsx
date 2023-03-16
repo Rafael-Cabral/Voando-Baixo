@@ -20,6 +20,7 @@ export const StyledProjectCard = styled.div<StyledProjectCardProps>`
     margin-top: ${(props: StyledProjectCardProps) => props.mt ? props.mt : "0"};
     margin-left: ${(props: StyledProjectCardProps) => props.ml ? props.ml : "0"};
     margin-right: ${(props: StyledProjectCardProps) => props.mr ? props.mr : "0"};
+    position: relative;
 `
 
 export const StyledTop = styled.div<StyledTopProps>`

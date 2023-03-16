@@ -22,6 +22,7 @@ export const ProjectList = ({projects, mb, mt, ml, mr}: ProjectListProps) => {
                     image={project.image}
                     mb="3.2rem"
                     mr="3.2rem"
+                    key={project.id}
                 />
             ))}
         </StyledProjectList>
