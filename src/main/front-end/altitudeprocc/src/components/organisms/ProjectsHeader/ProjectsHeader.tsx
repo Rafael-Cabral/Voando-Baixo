@@ -4,6 +4,7 @@ import { StyledHeaderLeft, StyledHeaderRight, StyledProjectsHeader } from "./Pro
 import { ReactComponent as Search } from "../../../assets/search.svg"
 import { Input } from "../../atoms/Input/Input"
 import { ReactComponent as Plus } from "../../../assets/plus.svg"
+import React from "react"
 
 const HeaderLeft = () => {
     return (
@@ -14,20 +15,25 @@ const HeaderLeft = () => {
     )
 }
 
-const HeaderRight = () => {
+const HeaderRight = ({ search, setSearch } : { search : string, setSearch : React.Dispatch<React.SetStateAction<string>> }) => {
+
+    const handleSearch = (e : React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value)
+    }
+
     return (
         <StyledHeaderRight>
-            <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem" value=""/>
+            <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem" value={search} onChange={handleSearch}/>
             <Button type="button" variant="primary" icon={<Plus />}>Criar novo projeto</Button>
         </StyledHeaderRight>
     )
 }
 
-export const ProjectsHeader = () => {
+export const ProjectsHeader = ({ search, setSearch } : { search : string, setSearch : React.Dispatch<React.SetStateAction<string>> }) => {
     return (
         <StyledProjectsHeader>
             <HeaderLeft />
-            <HeaderRight />
+            <HeaderRight search={search} setSearch={setSearch}/>
         </StyledProjectsHeader>
     )
 }

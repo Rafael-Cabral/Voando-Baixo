@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import { ProjectCard, ProjectCardProps } from "../../molecules/ProjectCard/ProjectCard"
 import { StyledProjectList } from "./ProjectList.styles"
 
@@ -8,13 +9,25 @@ interface ProjectListProps {
     mt?: string;
     ml?: string;
     mr?: string;
+    search: string;
 }
 
 
-export const ProjectList = ({projects, mb, mt, ml, mr}: ProjectListProps) => {
+export const ProjectList = ({projects, mb, mt, ml, mr, search}: ProjectListProps) => {
+
+    const [projectList, setProjectList] = useState<Array<ProjectCardProps>>(projects);
+
+    useEffect(() => {
+        if(search.length > 0) {
+            setProjectList(projects.filter((project) => project.name.toLowerCase().includes(search.toLowerCase())));
+        } else {
+            setProjectList(projects);
+        }
+    }, [search]);
+
     return (
         <StyledProjectList mb={mb} mt={mt} ml={ml} mr={mr}>
-            {projects.map((project) => (
+            {projectList.map((project) => (
                 <ProjectCard
                     id={project.id}
                     name={project.name}
