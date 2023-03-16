@@ -4,7 +4,10 @@ import { StyledHeaderLeft, StyledHeaderRight, StyledProjectsHeader } from "./Pro
 import { ReactComponent as Search } from "../../../assets/search.svg"
 import { Input } from "../../atoms/Input/Input"
 import { ReactComponent as Plus } from "../../../assets/plus.svg"
-import React from "react"
+import { StyledComponentToBeRendered } from "../../atoms/ModalMenu/ModalMenu.styles"
+import { CreateProjectPopup } from "../../molecules/CreateProjectPopup/CreateProjectPopup"
+import ReactDOM from 'react-dom';
+import React from "react";
 
 const HeaderLeft = () => {
     return (
@@ -21,11 +24,23 @@ const HeaderRight = ({ search, setSearch } : { search : string, setSearch : Reac
         setSearch(e.target.value)
     }
 
+    const [componentVisibility, setComponentVisibility] = React.useState<boolean>(false);
+
     return (
-        <StyledHeaderRight>
-            <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem" value={search} onChange={handleSearch}/>
-            <Button type="button" variant="primary" icon={<Plus />}>Criar novo projeto</Button>
-        </StyledHeaderRight>
+
+        <>
+            <StyledHeaderRight>
+                <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem" value={search} onChange={handleSearch}/>
+                <Button type="button" variant="primary" icon={<Plus />} onClick={() => {setComponentVisibility(true)}}>Criar novo projeto</Button>
+            </StyledHeaderRight>
+            {componentVisibility && ReactDOM.createPortal(
+                <StyledComponentToBeRendered>
+                    <CreateProjectPopup closePopup={setComponentVisibility}/>
+                </StyledComponentToBeRendered>,
+                document.getElementById("root") as HTMLElement
+            )}
+        </>
+        
     )
 }
 
