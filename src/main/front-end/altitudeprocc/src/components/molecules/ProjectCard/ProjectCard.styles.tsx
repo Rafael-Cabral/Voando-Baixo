@@ -21,6 +21,12 @@ export const StyledProjectCard = styled.div<StyledProjectCardProps>`
     margin-left: ${(props: StyledProjectCardProps) => props.ml ? props.ml : "0"};
     margin-right: ${(props: StyledProjectCardProps) => props.mr ? props.mr : "0"};
     position: relative;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:hover {
+        scale: 1.1;
+    }
 `
 
 export const StyledTop = styled.div<StyledTopProps>`
