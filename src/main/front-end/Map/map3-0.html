@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Topographic Map</title>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #scale { position: absolute; bottom: 10px; left: 10px; z-index: 1; background-color: white; padding: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div id='map'></div>
+    <div id='scale'></div>
+    <script>
+        // Your Mapbox access token 
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYmVueWludGVsaSIsImEiOiJjbGYwM25oaWMwMjRwM3Vta2tiMjd2eGk3In0.yAOpHb-ul9chFeWMM1KOeg';
+
+        // Static map boundaries
+        var xmin = -48.99954;
+        var ymin = -29.99865;
+        var xmax = -42.00076;
+        var ymax = -20.99988;
+
+        // Initialize the map
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
+            center: [-(xmin + xmax) / 2, (ymin + ymax) / 2],
+            zoom: 2,
+            maxBounds: [[xmin, ymin], [xmax, ymax]]
+        });
+
+        // Add scale control to the map
+        var scale = new mapboxgl.ScaleControl({
+            maxWidth: 100,
+            unit: 'metric'
+        });
+            map.addControl(scale);
+
+// Add a line layer to display the route between origin and destiny
+map.on('load', function () {
+    map.addSource('route', {
+        'type': 'geojson',
+        'data': {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': coordinates
+            }
+        }
+    });
+
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#1db7dd',
+            'line-width': 4,
+            'line-dasharray': [0, 1]
+        }
+    });
+});
+
+const coordinates = [  [-45.00013888888889, -21.99986111111111],
+  [-44.99875, -21.99986111111111],
+  [-44.99736111111111, -21.99986111111111],
+  [-44.99697222222222, -21.99847222222222],
+  [-44.99558333333333, -21.99708333333333],
+  [-44.99419444444444, -21.99569444444444],
+  [-44.99280555555556, -21.99430555555555],
+  [-44.99141666666667, -21.99291666666667],
+  [-44.99002777777778, -21.99152777777778],
+  [-44.98863888888889, -21.99013888888889],
+  [-44.98625, -21.99986111111111],
+  [-44.984861111111115, -21.99986111111111],
+  [-44.983472222222225, -21.99986111111111],
+  [-44.982083333333335, -21.99986111111111],
+  [-44.980694444444445, -21.99986111111111],
+  [-44.979305555555555, -21.99986111111111],
+  [-44.977916666666665, -21.99986111111111],
+  [-44.97652777777778, -21.99986111111111],
+  [-44.97513888888889, -21.99986111111111],
+  [-44.97375, -21.99986111111111],
+  [-44.97236111111111, -21.99986111111111],
+  [-44.97097222222222, -21.99986111111111],
+  [-44.96958333333333, -21.99986111111111],
+  [-44.96819444444445, -21.99986111111111],
+  [-44.96680555555556, -21.99986111111111],
+  [-44.96541666666667, -21.99986111111111],
+  [-44.96402777777778, -21.99986111111111],
+  [-44.96263888888889, -21.99986111111111],
+  [-44.96125, -21.99986111111111],
+  [-44.95986111111112, -21.99986111111111],
+  [-44.95847222222223, -21.99986111111111],
+  [-44.95708333333334, -21.99986111111111],
+  [-44.95569444444445, -21.99986111111111],
+  [-44.95430555555556, -21.99986111111111],
+  [-44.95291666666667, -21.99986111111111],
+  [-44.95152777777778, -21.99986111111111],
+  [-44.950138888888894, -21.99986111111111],
+  [-44.948750000000004, -21.99986111111111],
+  [-44.947361111111114, -21.99986111111111]];
+
+const originCoords = coordinates[0];
+const destinyCoords = coordinates[coordinates.length - 1];
+
+function animateLine(map, coordinates) {
+    let currentSegment = 0;
+    let segmentCoordinates = [coordinates[currentSegment]];
+
+    function animateSegment() {
+        const numPoints = 100;
+        const lineString = turf.lineString([coordinates[currentSegment], coordinates[currentSegment + 1]]);
+        const length = turf.length(lineString, { units: 'kilometers' });
+        const interval = length / numPoints;
+
+        for (let i = 1; i <= numPoints; i++) {
+            const newCoord = turf.along(lineString, i * interval, { units: 'kilometers' }).geometry.coordinates;
+            segmentCoordinates.push(newCoord);
+            setTimeout(() => {
+                map.getSource('route').setData({
+                    'type': 'Feature',
+                    'properties': {},
+                    'geometry': {
+                        'type': 'LineString',
+                        'coordinates': segmentCoordinates
+                    }
+                });
+            }, i * 50);
+        }
+
+        currentSegment++;
+
+        if (currentSegment < coordinates.length - 1) {
+            setTimeout(animateSegment, numPoints * 50);
+        }
+    }
+
+    animateSegment();
+}
+
+
+    // Add origin marker with popup
+    const originPopup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: [0, -15] })
+        .setHTML(`<p>Origin: ${originCoords[0].toFixed(6)}, ${originCoords[1].toFixed(6)}</p>`);
+
+    new mapboxgl.Marker({ color: 'green' })
+        .setLngLat(originCoords)
+        .setPopup(originPopup)
+        .addTo(map);
+
+    // Add destiny marker with popup
+    const destinyPopup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: [0, -15] })
+        .setHTML(`<p>Destiny: ${destinyCoords[0].toFixed(6)}, ${destinyCoords[1].toFixed(6)}</p>`);
+
+    new mapboxgl.Marker({ color: 'red' })
+        .setLngLat(destinyCoords)
+        .setPopup(destinyPopup)
+        .addTo(map)
+
+        // Update the route's coordinates
+        map.getSource('route').setData({
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': coordinates
+            }
+        });
+
+        // Animate the line
+        animateLine(map, coordinates);
+
+        // Direct the user's screen to the line and markers
+        map.fitBounds(coordinates, {
+            padding: 100
+        });
+    </script>
+</body>
+</html>
