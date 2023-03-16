@@ -17,7 +17,7 @@ const HeaderLeft = () => {
 const HeaderRight = () => {
     return (
         <StyledHeaderRight>
-            <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem"/>
+            <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem" value=""/>
             <Button type="button" variant="primary" icon={<Plus />}>Criar novo projeto</Button>
         </StyledHeaderRight>
     )

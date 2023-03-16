@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import ReactDOM from 'react-dom';
 import { StyledComponentToBeRendered, StyledModalMenu, StyledModalMenuItem, StyledModalMenuProps } from "./ModalMenu.styles"
 
 interface ModalMenuItemProps {
-    componentToBeRendered: any;
+    componentToBeRendered: ReactElement;
+    componentVisibility: boolean;
+    setComponentVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ModalMenuItem = ({ componentToBeRendered, children }: React.PropsWithChildren<ModalMenuItemProps>) => {
-
-    const [componentVisibility, setComponentVisibility] = useState<boolean>(false);
+export const ModalMenuItem = ({ componentToBeRendered, children, componentVisibility, setComponentVisibility }: React.PropsWithChildren<ModalMenuItemProps>) => {
 
     return (
         <>
@@ -22,6 +22,7 @@ export const ModalMenuItem = ({ componentToBeRendered, children }: React.PropsWi
                 </StyledComponentToBeRendered>,
                 document.getElementById("root") as HTMLElement
             )}
+
         </>
     )
 

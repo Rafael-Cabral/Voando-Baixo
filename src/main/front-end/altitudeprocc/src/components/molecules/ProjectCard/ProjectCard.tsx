@@ -4,6 +4,7 @@ import { ReactComponent as OpenModalMenu } from "../../../assets/actions.svg";
 import { ModalMenu, ModalMenuItem } from "../../atoms/ModalMenu/ModalMenu";
 import { Home } from "../../../pages/Home/Home";
 import { useEffect, useState } from "react";
+import { RenameProjectPopup } from "../RenameProjectPopup/RenameProjectPopup";
 
 export interface ProjectCardProps extends StyledProjectCardProps {
     id: string;
@@ -75,6 +76,9 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
         setModalMenuVisibility(!modalMenuVisibility);
 
     }
+
+    const [firstComponentVisibility, setFirstComponentVisibility] = useState<boolean>(false);
+    const [secondComponentVisibility, setSecondComponentVisibility] = useState<boolean>(false);
     
     return (
         <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr}>
@@ -84,10 +88,10 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
             <Bottom id={id} name={name} data={data} handleModalVisibility={handleModalVisibility}/>
 
             <ModalMenu visibility={modalMenuVisibility ? "visible" : "hidden"} id={id}>
-                <ModalMenuItem componentToBeRendered={<Home />}>
+                <ModalMenuItem componentToBeRendered={<RenameProjectPopup id={id} name={name} closePopup={setFirstComponentVisibility}/>} componentVisibility={firstComponentVisibility} setComponentVisibility={setFirstComponentVisibility}>
                     <Text size="medium" weight="regular" color="#000">Renomear</Text>
                 </ModalMenuItem>
-                <ModalMenuItem componentToBeRendered={<Home />}>
+                <ModalMenuItem componentToBeRendered={<Home />} componentVisibility={secondComponentVisibility} setComponentVisibility={setSecondComponentVisibility}>
                     <Text size="medium" weight="regular" color="#000">Excluir</Text>
                 </ModalMenuItem>
             </ModalMenu>
