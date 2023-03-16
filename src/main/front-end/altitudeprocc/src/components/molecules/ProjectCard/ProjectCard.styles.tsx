@@ -39,5 +39,24 @@ export const StyledBottom = styled.div`
     width: 100%;
     height: 8.5rem;
     padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+`
+
+export const StyledBottomLeft = styled.div`
+
+    display: flex;
+    flex-direction: column;
+
+`
+
+export const StyledBottomRight = styled.div`
+    width: 2.4rem;
+    height: 2.4rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
