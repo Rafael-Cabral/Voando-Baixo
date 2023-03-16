@@ -34,6 +34,7 @@ export const StyledButton = styled.button<ButtonProps>`
 
     &:hover {
         background-color: #2e2e2e;
+        scale: 1.05;
     }
 
     & > svg {

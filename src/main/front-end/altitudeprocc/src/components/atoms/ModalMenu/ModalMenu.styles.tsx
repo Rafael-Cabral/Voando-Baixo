@@ -21,6 +21,7 @@ export const StyledModalMenu = styled.div<StyledModalMenuProps>`
     position: absolute;
     bottom: -8rem;
     right: -2rem;
+    z-index: 1;
 
 `
 
@@ -38,3 +39,19 @@ export const StyledModalMenuItem = styled.div`
         }
 
 `
+
+export const StyledComponentToBeRendered = styled.div`
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.64);
+    overflow-x: hidden;
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+`;

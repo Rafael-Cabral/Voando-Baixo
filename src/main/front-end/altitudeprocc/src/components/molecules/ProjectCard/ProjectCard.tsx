@@ -51,7 +51,15 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
     useEffect(() => {
 
         const handleMouseClick = (event: MouseEvent) => {
-            setModalMenuVisibility(false);
+
+            const target = event.target as HTMLElement;
+
+            const modalMenu = document.getElementById("Modal"+id);
+
+            if (modalMenu && !modalMenu.contains(target)) {
+                setModalMenuVisibility(false);
+            }
+
         };
 
         window.addEventListener('mousedown', handleMouseClick);
@@ -76,10 +84,10 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
             <Bottom id={id} name={name} data={data} handleModalVisibility={handleModalVisibility}/>
 
             <ModalMenu visibility={modalMenuVisibility ? "visible" : "hidden"} id={id}>
-                <ModalMenuItem onClickRenderComponent={<Home />}>
+                <ModalMenuItem componentToBeRendered={<Home />}>
                     <Text size="medium" weight="regular" color="#000">Renomear</Text>
                 </ModalMenuItem>
-                <ModalMenuItem onClickRenderComponent={<Home />}>
+                <ModalMenuItem componentToBeRendered={<Home />}>
                     <Text size="medium" weight="regular" color="#000">Excluir</Text>
                 </ModalMenuItem>
             </ModalMenu>
