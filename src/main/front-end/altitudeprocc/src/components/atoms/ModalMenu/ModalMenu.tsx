@@ -12,12 +12,12 @@ export const ModalMenuItem = ({ componentToBeRendered, children, componentVisibi
 
     return (
         <>
-            <StyledModalMenuItem onClick={() => { setComponentVisibility(true) }}>
+            <StyledModalMenuItem onClick={() => { setComponentVisibility(true) }} className="modalElement">
                 {children}
             </StyledModalMenuItem>
 
             {componentVisibility && ReactDOM.createPortal(
-                <StyledComponentToBeRendered>
+                <StyledComponentToBeRendered className="modalElement">
                     {componentToBeRendered}
                 </StyledComponentToBeRendered>,
                 document.getElementById("root") as HTMLElement
@@ -30,7 +30,7 @@ export const ModalMenuItem = ({ componentToBeRendered, children, componentVisibi
 
 export const ModalMenu = ({ children, visibility, id }: React.PropsWithChildren<StyledModalMenuProps>) => {
     return (
-        <StyledModalMenu visibility={visibility} id={"Modal" + id}>
+        <StyledModalMenu visibility={visibility} id={"Modal" + id} className="modalElement">
             {children}
         </StyledModalMenu>
     )

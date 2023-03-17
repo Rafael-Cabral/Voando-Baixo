@@ -12,7 +12,7 @@ interface DeleteProjectPopupProps {
 
 export const DeleteProjectPopup = ({ id, name, closePopup }: React.PropsWithChildren<DeleteProjectPopupProps>) => {
     return (
-        <StyledDeleteProjectPopup>
+        <StyledDeleteProjectPopup className="modalElement">
             <Text size="large" weight="semi" mb="3.2rem">Excluir projeto</Text>
             <Input type="text" icon={<Folder />} placeholder="Nome do projeto" value={name} mb="3.2rem" disabled={true}></Input>
             <Button type="button" variant="primary" mb="1.6rem">Excluir projeto</Button>

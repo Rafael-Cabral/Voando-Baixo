@@ -6,7 +6,7 @@ import { Home } from "../../../pages/Home/Home";
 import { useEffect, useState } from "react";
 import { RenameProjectPopup } from "../RenameProjectPopup/RenameProjectPopup";
 import { DeleteProjectPopup } from "../DeleteProjectPopup/DeleteProjectPopup";
-import { Link } from "react-router-dom";
+import { Link, useHref, useNavigate } from "react-router-dom";
 
 export interface ProjectCardProps extends StyledProjectCardProps {
     id: string;
@@ -32,8 +32,8 @@ const BottomLeft = ({id, name, data} : {id: string, name: string, data: string})
 
 const BottomRight = ({handleModalVisibility} : {handleModalVisibility: any}) => {
     return (
-        <StyledBottomRight onClick={handleModalVisibility}>
-            <OpenModalMenu />
+        <StyledBottomRight onClick={handleModalVisibility} className="modalElement">
+            <OpenModalMenu/>
         </StyledBottomRight>
     )
 }
@@ -81,10 +81,36 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
 
     const [firstComponentVisibility, setFirstComponentVisibility] = useState<boolean>(false);
     const [secondComponentVisibility, setSecondComponentVisibility] = useState<boolean>(false);
-    
+
+    const navigate = useNavigate();
+
+    const openProject = (event : any, id: string) => {
+
+        console.log(event.target);
+
+        const target = event.target as HTMLElement;
+
+        const modalMenuElements = document.querySelectorAll(".modalElement");
+
+        let ableToNavigate = true;
+
+        modalMenuElements.forEach((element) => {
+
+            if (element.contains(target)) {
+                ableToNavigate = false;
+            }
+
+        });
+
+        if(ableToNavigate) {
+            navigate("/projects/"+id);
+        }
+
+    };
+
     return (
-        <Link to={`/projects/${id}`}>
-            <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr}>
+        
+            <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr} onClick={(event) => {openProject(event, id)}}>
 
                 <Top image={image}/>
 
@@ -100,6 +126,6 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
                 </ModalMenu>
 
             </StyledProjectCard>
-        </Link>
+        
     )
 }

@@ -12,7 +12,7 @@ interface RenameProjectPopupProps {
 
 export const RenameProjectPopup = ({ id, name, closePopup }: React.PropsWithChildren<RenameProjectPopupProps>) => {
     return (
-        <StyledRenameProjectPopup>
+        <StyledRenameProjectPopup className="modalElement">
             <Text size="large" weight="semi" mb="3.2rem">Renomear projeto</Text>
             <Input type="text" icon={<Folder />} placeholder="Novo nome" value={name} mb="3.2rem"></Input>
             <Button type="button" variant="primary" mb="1.6rem">Renomear projeto</Button>
