@@ -69,10 +69,10 @@ public class AStarTest {
 
         long start = System.currentTimeMillis();
 
-        List<Vertex> lista = AStar.findPath(graph.getVertices().get(0), graph.getVertices().get(503300));
+        List<Vertex> lista = AStar.findPath(graph.getVertices().get(0), graph.getVertices().get(730));
 
         long end = System.currentTimeMillis();
-        System.out.println("DEBUG: Took " + (end - start) + " MilliSeconds");
+        //System.out.println("DEBUG: Took " + (end - start) + " MilliSeconds");
 
         //Print para debug
         System.out.println("Ponto inicial: 0; Ponto final: 270.000");

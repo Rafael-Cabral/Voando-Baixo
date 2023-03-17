@@ -14,7 +14,7 @@ public class AStar {
 
     public static List<Vertex> findPath(Vertex start, Vertex end) {
         //Lista de prioridade vazia
-        TreeSet<Vertex> notVisited = new TreeSet<>();
+        PriorityQueue<Vertex> notVisited = new PriorityQueue<>();
 
         //Lista de prioridade com vértices vizitados
         Set<Vertex> visited = new HashSet<>();
@@ -31,7 +31,7 @@ public class AStar {
         //Condição que verifica, passo a passo qual o vértice mais barato
         while (!notVisited.isEmpty()) {
             //Pega o vértice com menor custo da fila
-            Vertex current = notVisited.pollFirst();
+            Vertex current = notVisited.poll();
 
             //Verifica se esse vértice é o final
             if (current == end) {
