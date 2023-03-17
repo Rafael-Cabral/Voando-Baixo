@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { Text } from '../Text/Text';
 import { UploadInput, UploadWrapper } from './UploadFile.style';
 
-export const UploadFile = ({mb, mt, ml, mr}: React.PropsWithChildren<any>) => {
-
-    const [fileInput, setFileInput] = React.useState<File>();
+export const UploadFile = ({mb, mt, ml, mr, fileInput, setFileInput}: React.PropsWithChildren<any>) => {
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
