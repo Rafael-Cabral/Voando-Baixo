@@ -7,6 +7,7 @@ import { Text } from './components/atoms/Text/Text'
 import { Home } from './pages/Home/Home'
 import { Route, Routes } from 'react-router-dom'
 import { Projects } from './pages/Projects/Projects'
+import { Project } from './pages/Project/Project'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />}/>
       <Route path="/projects" element={<Projects />}/>
+      <Route path="/projects/:projectId/*" element={<Project />}/>
     </Routes>
   </>
   )

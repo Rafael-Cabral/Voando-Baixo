@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
         outline: none;
         box-sizing: border-box;
         font-family: "Inter", sans-serif;
-        
+        text-decoration: none;
 
     }
 
@@ -22,6 +22,16 @@ export const GlobalStyle = createGlobalStyle`
 
         background-color: #F8F8FA;
 
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
     }
 
 `
