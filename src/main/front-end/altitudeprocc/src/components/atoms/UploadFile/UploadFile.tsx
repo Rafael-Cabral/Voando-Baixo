@@ -26,22 +26,29 @@ export const UploadFile = ({mb, mt, ml, mr, fileInput, setFileInput, uploadStatu
 
         formData.append('file', fileInput);
 
-        const response = await axios.post('http://localhost:3000/api/uploads', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            onUploadProgress: (progressEvent) => {
-                const { loaded, total } = progressEvent;
-                let percent = Math.floor((loaded * 100) / (total || 1));
-                if (percent < 100) {
-                    setUploadStatus(`Upload em andamento: ${percent}%`);
-                } else {
-                    setUploadStatus(`Upload concluído!`);
+        try {
+            const response = await axios.post('http://localhost:3000/api/uploads', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: (progressEvent) => {
+                    const { loaded, total } = progressEvent;
+                    let percent = Math.floor((loaded * 100) / (total || 1));
+                    if (percent < 100) {
+                        setUploadStatus(`Upload em andamento: ${percent}%`);
+                    } else {
+                        setUploadStatus(`Upload concluído!`);
+                    }
                 }
-            }
-        });
+            });
 
-        setUploadedFileData(response.data?.success?.data);
+            setUploadedFileData(response.data?.success?.data);
+
+        } catch (error) {
+            
+            setUploadStatus(`Erro ao fazer upload do arquivo!`);
+
+        }
         
     }
 
