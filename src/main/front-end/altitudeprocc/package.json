@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/notyf": "^3.0.0",
     "axios": "^1.3.4",
     "notyf": "^3.10.0",
     "react": "^18.2.0",

@@ -34,4 +34,12 @@ export const GlobalStyle = createGlobalStyle`
         -moz-appearance: textfield;
     }
 
+    .notyf__toast {
+        max-width: 55rem !important;
+    }
+
+    .notyf__message {
+        font-size: 1.6rem !important;
+    }
+
 `
