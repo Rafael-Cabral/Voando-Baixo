@@ -17,7 +17,7 @@ export const CreateProjectPopup = ({closePopup} : React.PropsWithChildren<Create
             <Text size="large" weight="semi" mb="3.2rem">Criar novo projeto</Text>
             <Input type="text" icon={<Folder />} placeholder="Nome do projeto" value="" mb="1.6rem"></Input>
             <UploadFile mb="3.2rem"/>
-            <Button type="button" variant="primary" mb="1.6rem">Criar projeto</Button>
+            <Button type="button" variant="primary" mb="1.6rem" disabled>Criar projeto</Button>
             <Button type="button" variant="secondary" onClick={() => {closePopup(false)}}>Cancelar</Button>
         </StyledCreateProjectPopup>
     )

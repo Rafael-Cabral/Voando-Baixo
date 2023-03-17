@@ -9,6 +9,7 @@ import { Input } from "../../components/atoms/Input/Input";
 import { ReactComponent as Exit } from "../../assets/exit.svg";
 import { Button } from "../../components/atoms/Button/Button";
 import { Slider } from "../../components/atoms/Slider/Slider";
+import { useEffect, useState } from "react";
 
 const CoordinateLabel = ({text, icon} : { text : string, icon : any}) => {
     return (
@@ -29,6 +30,21 @@ const PageDescription = () => {
 }
 
 const ProjectSidebar = () => {
+
+    const [disabled, setDisabled] = useState(true);
+    const [originLatitude, setOriginLatitude] = useState("");
+    const [originLongitude, setOriginLongitude] = useState("");
+    const [destinationLatitude, setDestinationLatitude] = useState("");
+    const [destinationLongitude, setDestinationLongitude] = useState("");
+
+    useEffect(() => {
+        if (originLatitude.length > 0 && originLongitude.length > 0 && destinationLatitude.length > 0 && destinationLongitude.length > 0) {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
+    }, [originLatitude, originLongitude, destinationLatitude, destinationLongitude]);
+
     return (
         <StyledProjectSidebar>
             <Link to="/projects">
@@ -36,12 +52,12 @@ const ProjectSidebar = () => {
             </Link>
             <PageDescription />
             <CoordinateLabel text="Origem" icon={<A />} />
-            <Input type="number" placeholder="Latitude de origem" icon={<Exit />} value="" mb="1.2rem"></Input>
-            <Input type="number" placeholder="Longitude de origem" icon={<Exit />} value="" mb="2.4rem"></Input>
+            <Input type="number" placeholder="Latitude de origem" icon={<Exit />} value={originLatitude} mb="1.2rem" onChange={(event) => {setOriginLatitude(event.target.value)}}></Input>
+            <Input type="number" placeholder="Longitude de origem" icon={<Exit />} value={originLongitude} mb="2.4rem" onChange={(event) => {setOriginLongitude(event.target.value)}}></Input>
             <CoordinateLabel text="Destino" icon={<B />} />
-            <Input type="number" placeholder="Latitude de destino" icon={<Exit />} value="" mb="1.2rem"></Input>
-            <Input type="number" placeholder="Longitude de destino" icon={<Exit />} value="" mb="3.6rem"></Input>
-            <Button variant="primary" type="button">Encontrar melhor trajeto</Button>
+            <Input type="number" placeholder="Latitude de destino" icon={<Exit />} value={destinationLatitude} mb="1.2rem" onChange={(event) => {setDestinationLatitude(event.target.value)}}></Input>
+            <Input type="number" placeholder="Longitude de destino" icon={<Exit />} value={destinationLongitude} mb="3.6rem" onChange={(event) => {setDestinationLongitude(event.target.value)}}></Input>
+            <Button variant="primary" type="button" disabled={disabled}>Encontrar melhor trajeto</Button>
         </StyledProjectSidebar>
     )
 }

@@ -11,6 +11,8 @@ export interface ButtonProps {
     ml?: string;
     mr?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
+    disabled?: boolean;
+    setDisabled?: any;
 
 }
 
@@ -51,6 +53,11 @@ export const StyledButton = styled.button<ButtonProps>`
 
         margin-left: 1rem;
 
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: #e0e0e0;
     }
     
 `;
