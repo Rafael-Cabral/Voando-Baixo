@@ -6,6 +6,7 @@ import { Home } from "../../../pages/Home/Home";
 import { useEffect, useState } from "react";
 import { RenameProjectPopup } from "../RenameProjectPopup/RenameProjectPopup";
 import { DeleteProjectPopup } from "../DeleteProjectPopup/DeleteProjectPopup";
+import { Link } from "react-router-dom";
 
 export interface ProjectCardProps extends StyledProjectCardProps {
     id: string;
@@ -82,21 +83,23 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
     const [secondComponentVisibility, setSecondComponentVisibility] = useState<boolean>(false);
     
     return (
-        <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr}>
+        <Link to={`/projects/${id}`}>
+            <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr}>
 
-            <Top image={image}/>
+                <Top image={image}/>
 
-            <Bottom id={id} name={name} data={data} handleModalVisibility={handleModalVisibility}/>
+                <Bottom id={id} name={name} data={data} handleModalVisibility={handleModalVisibility}/>
 
-            <ModalMenu visibility={modalMenuVisibility ? "visible" : "hidden"} id={id}>
-                <ModalMenuItem componentToBeRendered={<RenameProjectPopup id={id} name={name} closePopup={setFirstComponentVisibility}/>} componentVisibility={firstComponentVisibility} setComponentVisibility={setFirstComponentVisibility}>
-                    <Text size="medium" weight="regular" color="#000">Renomear</Text>
-                </ModalMenuItem>
-                <ModalMenuItem componentToBeRendered={<DeleteProjectPopup id={id} name={name} closePopup={setSecondComponentVisibility} />} componentVisibility={secondComponentVisibility} setComponentVisibility={setSecondComponentVisibility}>
-                    <Text size="medium" weight="regular" color="#000">Excluir</Text>
-                </ModalMenuItem>
-            </ModalMenu>
+                <ModalMenu visibility={modalMenuVisibility ? "visible" : "hidden"} id={id}>
+                    <ModalMenuItem componentToBeRendered={<RenameProjectPopup id={id} name={name} closePopup={setFirstComponentVisibility}/>} componentVisibility={firstComponentVisibility} setComponentVisibility={setFirstComponentVisibility}>
+                        <Text size="medium" weight="regular" color="#000">Renomear</Text>
+                    </ModalMenuItem>
+                    <ModalMenuItem componentToBeRendered={<DeleteProjectPopup id={id} name={name} closePopup={setSecondComponentVisibility} />} componentVisibility={secondComponentVisibility} setComponentVisibility={setSecondComponentVisibility}>
+                        <Text size="medium" weight="regular" color="#000">Excluir</Text>
+                    </ModalMenuItem>
+                </ModalMenu>
 
-        </StyledProjectCard>
+            </StyledProjectCard>
+        </Link>
     )
 }
