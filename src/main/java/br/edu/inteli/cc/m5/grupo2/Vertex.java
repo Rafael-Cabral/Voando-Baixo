@@ -59,7 +59,7 @@ public class Vertex implements Comparable<Vertex> {
      * @param   Vertex   arrivalVertex
      */
     public void addConnectionTo(Vertex arrivalVertex) {
-        int weight = (int) (Math.abs(arrivalVertex.getAltitude() - this.altitude) + arrivalVertex.getAltitude());
+        int weight = (int) Math.abs(arrivalVertex.getAltitude() - this.altitude);
         this.connections.add(new Edge(arrivalVertex, weight));
     }
 

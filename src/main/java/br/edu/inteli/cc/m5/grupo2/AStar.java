@@ -8,8 +8,9 @@ public class AStar {
         double latDistance = d1 * 111319.9;
         double d2 = Math.abs(end.getLongitude() - start.getLongitude());
         double lonDistance = d2 * 111319.9;
+        double altitudeAverage = (start.getAltitude() + end.getAltitude()) / 2;
 
-        return (Math.sqrt(Math.pow(latDistance, 2) + Math.pow(lonDistance, 2)));
+        return (Math.sqrt(Math.pow(latDistance, 2) + Math.pow(lonDistance, 2))) * altitudeAverage;
     }
 
     public static List<Vertex> findPath(Vertex start, Vertex end) {
