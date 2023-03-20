@@ -4,11 +4,9 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.*;
-import org.neo4j.driver.exceptions.Neo4jException;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -25,16 +23,13 @@ public class Neo4j implements AutoCloseable {
         Logger rootLogger = loggerContext.getLogger("io.netty");
         rootLogger.setLevel(ch.qos.logback.classic.Level.OFF);
 
-
         this.driver = GraphDatabase.driver(
                 uri,
                 AuthTokens.basic(user, password),
                 Config.defaultConfig());
-
     }
 
     public void createVertices(Graph graph) throws FileNotFoundException {
-
         StringBuilder queryStr = new StringBuilder();
 
         graph.getVertices().forEach(vertex -> {
@@ -49,23 +44,13 @@ public class Neo4j implements AutoCloseable {
 
         Query query = new Query(queryStr.toString());
 
-        try {
+        Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+        session.executeWrite(tx -> tx.run(query).single());
 
-            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
-
-            Record record = session.executeWrite(tx -> tx.run(query).single());
-
-            System.out.println("Graph persisted successfully.");
-
-        } catch (Neo4jException exception) {
-
-            throw exception;
-
-        }
+        System.out.println("Graph persisted successfully.");
     }
 
     public void createVertex(Vertex vertex) {
-
         Query query = new Query(
                 """
                         CREATE (vertex:Vertex {
@@ -85,22 +70,11 @@ public class Neo4j implements AutoCloseable {
                         "altitude", vertex.getAltitude(),
                         "connections", vertex.getAllConnections()));
 
-        try {
-
-            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
-
-            Record record = session.executeWrite(tx -> tx.run(query).single());
-
-        } catch (Neo4jException exception) {
-
-            throw exception;
-
-        }
-
+        Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+        session.executeWrite(tx -> tx.run(query).single());
     }
 
     public void findVertex(int vertexId) {
-
         Query query = new Query(
                 """
                         MATCH (vertex:Vertex)
@@ -110,29 +84,17 @@ public class Neo4j implements AutoCloseable {
 
                 Map.of("id", vertexId));
 
-        try {
+        Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+        Record record = session.executeWrite(tx -> tx.run(query).single());
 
-            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
-
-            Record record = session.executeWrite(tx -> tx.run(query).single());
-
-            System.out.println("Vertex found successfully: ");
-
-            System.out.println("id: " + record.get("id").asString());
-            System.out.println("latitude: " + record.get("latitude").asString());
-            System.out.println("longitude: " + record.get("longitude").asString());
-            System.out.println("altitude: " + record.get("altitude").asString());
-
-        } catch (Neo4jException exception) {
-
-            throw exception;
-
-        }
-
+        System.out.println("Vertex found successfully: ");
+        System.out.println("id: " + record.get("id").asString());
+        System.out.println("latitude: " + record.get("latitude").asString());
+        System.out.println("longitude: " + record.get("longitude").asString());
+        System.out.println("altitude: " + record.get("altitude").asString());
     }
 
     public void connectVertex(Vertex vertexA) {
-
         vertexA.getAllConnections().forEach(connection -> {
 
             Vertex vertexB = connection.getArrivalVertex();
@@ -167,24 +129,12 @@ public class Neo4j implements AutoCloseable {
                             "vertexB_longitude", vertexB.getLongitude(),
                             "vertexB_altitude", vertexB.getAltitude()));
 
-            try {
-
-                Session session = driver.session(SessionConfig.forDatabase("neo4j"));
-
-                List records = session.executeWrite(tx -> tx.run(query).list());
-
-            } catch (Neo4jException exception) {
-
-                throw exception;
-
-            }
-
+            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+            session.executeWrite(tx -> tx.run(query).list());
         });
-
     }
 
     public void deleteVertex(Vertex vertex) {
-
         Query query = new Query(
                 """
                         MATCH (vertex:Vertex {
@@ -195,24 +145,12 @@ public class Neo4j implements AutoCloseable {
                         """,
                 Map.of("id", vertex.getId()));
 
-        try {
-
-            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
-
-            Record record = session.executeWrite(tx -> tx.run(query).single());
-
-            System.out.println("Vertex deleted successfully.");
-
-        } catch (Neo4jException exception) {
-
-            throw exception;
-
-        }
-
+        Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+        session.executeWrite(tx -> tx.run(query).single());
+        System.out.println("Vertex deleted successfully.");
     }
 
     public void updateVertex(int vertexId, Vertex updatedVertex) {
-
         Query query = new Query(
                 """
                         MATCH (vertex:Vertex {
@@ -231,25 +169,13 @@ public class Neo4j implements AutoCloseable {
                         "longitude", updatedVertex.getLongitude(),
                         "altitude", updatedVertex.getAltitude()));
 
-        try {
-
-            Session session = driver.session(SessionConfig.forDatabase("neo4j"));
-
-            Record record = session.executeWrite(tx -> tx.run(query).single());
-
-            System.out.println("Vertex updated successfully.");
-
-        } catch (Neo4jException exception) {
-
-            throw exception;
-
-        }
-
+        Session session = driver.session(SessionConfig.forDatabase("neo4j"));
+        session.executeWrite(tx -> tx.run(query).single());
+        System.out.println("Vertex updated successfully.");
     }
 
     @Override
     public void close() {
         driver.close();
     }
-
 }
