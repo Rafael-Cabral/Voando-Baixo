@@ -38,7 +38,7 @@ export const CreateProjectPopup = ({closePopup} : React.PropsWithChildren<Create
             }
         });
 
-        const notyf = new Notyf({duration: 300000000});
+        const notyf = new Notyf({duration: 3000});
 
         try {
 

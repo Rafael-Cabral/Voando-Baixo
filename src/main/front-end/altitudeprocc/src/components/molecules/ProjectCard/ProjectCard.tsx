@@ -11,7 +11,7 @@ import { Link, useHref, useNavigate } from "react-router-dom";
 export interface ProjectCardProps extends StyledProjectCardProps {
     id: string;
     name: string;
-    data: string;
+    date: string;
     image?: string;
 }
 
@@ -21,11 +21,11 @@ const Top = ({image} : StyledTopProps) => {
     )
 }
 
-const BottomLeft = ({id, name, data} : {id: string, name: string, data: string}) => {
+const BottomLeft = ({id, name, date} : {id: string, name: string, date: string}) => {
     return (
         <StyledBottomLeft>
             <Text size="small" weight="semi">{name}</Text>
-            <Text size="small" weight="medium" color="#52525B">{data}</Text>
+            <Text size="small" weight="medium" color="#52525B">{date}</Text>
         </StyledBottomLeft>
     )
 }
@@ -38,16 +38,16 @@ const BottomRight = ({handleModalVisibility} : {handleModalVisibility: any}) => 
     )
 }
 
-const Bottom = ({id, name, data, handleModalVisibility} : {id: string, name: string, data: string, handleModalVisibility: any}) => {
+const Bottom = ({id, name, date, handleModalVisibility} : {id: string, name: string, date: string, handleModalVisibility: any}) => {
     return (
         <StyledBottom>
-            <BottomLeft id={id} name={name} data={data}/>
+            <BottomLeft id={id} name={name} date={date}/>
             <BottomRight handleModalVisibility={handleModalVisibility}/>
         </StyledBottom>
     )
 }
 
-export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCardProps) => {
+export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr}: ProjectCardProps) => {
 
     const [modalMenuVisibility, setModalMenuVisibility] = useState<boolean>(false);
 
@@ -114,7 +114,7 @@ export const ProjectCard = ({id, name, data, image, mb, mt, ml, mr}: ProjectCard
 
                 <Top image={image}/>
 
-                <Bottom id={id} name={name} data={data} handleModalVisibility={handleModalVisibility}/>
+                <Bottom id={id} name={name} date={date} handleModalVisibility={handleModalVisibility}/>
 
                 <ModalMenu visibility={modalMenuVisibility ? "visible" : "hidden"} id={id}>
                     <ModalMenuItem componentToBeRendered={<RenameProjectPopup id={id} name={name} closePopup={setFirstComponentVisibility}/>} componentVisibility={firstComponentVisibility} setComponentVisibility={setFirstComponentVisibility}>
