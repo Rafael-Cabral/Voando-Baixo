@@ -8,6 +8,7 @@ import { UploadFile } from "../../atoms/UploadFile/UploadFile";
 import axios from "axios";
 import { Notyf } from "notyf";
 import 'notyf/notyf.min.css';
+import { useNavigate } from "react-router-dom";
 
 interface CreateProjectPopupProps {
     closePopup: any;
@@ -20,6 +21,8 @@ export const CreateProjectPopup = ({closePopup} : React.PropsWithChildren<Create
     const [uploadedFileData, setUploadedFileData] = useState<any>({});
     const [projectName, setProjectName] = useState<string>("");
     const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (fileInput && projectName.length > 0 && uploadStatus === "Upload concluído!" && uploadedFileData) {
@@ -49,6 +52,8 @@ export const CreateProjectPopup = ({closePopup} : React.PropsWithChildren<Create
             });
 
             notyf.success("Projeto criado com sucesso!");
+
+            navigate(0);
 
         } catch (error) {
 

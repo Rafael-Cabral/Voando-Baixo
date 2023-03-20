@@ -86,8 +86,6 @@ export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr}: ProjectCard
 
     const openProject = (event : any, id: string) => {
 
-        console.log(event.target);
-
         const target = event.target as HTMLElement;
 
         const modalMenuElements = document.querySelectorAll(".modalElement");

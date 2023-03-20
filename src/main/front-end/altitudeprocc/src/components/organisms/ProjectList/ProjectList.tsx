@@ -29,8 +29,6 @@ export const ProjectList = ({ mb, mt, ml, mr, search}: ProjectListProps) => {
 
         const response = await axios.get('http://localhost:3000/api/projects')
 
-        console.log(response.data?.success.data)
-
         setProjectList(response.data?.success.data.map((project: any) => {
 
             const dateObj = project.createdAt; 

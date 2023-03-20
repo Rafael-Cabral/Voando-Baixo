@@ -30,7 +30,7 @@ const HeaderRight = ({ search, setSearch } : { search : string, setSearch : Reac
 
         <>
             <StyledHeaderRight>
-                <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem" value={search} onChange={handleSearch}/>
+                <Input type="text" placeholder="Pesquisar" icon={<Search />} mr="2.4rem" value={search} onChange={handleSearch} id="search"/>
                 <Button type="button" variant="primary" icon={<Plus />} onClick={() => {setComponentVisibility(true)}}>Criar novo projeto</Button>
             </StyledHeaderRight>
             {componentVisibility && ReactDOM.createPortal(
