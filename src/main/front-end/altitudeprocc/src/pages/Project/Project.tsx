@@ -1,7 +1,7 @@
 import { Tag } from "../../components/atoms/Tag/Tag"
 import { StyledControls, StyledCoordinateLabel, StyledMapZone, StyledPageDescription, StyledProject, StyledProjectContent, StyledProjectSidebar } from "./Project.style"
 import { ReactComponent as Back } from "../../assets/back.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Text } from "../../components/atoms/Text/Text";
 import { ReactComponent as A } from "../../assets/a.svg";
 import { ReactComponent as B } from "../../assets/b.svg";
@@ -10,6 +10,7 @@ import { ReactComponent as Exit } from "../../assets/exit.svg";
 import { Button } from "../../components/atoms/Button/Button";
 import { Slider } from "../../components/atoms/Slider/Slider";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const CoordinateLabel = ({text, icon} : { text : string, icon : any}) => {
     return (
@@ -20,16 +21,17 @@ const CoordinateLabel = ({text, icon} : { text : string, icon : any}) => {
     )
 }
 
-const PageDescription = () => {
+const PageDescription = ({projectName} : { projectName : string}) => {
+
     return (
         <StyledPageDescription>
             <Text size="small" weight="medium" color="#667085">Você está em</Text>
-            <Text size="large" weight="semi" color="#18181B">Operação 1</Text>
+            <Text size="large" weight="semi" color="#18181B">{projectName}</Text>
         </StyledPageDescription>
     )
 }
 
-const ProjectSidebar = () => {
+const ProjectSidebar = ({projectName} : {projectName:string}) => {
 
     const [disabled, setDisabled] = useState(true);
     const [originLatitude, setOriginLatitude] = useState("");
@@ -50,7 +52,7 @@ const ProjectSidebar = () => {
             <Link to="/projects">
                 <Tag icon={<Back />} iconPosition="left" mb="3.6rem">Voltar</Tag>
             </Link>
-            <PageDescription />
+            <PageDescription projectName={projectName}/>
             <CoordinateLabel text="Origem" icon={<A />} />
             <Input type="number" placeholder="Latitude de origem" icon={<Exit />} value={originLatitude} mb="1.2rem" onChange={(event) => {setOriginLatitude(event.target.value)}}></Input>
             <Input type="number" placeholder="Longitude de origem" icon={<Exit />} value={originLongitude} mb="2.4rem" onChange={(event) => {setOriginLongitude(event.target.value)}}></Input>
@@ -87,9 +89,40 @@ const ProjectContent = () => {
 }
 
 export const Project = () => {
+
+    const { projectId } = useParams();
+
+    interface IProject {
+        id: string;
+        name: string;
+        dt2file: string;
+        createdAt: string;
+    }
+
+    const [project, setProject] = useState<IProject>({id: "", name: "", dt2file: "", createdAt: ""});
+
+    const loadProject = async () => {
+
+        try {
+            const response = await axios.get(`http://localhost:3000/api/projects/${projectId}`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            setProject(response.data?.success.data);
+        } catch {
+            setProject({ id: "", name: "", dt2file: "", createdAt: ""});
+        }
+    }
+
+    useEffect(() => {
+        loadProject();
+    }, []);
+
+
     return (
         <StyledProject>
-            <ProjectSidebar />
+            <ProjectSidebar projectName={project?.name}/>
             <ProjectContent />
         </StyledProject>
     )
