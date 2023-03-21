@@ -50,16 +50,40 @@ class ProjectsService {
 		
 		const session = setup.app.database.driver.session();
 
-		const res = await session.run(
+		const resProject = await session.run(
 			`
 			MATCH (p:Project {id: "${projectId}"})
 			RETURN p
 			`
 		);
 
-		session.close();
+		const project = resProject.records[0].get(0).properties;
 
-		return res.records[0].get(0).properties;
+		if(project.status === "processing") {
+
+			return project;
+		
+		} else {
+
+			const resMap = await session.run(
+				`
+				MATCH (p:Project {id: "${projectId}"})-[:HAS]->(m:Map)
+				RETURN m
+				`
+			);
+
+			const map = resMap.records[0].get(0).properties;
+
+			session.close();
+
+			const res = {
+				...project,
+				map
+			};
+
+			return res;
+
+		}
 
 	}
 
