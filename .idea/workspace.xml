@@ -242,6 +242,10 @@
           <line>58</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.neo4j.driver.exceptions.NoSuchRecordException" package="org.neo4j.driver.exceptions" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
