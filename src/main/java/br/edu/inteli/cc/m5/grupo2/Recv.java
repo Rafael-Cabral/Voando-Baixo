@@ -1,11 +1,8 @@
 package br.edu.inteli.cc.m5.grupo2;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.rabbitmq.client.*;
-import com.google.gson.*;
-
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Recv {
 
@@ -95,27 +92,11 @@ public class Recv {
 
             Neo4j neo4j = new Neo4j();
 
-            ArrayList<Vertex> graphVertices = graph.getVertices();
-            AtomicInteger currentVertex = new AtomicInteger();
-            int quantityOfVertices = graphVertices.size();
+            System.out.println(" [ ] Persisting file bounds for map rendering.");
 
-            graphVertices.forEach(vertex -> {
-                neo4j.createVertex(vertex);
-                System.out.print("\r [ ] Persisting vertices in Neo4j: " +  String.format(Locale.US, "%.4f", ((double) currentVertex.get() / quantityOfVertices)) + "%");
-                currentVertex.getAndIncrement();
-            });
+            neo4j.persistMapBounds(graph, rows, projectId);
 
-            System.out.println(" [*] Vertices persisted successfully.");
-
-            currentVertex.set(0);
-
-            graph.getVertices().forEach(vertex -> {
-                neo4j.connectVertex(vertex);
-                System.out.print("\r [ ] Linking vertices in Neo4j: " + String.format(Locale.US, "%.4f", ((double) currentVertex.get() / quantityOfVertices)) + "%");
-                currentVertex.getAndIncrement();
-            });
-
-            System.out.println(" [*] Vertices linked successfully.");
+            System.out.println(" [*] File bound for map rendering persisted successfully.");
 
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });

@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class Neo4j implements AutoCloseable {
@@ -33,43 +32,32 @@ public class Neo4j implements AutoCloseable {
 
     }
 
-    public void createVertices(Graph graph, int rows) throws FileNotFoundException {
+    public void persistMapBounds(Graph graph, int rows, String projectId) throws FileNotFoundException {
 
-        StringBuilder queryStr = new StringBuilder();
-
-        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
-                graph.getVertices().get(0).getId(),
-                graph.getVertices().get(0).getLatitude(),
-                graph.getVertices().get(0).getLongitude(),
-                graph.getVertices().get(0).getAltitude()));
-
-        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
-                graph.getVertices().get(graph.getVertices().size() - 1).getId(),
-                graph.getVertices().get(graph.getVertices().size() - 1).getLatitude(),
-                graph.getVertices().get(graph.getVertices().size() - 1).getLongitude(),
-                graph.getVertices().get(graph.getVertices().size() - 1).getAltitude()));
-
-        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
-                graph.getVertices().get(rows).getId(),
-                graph.getVertices().get(rows).getLatitude(),
-                graph.getVertices().get(rows).getLongitude(),
-                graph.getVertices().get(rows).getAltitude()));
-
-        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
-                graph.getVertices().get(graph.getVertices().size() - rows).getId(),
-                graph.getVertices().get(graph.getVertices().size() - rows).getLatitude(),
-                graph.getVertices().get(graph.getVertices().size() - rows).getLongitude(),
-                graph.getVertices().get(graph.getVertices().size() - rows).getAltitude()));
-
-        Query query = new Query(queryStr.toString());
+        Query query = new Query(
+                """
+                        MATCH (p:Project)
+                        WHERE p.id = $id
+                        SET p.status = "processed"
+                        
+                        MERGE (p)-[:HAS]->(m:Map {topLeft: [$tL_latitude, $tL_longitude], topRight: [$tR_latitude, $tR_longitude], bottomLeft: [$bL_latitude, $bL_longitude], bottomRight: [$bR_latitude, $bR_longitude]});
+                        """,
+                Map.of(
+                        "tL_latitude", graph.getVertices().get(0).getLatitude(),
+                        "tL_longitude", graph.getVertices().get(0).getLongitude(),
+                        "tR_latitude", graph.getVertices().get(rows).getLatitude(),
+                        "tR_longitude", graph.getVertices().get(rows).getLongitude(),
+                        "bL_latitude", graph.getVertices().get(graph.getVertices().size() - rows).getLatitude(),
+                        "bL_longitude", graph.getVertices().get(graph.getVertices().size() - rows).getLongitude(),
+                        "bR_latitude", graph.getVertices().get(graph.getVertices().size() - 1).getLatitude(),
+                        "bR_longitude", graph.getVertices().get(graph.getVertices().size() - 1).getLongitude(),
+                        "id", projectId));
 
         try {
 
             Session session = driver.session(SessionConfig.forDatabase("neo4j"));
 
-            Record record = session.executeWrite(tx -> tx.run(query).single());
-
-            System.out.println("Graph persisted successfully.");
+            session.executeWrite(tx -> tx.run(query));
 
         } catch (Neo4jException exception) {
 
