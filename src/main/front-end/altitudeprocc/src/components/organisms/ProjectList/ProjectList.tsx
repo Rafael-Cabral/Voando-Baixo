@@ -16,12 +16,13 @@ interface ProjectListProps {
 export const ProjectList = ({ mb, mt, ml, mr, search}: ProjectListProps) => {
 
     const [projectList, setProjectList] = useState<Array<ProjectCardProps>>([]);
+    const [projectListCopy, setProjectListCopy] = useState<Array<ProjectCardProps>>([]);
 
     useEffect(() => {
         if(search.length > 0) {
             setProjectList(projectList.filter((project) => project.name.toLowerCase().includes(search.toLowerCase())));
         } else {
-            setProjectList(projectList);
+            setProjectList(projectListCopy);
         }
     }, [search]);
 
@@ -29,7 +30,7 @@ export const ProjectList = ({ mb, mt, ml, mr, search}: ProjectListProps) => {
 
         const response = await axios.get('http://localhost:3000/api/projects')
 
-        setProjectList(response.data?.success.data.map((project: any) => {
+        const projects = response.data?.success.data.map((project: any) => {
 
             const dateObj = project.createdAt; 
             const date = new Date(dateObj);
@@ -45,8 +46,13 @@ export const ProjectList = ({ mb, mt, ml, mr, search}: ProjectListProps) => {
                 name: project.name,
                 date: formattedDate,
                 image: "https://i.imgur.com/QY9WEyH.png",
+                status: project.status
             }
-        }));
+        });
+
+        setProjectListCopy(projects);
+
+        setProjectList(projects);
 
     }
 
@@ -58,7 +64,7 @@ export const ProjectList = ({ mb, mt, ml, mr, search}: ProjectListProps) => {
 
     return (
         <StyledProjectList mb={mb} mt={mt} ml={ml} mr={mr}>
-            {projectList.map((project) => (
+            {projectList && projectList.map((project) => (
                 <ProjectCard
                     id={project.id}
                     name={project.name}
@@ -67,6 +73,7 @@ export const ProjectList = ({ mb, mt, ml, mr, search}: ProjectListProps) => {
                     mb="3.2rem"
                     mr="3.2rem"
                     key={project.id}
+                    status={project.status}
                 />
             ))}
         </StyledProjectList>

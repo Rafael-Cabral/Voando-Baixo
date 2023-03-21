@@ -5,6 +5,7 @@ export interface StyledProjectCardProps {
     mt?: string;
     ml?: string;
     mr?: string;
+    status?: "processing" | "processed";
 }
 
 export interface StyledTopProps {
@@ -22,10 +23,38 @@ export const StyledProjectCard = styled.div<StyledProjectCardProps>`
     margin-right: ${(props: StyledProjectCardProps) => props.mr ? props.mr : "0"};
     position: relative;
     transition: 0.5s;
-    cursor: pointer;
+    cursor: ${(props: StyledProjectCardProps) => props.status === "processing" ? "not-allowed" : "pointer"};
+    position: relative;
 
     &:hover {
         scale: 1.1;
+    }
+`
+
+export const StyledLoading = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: inherit;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+
+    & > svg {
+        animation: spin 1s linear infinite;
+    }
+
+    // Make the svg spin 360 degrees forever
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
     }
 `
 

@@ -1,5 +1,5 @@
 import { Text } from "../../atoms/Text/Text";
-import { StyledBottom, StyledBottomLeft, StyledBottomRight, StyledProjectCard, StyledProjectCardProps, StyledTop, StyledTopProps } from "./ProjectCard.styles";
+import { StyledBottom, StyledBottomLeft, StyledBottomRight, StyledLoading, StyledProjectCard, StyledProjectCardProps, StyledTop, StyledTopProps } from "./ProjectCard.styles";
 import { ReactComponent as OpenModalMenu } from "../../../assets/actions.svg";
 import { ModalMenu, ModalMenuItem } from "../../atoms/ModalMenu/ModalMenu";
 import { Home } from "../../../pages/Home/Home";
@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import { RenameProjectPopup } from "../RenameProjectPopup/RenameProjectPopup";
 import { DeleteProjectPopup } from "../DeleteProjectPopup/DeleteProjectPopup";
 import { Link, useHref, useNavigate } from "react-router-dom";
+import { ReactComponent as LoadingIcon } from "../../../assets/loading.svg";
 
 export interface ProjectCardProps extends StyledProjectCardProps {
     id: string;
     name: string;
     date: string;
     image?: string;
+    status: "processing" | "processed";
 }
 
 const Top = ({image} : StyledTopProps) => {
@@ -47,7 +49,16 @@ const Bottom = ({id, name, date, handleModalVisibility} : {id: string, name: str
     )
 }
 
-export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr}: ProjectCardProps) => {
+const Loading = () => {
+    return (
+        <StyledLoading>
+            <LoadingIcon/>
+            <Text size="large" weight="semi">Criando...</Text>
+        </StyledLoading>
+    )
+}
+
+export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr, status}: ProjectCardProps) => {
 
     const [modalMenuVisibility, setModalMenuVisibility] = useState<boolean>(false);
 
@@ -86,31 +97,36 @@ export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr}: ProjectCard
 
     const openProject = (event : any, id: string) => {
 
-        const target = event.target as HTMLElement;
 
-        const modalMenuElements = document.querySelectorAll(".modalElement");
+        if(status == "processed") {
 
-        let ableToNavigate = true;
+            const target = event.target as HTMLElement;
 
-        modalMenuElements.forEach((element) => {
+            const modalMenuElements = document.querySelectorAll(".modalElement");
 
-            if (element.contains(target)) {
-                ableToNavigate = false;
+            let ableToNavigate = true;
+
+            modalMenuElements.forEach((element) => {
+
+                if (element.contains(target)) {
+                    ableToNavigate = false;
+                }
+
+            });
+
+            if(ableToNavigate) {
+                navigate("/projects/"+id);
             }
 
-        });
-
-        if(ableToNavigate) {
-            navigate("/projects/"+id);
         }
 
     };
 
     return (
         
-            <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr} onClick={(event) => {openProject(event, id)}}>
+            <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr} status={status} onClick={(event) => {openProject(event, id)}}>
 
-                <Top image={image}/>
+                <Top image={status == "processed" ? image : ""}/>
 
                 <Bottom id={id} name={name} date={date} handleModalVisibility={handleModalVisibility}/>
 
@@ -122,6 +138,8 @@ export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr}: ProjectCard
                         <Text size="medium" weight="regular" color="#000">Excluir</Text>
                     </ModalMenuItem>
                 </ModalMenu>
+
+                { status == "processing" && <Loading/>}
 
             </StyledProjectCard>
         

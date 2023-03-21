@@ -52,7 +52,7 @@ const ProjectSidebar = ({projectName} : {projectName:string}) => {
             <Link to="/projects">
                 <Tag icon={<Back />} iconPosition="left" mb="3.6rem">Voltar</Tag>
             </Link>
-            <PageDescription projectName={projectName}/>
+            <PageDescription projectName={projectName && projectName || "Carregando..."}/>
             <CoordinateLabel text="Origem" icon={<A />} />
             <Input type="number" placeholder="Latitude de origem" icon={<Exit />} value={originLatitude} mb="1.2rem" onChange={(event) => {setOriginLatitude(event.target.value)}}></Input>
             <Input type="number" placeholder="Longitude de origem" icon={<Exit />} value={originLongitude} mb="2.4rem" onChange={(event) => {setOriginLongitude(event.target.value)}}></Input>
@@ -97,9 +97,10 @@ export const Project = () => {
         name: string;
         dt2file: string;
         createdAt: string;
+        status: "processing" | "processed";
     }
 
-    const [project, setProject] = useState<IProject>({id: "", name: "", dt2file: "", createdAt: ""});
+    const [project, setProject] = useState<IProject>({id: "", name: "", dt2file: "", createdAt: "", status: "processing"});
 
     const loadProject = async () => {
 
@@ -111,7 +112,7 @@ export const Project = () => {
             });
             setProject(response.data?.success.data);
         } catch {
-            setProject({ id: "", name: "", dt2file: "", createdAt: ""});
+            setProject({ id: "", name: "", dt2file: "", createdAt: "", status: "processing"});
         }
     }
 
