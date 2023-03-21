@@ -25,14 +25,14 @@ export const CreateProjectPopup = ({closePopup} : React.PropsWithChildren<Create
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (fileInput && projectName.length > 0 && uploadStatus === "Upload concluído!" && uploadedFileData) {
+        if (fileInput && projectName.length > 0 && uploadStatus === "Upload concluído!" && uploadedFileData && uploadedFileData.objectKey) {
             setIsButtonDisabled(false);
         } else {
             setIsButtonDisabled(true);
         }
     }, [fileInput, projectName, uploadStatus, uploadedFileData]);
 
-    const handleCreateProject = async () => {
+    const handleCreateProject : any = async () => {
 
         const json = JSON.stringify({
             project: {

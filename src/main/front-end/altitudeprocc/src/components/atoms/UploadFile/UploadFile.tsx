@@ -42,6 +42,8 @@ export const UploadFile = ({mb, mt, ml, mr, fileInput, setFileInput, uploadStatu
                 }
             });
 
+            console.log(response.data?.success?.data);
+
             setUploadedFileData(response.data?.success?.data);
 
         } catch (error) {
