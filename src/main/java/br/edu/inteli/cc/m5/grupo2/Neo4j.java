@@ -33,19 +33,33 @@ public class Neo4j implements AutoCloseable {
 
     }
 
-    public void createVertices(Graph graph) throws FileNotFoundException {
+    public void createVertices(Graph graph, int rows) throws FileNotFoundException {
 
         StringBuilder queryStr = new StringBuilder();
 
-        graph.getVertices().forEach(vertex -> {
+        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
+                graph.getVertices().get(0).getId(),
+                graph.getVertices().get(0).getLatitude(),
+                graph.getVertices().get(0).getLongitude(),
+                graph.getVertices().get(0).getAltitude()));
 
-            queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
-                    vertex.getId(),
-                    vertex.getLatitude(),
-                    vertex.getLongitude(),
-                    vertex.getAltitude()));
+        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
+                graph.getVertices().get(graph.getVertices().size() - 1).getId(),
+                graph.getVertices().get(graph.getVertices().size() - 1).getLatitude(),
+                graph.getVertices().get(graph.getVertices().size() - 1).getLongitude(),
+                graph.getVertices().get(graph.getVertices().size() - 1).getAltitude()));
 
-        });
+        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
+                graph.getVertices().get(rows).getId(),
+                graph.getVertices().get(rows).getLatitude(),
+                graph.getVertices().get(rows).getLongitude(),
+                graph.getVertices().get(rows).getAltitude()));
+
+        queryStr.append(String.format(Locale.US, "CREATE (:Vertex { id: %d, latitude: %.5f, longitude: %.5f, altitude: %.5f })\n",
+                graph.getVertices().get(graph.getVertices().size() - rows).getId(),
+                graph.getVertices().get(graph.getVertices().size() - rows).getLatitude(),
+                graph.getVertices().get(graph.getVertices().size() - rows).getLongitude(),
+                graph.getVertices().get(graph.getVertices().size() - rows).getAltitude()));
 
         Query query = new Query(queryStr.toString());
 
