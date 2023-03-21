@@ -8,7 +8,6 @@ import org.neo4j.driver.exceptions.Neo4jException;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -53,7 +52,7 @@ public class Neo4j implements AutoCloseable {
 
             Session session = driver.session(SessionConfig.forDatabase("neo4j"));
 
-            Record record = session.executeWrite(tx -> tx.run(query).single());
+            session.executeWrite(tx -> tx.run(query).single());
 
             System.out.println("Graph persisted successfully.");
 
@@ -89,7 +88,7 @@ public class Neo4j implements AutoCloseable {
 
             Session session = driver.session(SessionConfig.forDatabase("neo4j"));
 
-            Record record = session.executeWrite(tx -> tx.run(query).single());
+            session.executeWrite(tx -> tx.run(query).single());
 
         } catch (Neo4jException exception) {
 
@@ -105,7 +104,7 @@ public class Neo4j implements AutoCloseable {
                 """
                         MATCH (vertex:Vertex)
                         WHERE vertex.id = $id
-                        RETURN vertex
+                        RETURN vertex.id, vertex.latitude, vertex.longitude, vertex.altitude
                         """,
 
                 Map.of("id", vertexId));
@@ -118,10 +117,12 @@ public class Neo4j implements AutoCloseable {
 
             System.out.println("Vertex found successfully: ");
 
-            System.out.println("id: " + record.get("id").asString());
-            System.out.println("latitude: " + record.get("latitude").asString());
-            System.out.println("longitude: " + record.get("longitude").asString());
-            System.out.println("altitude: " + record.get("altitude").asString());
+            System.out.println("Vertex found successfully: ");
+            System.out.println("id: " + record.get("vertex.id"));
+            System.out.println("latitude: " + record.get("vertex.latitude"));
+            System.out.println("longitude: " + record.get("vertex.longitude"));
+            System.out.println("altitude: " + record.get("vertex.altitude"));
+
 
         } catch (Neo4jException exception) {
 
@@ -171,7 +172,9 @@ public class Neo4j implements AutoCloseable {
 
                 Session session = driver.session(SessionConfig.forDatabase("neo4j"));
 
-                List records = session.executeWrite(tx -> tx.run(query).list());
+                session.executeWrite(tx -> tx.run(query).list());
+
+                System.out.println("Vertexes connected");
 
             } catch (Neo4jException exception) {
 
@@ -199,7 +202,7 @@ public class Neo4j implements AutoCloseable {
 
             Session session = driver.session(SessionConfig.forDatabase("neo4j"));
 
-            Record record = session.executeWrite(tx -> tx.run(query).single());
+            session.executeWrite(tx -> tx.run(query));
 
             System.out.println("Vertex deleted successfully.");
 
@@ -235,16 +238,13 @@ public class Neo4j implements AutoCloseable {
 
             Session session = driver.session(SessionConfig.forDatabase("neo4j"));
 
-            Record record = session.executeWrite(tx -> tx.run(query).single());
+            session.executeWrite(tx -> tx.run(query).single());
 
             System.out.println("Vertex updated successfully.");
 
         } catch (Neo4jException exception) {
-
             throw exception;
-
         }
-
     }
 
     @Override
@@ -257,31 +257,31 @@ public class Neo4j implements AutoCloseable {
         Graph graph = new Graph();
         Neo4j neo4j = new Neo4j();
 
-        Vertex vertex = new Vertex(1,100.00, 100.00, 100.00);
-        Vertex vertex2 = new Vertex(2,100.00, 200.00, 200.00);
-        Vertex vertex3 = new Vertex(3,150.00, 150.00, 150.00);
-        Vertex vertex4 = new Vertex(4,150.00, 200.00, 150.00);
-        Vertex vertex5 = new Vertex(5,150.00, 200.00, 150.00);
+        Vertex vertex = new Vertex(0,100.00, 100.00, 100.00);
+        Vertex vertex2 = new Vertex(1,100.00, 200.00, 200.00);
+        Vertex vertex3 = new Vertex(2,150.00, 150.00, 150.00);
+        Vertex vertex4 = new Vertex(3,150.00, 200.00, 150.00);
+        Vertex vertex5 = new Vertex(4,150.00, 200.00, 150.00);
 
         graph.addVertex(vertex);
         graph.addVertex(vertex2);
         graph.addVertex(vertex3);
         graph.addVertex(vertex4);
 
-        graph.addEdge(vertex.getId() - 1, vertex2.getId() - 1);
-        graph.addEdge(vertex.getId() - 1, vertex3.getId() - 1);
-        graph.addEdge(vertex3.getId() - 1, vertex2.getId() - 1);
-        graph.addEdge(vertex2.getId() - 1, vertex4.getId() - 1);
+        graph.addEdge(vertex.getId(), vertex2.getId());
+        graph.addEdge(vertex.getId(), vertex3.getId());
+        graph.addEdge(vertex3.getId(), vertex2.getId());
+        graph.addEdge(vertex2.getId(), vertex4.getId());
 
-        //neo4j.createVertices(graph);
+        neo4j.createVertices(graph);
         System.out.println("/////////////////////////////////////////////////////////////////");
-        neo4j.findVertex(1);
+        neo4j.createVertex(vertex5);
         System.out.println("/////////////////////////////////////////////////////////////////");
-        //neo4j.createVertex(vertex5);
+        neo4j.findVertex(4);
         System.out.println("/////////////////////////////////////////////////////////////////");
-        //neo4j.connectVertex(vertex4);
+        neo4j.connectVertex(vertex2);
         System.out.println("/////////////////////////////////////////////////////////////////");
-        //neo4j.updateVertex(1, vertex5);
+        neo4j.updateVertex(1, vertex5);
         System.out.println("/////////////////////////////////////////////////////////////////");
         neo4j.deleteVertex(vertex);
         System.out.println("/////////////////////////////////////////////////////////////////");
