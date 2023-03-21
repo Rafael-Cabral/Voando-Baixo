@@ -42,4 +42,9 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 1.6rem !important;
     }
 
+    .map-container {
+        height: 100%;
+        overflow: hidden;
+    }
+
 `

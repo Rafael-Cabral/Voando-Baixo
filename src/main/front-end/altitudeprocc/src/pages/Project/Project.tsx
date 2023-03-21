@@ -9,8 +9,11 @@ import { Input } from "../../components/atoms/Input/Input";
 import { ReactComponent as Exit } from "../../assets/exit.svg";
 import { Button } from "../../components/atoms/Button/Button";
 import { Slider } from "../../components/atoms/Slider/Slider";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import mapboxgl from "mapbox-gl";
+
+mapboxgl.accessToken = "pk.eyJ1IjoiZWxpYXNiaW9uZG8iLCJhIjoiY2xmaWFlNHo0MDA5bDNwbWk4bjJlYjh4YiJ9.q4l1ugFTPCZi70qHmWkM7g";
 
 const CoordinateLabel = ({text, icon} : { text : string, icon : any}) => {
     return (
@@ -64,9 +67,84 @@ const ProjectSidebar = ({projectName} : {projectName:string}) => {
     )
 }
 
-const MapZone = () => {
+const MapZone = ({project} : {project:IProject}) => {
+
+    if(!project.map) {
+        return <></>
+    }
+
+    const topLeftLongitude = project.map.topLeft[1];
+  const topLeftLatitude = project.map.topLeft[0];
+  const bottomRightLongitude = project.map.bottomRight[1];
+  const bottomRightLatitude = project.map.bottomRight[0];
+  const centeredLongitude = (topLeftLongitude + bottomRightLongitude) / 2;
+  const centeredLatitude = (topLeftLatitude + bottomRightLatitude) / 2;
+
+  const mapContainer = useRef("");
+  const map = useRef<any>(null);
+  const [lng, setLng] = useState(centeredLongitude);
+  const [lat, setLat] = useState(centeredLatitude);
+  const [zoom, setZoom] = useState(9);
+
+  const bounds = [
+    topLeftLongitude, topLeftLatitude, bottomRightLongitude, bottomRightLatitude
+  ];
+
+  useEffect(() => {
+    if (map.current) return; // initialize map only once
+
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/satellite-v9',
+      center: [centeredLongitude, centeredLatitude],
+      zoom: zoom,
+    });
+
+    map.current.on('load', () => {
+      // Add a new layer with the GeoJSON rectangle hole
+      map.current.addSource('rectangle-hole', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [-180, -90],
+                [180, -90],
+                [180, 90],
+                [-180, 90],
+                [-180, -90],
+              ],
+              [
+                [topLeftLongitude, topLeftLatitude],
+                [bottomRightLongitude, topLeftLatitude],
+                [bottomRightLongitude, bottomRightLatitude],
+                [topLeftLongitude, bottomRightLatitude],
+                [topLeftLongitude, topLeftLatitude],
+              ],
+            ],
+          },
+        },
+      });
+
+      // Add the rectangle hole layer to the map
+      map.current.addLayer({
+        id: 'rectangle-hole',
+        type: 'fill',
+        source: 'rectangle-hole',
+        layout: {},
+        paint: {
+          'fill-color': '#E0E0E0',
+          'fill-opacity': 1,
+        },
+      });
+    });
+  });
+
     return (
-        <StyledMapZone>
+        <StyledMapZone ref={mapContainer} className="map-container">
+            
         </StyledMapZone>
     )
 }
@@ -79,26 +157,32 @@ const Controls = () => {
     )
 }
 
-const ProjectContent = () => {
+const ProjectContent = ({project} : {project : IProject}) => {
     return (
-        <StyledProjectContent>
-            <MapZone/>
+        <StyledProjectContent id="project-content">
+            <MapZone project={project}/>
             <Controls />
         </StyledProjectContent>
     )
 }
 
+interface IProject {
+    id: string;
+    name: string;
+    dt2file: string;
+    createdAt: string;
+    status: "processing" | "processed";
+    map?: {
+        topLeft: [number, number],
+        topRight: [number, number],
+        bottomLeft: [number, number],
+        bottomRight: [number, number]
+    }
+}
+
 export const Project = () => {
 
     const { projectId } = useParams();
-
-    interface IProject {
-        id: string;
-        name: string;
-        dt2file: string;
-        createdAt: string;
-        status: "processing" | "processed";
-    }
 
     const [project, setProject] = useState<IProject>({id: "", name: "", dt2file: "", createdAt: "", status: "processing"});
 
@@ -124,7 +208,7 @@ export const Project = () => {
     return (
         <StyledProject>
             <ProjectSidebar projectName={project?.name}/>
-            <ProjectContent />
+            <ProjectContent project={project}/>
         </StyledProject>
     )
 }

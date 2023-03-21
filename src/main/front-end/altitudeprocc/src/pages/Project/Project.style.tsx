@@ -1,3 +1,4 @@
+import { Map } from "mapbox-gl";
 import styled from "styled-components";
 
 export const StyledProject = styled.div`
@@ -31,7 +32,11 @@ export const StyledCoordinateLabel = styled.div`
     margin-bottom: 1.2rem;
 `
 
-export const StyledMapZone = styled.div`
+interface Map {
+    ref: any
+}
+
+export const StyledMapZone = styled.div<Map>`
     width: 100%;
     height: 100%;
 `
