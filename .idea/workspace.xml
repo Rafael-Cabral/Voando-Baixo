@@ -72,7 +72,7 @@
       <recent name="C:\Users\Elias\Documents\GitHub\Turma-4\grupo2\src\main\java\br\edu\inteli\cc\m5\grupo" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Neo4j">
+  <component name="RunManager" selected="TestNG.AStarTest.findPathOneDted">
     <configuration name="DownloadFileFromS3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.edu.inteli.cc.m5.grupo2.DownloadFileFromS3" />
       <module name="template" />
@@ -239,7 +239,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/br/edu/inteli/cc/m5/grupo2/AStar.java</url>
-          <line>56</line>
+          <line>58</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
