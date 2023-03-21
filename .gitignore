@@ -4,3 +4,7 @@ target
 *.pdf
 .idea/workspace.xml
 downloads
+src/node_modules
+src/main/node_modules
+src/main/back-end/node_modules
+src/main/front-end/my-app/node_modules
