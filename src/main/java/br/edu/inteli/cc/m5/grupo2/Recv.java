@@ -4,102 +4,142 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.rabbitmq.client.*;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeoutException;
+
 public class Recv {
+    private static final String URI = "amqp://guest:guest@localhost:5672";
 
-    // Nome da fila a ser consumida
-    private String QUEUE_NAME;
-    // URI de conexão com o RabbitMQ
-    private String URI;
+    public void startConsuming() {
 
-    public Recv() {
-        this.QUEUE_NAME = "process";
-        this.URI = "amqp://guest:guest@localhost:5672";
+        java.util.logging.Logger.getLogger("com.rabbitmq.client").setLevel(java.util.logging.Level.WARNING);
+
+        try (Connection connection = createConnection();
+
+         Channel channel = createChannel(connection)) {
+                declareQueue(channel, "findroute");
+                declareQueue(channel, "process");
+
+            Gson gson = new Gson();
+
+            while (true) {
+
+                GetResponse response = channel.basicGet("findroute", true);
+
+                if (response != null) {
+
+                    String message = new String(response.getBody(), "UTF-8");
+                    JsonObject json = gson.fromJson(message, JsonObject.class);
+                    String projectId = json.get("id").getAsString();
+                    JsonObject origin = json.getAsJsonObject("origin");
+                    JsonObject destination = json.getAsJsonObject("destination");
+                    double originLatitude = origin.get("latitude").getAsDouble();
+                    double originLongitude = origin.get("longitude").getAsDouble();
+                    double destinationLatitude = destination.get("latitude").getAsDouble();
+                    double destinationLongitude = destination.get("longitude").getAsDouble();
+
+                    System.out.println("\n===============================================================================================\n");
+                    System.out.println(" Received new find route request from project '" + projectId + "'.\n");
+                    System.out.println(" Origin -----------------------------------------------------------------");
+                    System.out.println("     Latitude: " + originLatitude);
+                    System.out.println("     Longitude: " + originLongitude);
+                    System.out.println(" Destination ------------------------------------------------------------");
+                    System.out.println("     Latitude: " + destinationLatitude);
+                    System.out.println("     Longitude: " + destinationLongitude);
+                    System.out.println("\n Route found for project '" + projectId + "'.");
+                    System.out.println("\n===============================================================================================\n");
+
+                }
+
+                response = channel.basicGet("process", true);
+
+                if (response != null) {
+
+                    String message = new String(response.getBody(), "UTF-8");
+                    JsonObject json = gson.fromJson(message, JsonObject.class);
+                    String projectId = json.get("id").getAsString();
+                    System.out.println("\n===============================================================================================\n");
+                    System.out.println(" Received new processing request for project '" + projectId + "'.\n");
+                    System.out.println(" Downloading file from S3...");
+
+                    try {
+
+                        DownloadFileFromS3 downloadFileFromS3 = new DownloadFileFromS3();
+                        downloadFileFromS3.downloadFileFromS3(json.get("objectKey").getAsString(), projectId);
+                        System.out.println(" File downloaded successfully.");
+                        processMessage(projectId);
+                        System.out.println("\n Processing finished for project '" + projectId + "'.");
+                        System.out.println("\n===============================================================================================\n");
+
+                    } catch (Exception e) {
+
+                        System.out.println(" Error while processing message for project " + projectId + ": " + e);
+
+                    }
+
+                }
+
+                Thread.sleep(1000);
+
+            }
+
+        } catch (Exception e) {
+
+            System.out.println(" Error while consuming messages: " + e);
+
+        }
+
     }
 
-    // Cria uma conexão com o RabbitMQ utilizando a URI de conexão definida
-    public Connection createConnection() throws Exception {
+
+    private Connection createConnection() throws IOException, TimeoutException, URISyntaxException, NoSuchAlgorithmException, KeyManagementException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setUri(this.URI);
+        factory.setUri(URI);
         return factory.newConnection();
     }
 
-    // Cria um canal de comunicação com o RabbitMQ
-    public Channel createChannel(Connection connection) throws Exception {
+    private Channel createChannel(Connection connection) throws IOException {
         return connection.createChannel();
     }
 
-    // Declara a fila a ser consumida pelo canal
-    public void declareQueue(Channel channel) throws Exception {
-        // Define os argumentos de declaração da fila
-        boolean durable = true; // Fila persistente
-        boolean exclusive = false; // Fila não exclusiva
-        boolean autoDelete = false; // Fila não é excluída automaticamente
-        // Define as propriedades adicionais da fila
-        // Nesse caso, é passado como argumento apenas o nome da fila
-        // Mas podem ser definidas outras propriedades, como argumentos
-        // de política de fila, por exemplo.
-        AMQP.Queue.DeclareOk declareOk = channel.queueDeclare(QUEUE_NAME, durable, exclusive, autoDelete, null);
-        // Imprime uma mensagem informando que a fila foi declarada com sucesso
-        System.out.println(" [*] Waiting for new items in queue to process.");
+    private void declareQueue(Channel channel, String queueName) throws IOException {
+        channel.queueDeclare(queueName, true, false, false, null);
+        System.out.println(" Waiting for new messages in queue '" + queueName + "'.");
     }
 
-    public void consumeMessages(Channel channel) throws Exception {
-        Gson gson = new Gson();
-        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String message = new String(delivery.getBody(), "UTF-8");
-
-            JsonObject json = gson.fromJson(message, JsonObject.class);
-
-            String objectKey = json.get("objectKey").getAsString();
-            String projectId = json.get("id").getAsString();
-
-            System.out.println(" [*] Received new processing request for project " + json.get("id") + ".");
-            System.out.println(" [ ] Downloading file from S3...");
-
-            DownloadFileFromS3 downloadFileFromS3 = new DownloadFileFromS3();
-            downloadFileFromS3.downloadFileFromS3(objectKey, projectId);
-
-            // Exiba uma mensagem de confirmação
-            System.out.println(" [*] File downloaded successfully.");
-
-            // Instancing a new graph.
-            Graph graph = new Graph();
-
-            // Path to DTED file.
-            String path = System.getProperty("user.dir") + "/downloads/" + projectId + ".dt2";;
-
-            double[][] map = Dted.readDted(path, 180);
-
-            System.out.println(" [*] File read  successfully.");
-            System.out.println(" [ ] Loading graph instance...");
-
-            // Sending all Vertices to the graph created.
-            for (int i = 0;i < map.length - 1; i++) {
-                graph.addVertex(map[i][1], map[i][2], map[i][0]);
-            }
-
-            System.out.println(" [*] Graph loaded successfully.");
-
-            int rows = (int) map[map.length - 1][1];
-            int cols = (int) map[map.length - 1][2];
-
-            System.out.println(" [ ] Connecting graph vertices...");
-
-            // Creating all possible connections in the graph.
-            graph.connectVertices(180, rows, cols);
-
-            System.out.println(" [*] Graph vertices connected successfully.");
-
-            Neo4j neo4j = new Neo4j();
-
-            System.out.println(" [ ] Persisting file bounds for map rendering.");
-
-            neo4j.persistMapBounds(graph, rows, projectId);
-
-            System.out.println(" [*] File bound for map rendering persisted successfully.");
-
-        };
-        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
+    private void processMessage(String projectId) throws Exception {
+        Graph graph = createGraph(projectId);
+        Neo4j neo4j = new Neo4j();
+        neo4j.persistMapBounds(graph, getRows(projectId), projectId);
     }
 
+    private Graph createGraph(String projectId) throws Exception {
+        String path = System.getProperty("user.dir") + "/downloads/" + projectId + ".dt2";
+        double[][] map = Dted.readDted(path, 180);
+        System.out.println(" File read successfully.");
+        System.out.println(" Loading graph instance");
+        Graph graph = new Graph();
+        for (int i = 0; i < map.length - 1; i++) {
+            graph.addVertex(map[i][1], map[i][2], map[i][0]);
+        }
+        System.out.println(" Graph loaded successfully.");
+
+        int rows = (int) map[map.length - 1][1];
+        int cols = (int) map[map.length - 1][2];
+
+        System.out.println(" Connecting graph vertices...");
+        graph.connectVertices(180, rows, cols);
+        System.out.println(" Graph vertices connected successfully.");
+
+        return graph;
+    }
+
+    private int getRows(String projectId) throws Exception {
+        String path = System.getProperty("user.dir") + "/downloads/" + projectId + ".dt2";
+        double[][] map = Dted.readDted(path, 180);
+        return (int) map[map.length - 1][1];
+    }
 }
