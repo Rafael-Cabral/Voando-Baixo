@@ -40,5 +40,11 @@ export const success = {
 		code: 1006,
 		title: "Project Deleted Successfully.",
 		description: "Project has been deleted successfully."
+	},
+	bestRouteRequestedSuccessfully: {
+		status: 200,
+		code: 1007,
+		title: "Best Route Requested Successfully.",
+		description: "Best route has been requested successfully."
 	}
 };

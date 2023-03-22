@@ -1,6 +1,7 @@
 import setup from "..";
 import { IProject } from "../interfaces/IProject";
 import { v4 as uuid } from "uuid";
+import { ICoordinate } from "../interfaces/ICoordinate";
 
 class ProjectsService {
 
@@ -122,6 +123,32 @@ class ProjectsService {
 		session.close();
 
 		return res.records[0].get(0).properties;
+
+	}
+
+	public async requestBestRouteProcessing(projectId: string, origin : ICoordinate, destination : ICoordinate) {
+
+		const session = setup.app.database.driver.session();
+
+		const res = await session.run(
+			`
+			MATCH (p:Project {id: "${projectId}"})
+				SET p.status = "routing"
+				RETURN p
+			`
+		);
+		
+		session.close();
+
+		const project = res.records[0].get(0).properties;
+
+		await setup.rabbitMQServer.publishInQueue("findBestPath", JSON.stringify({
+			objectKey: project.objectKey,
+			origin,
+			destination
+		}));
+
+		return project;
 
 	}
 

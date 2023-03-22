@@ -28,5 +28,11 @@ export const error = {
 		code: 1505,
 		title: "Internal server error.",
 		description: "Unable to delete project."
+	},
+	unableToRequestBestRoute: {
+		status: 500,
+		code: 1506,
+		title: "Internal server error.",
+		description: "Unable to request best route."
 	}
 };

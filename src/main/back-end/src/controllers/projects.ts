@@ -105,6 +105,28 @@ class ProjectsController {
 
 	}
 
+	public async requestBestRouteProcessing(req : Request, res : Response) : Promise<Response> {
+
+		const { projectId } = req.params;
+		const { origin, destination } = req.body.route;
+
+		try {
+
+			const bestRoute = await ProjectsService.requestBestRouteProcessing(projectId, origin, destination);
+			
+			return responseBuilder(res, "success", success.bestRouteRequestedSuccessfully, bestRoute);
+		
+		} catch (err) {
+
+			console.error(err);
+
+			return responseBuilder(res, "error", error.unableToRequestBestRoute);
+		
+		}
+
+
+	}
+
 }
 
 export default new ProjectsController();
