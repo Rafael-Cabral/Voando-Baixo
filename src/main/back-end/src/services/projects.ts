@@ -64,7 +64,7 @@ class ProjectsService {
 
 			return project;
 		
-		} else {
+		} else if (project.status === "processed" || project.status === "routing") {
 
 			const resMap = await session.run(
 				`
@@ -84,6 +84,36 @@ class ProjectsService {
 
 			return res;
 
+		} else if (project.status === "routed") {
+
+			const resMap = await session.run(
+				`
+				MATCH (p:Project {id: "${projectId}"})-[:HAS]->(m:Map)
+				RETURN m
+				`
+			);
+
+			const map = resMap.records[0].get(0).properties;
+
+			const resRoute = await session.run(
+				`
+				MATCH (p:Project {id: "${projectId}"})-[:HAS]->(r:Route)
+				RETURN r
+				`
+			);
+
+			const vertices = JSON.parse(resRoute.records[0].get(0).properties.vertices);
+
+			session.close();
+
+			const res = {
+				...project,
+				map,
+				vertices
+			};
+
+			return res;
+		
 		}
 
 	}
@@ -96,8 +126,7 @@ class ProjectsService {
 			`
 			MATCH (p:Project {id: "${projectId}"})
 			SET p.name = "${project.name}", 
-				p.updatedAt = "${new Date()}",
-				p.status = "${project.status || "processing"}"
+				p.updatedAt = "${new Date()}"
 			RETURN p
 			`
 		);
@@ -142,7 +171,8 @@ class ProjectsService {
 
 		const project = res.records[0].get(0).properties;
 
-		await setup.rabbitMQServer.publishInQueue("findBestPath", JSON.stringify({
+		await setup.rabbitMQServer.publishInQueue("findroute", JSON.stringify({
+			id: project.id,
 			objectKey: project.objectKey,
 			origin,
 			destination
