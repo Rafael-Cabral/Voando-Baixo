@@ -1,6 +1,7 @@
 import setup from "..";
 import { IProject } from "../interfaces/IProject";
 import { v4 as uuid } from "uuid";
+import { ICoordinate } from "../interfaces/ICoordinate";
 
 class ProjectsService {
 
@@ -50,16 +51,70 @@ class ProjectsService {
 		
 		const session = setup.app.database.driver.session();
 
-		const res = await session.run(
+		const resProject = await session.run(
 			`
 			MATCH (p:Project {id: "${projectId}"})
 			RETURN p
 			`
 		);
 
-		session.close();
+		const project = resProject.records[0].get(0).properties;
 
-		return res.records[0].get(0).properties;
+		if(project.status === "processing") {
+
+			return project;
+		
+		} else if (project.status === "processed" || project.status === "routing") {
+
+			const resMap = await session.run(
+				`
+				MATCH (p:Project {id: "${projectId}"})-[:HAS]->(m:Map)
+				RETURN m
+				`
+			);
+
+			const map = resMap.records[0].get(0).properties;
+
+			session.close();
+
+			const res = {
+				...project,
+				map
+			};
+
+			return res;
+
+		} else if (project.status === "routed") {
+
+			const resMap = await session.run(
+				`
+				MATCH (p:Project {id: "${projectId}"})-[:HAS]->(m:Map)
+				RETURN m
+				`
+			);
+
+			const map = resMap.records[0].get(0).properties;
+
+			const resRoute = await session.run(
+				`
+				MATCH (p:Project {id: "${projectId}"})-[:HAS]->(r:Route)
+				RETURN r
+				`
+			);
+
+			const vertices = JSON.parse(resRoute.records[0].get(0).properties.vertices);
+
+			session.close();
+
+			const res = {
+				...project,
+				map,
+				vertices
+			};
+
+			return res;
+		
+		}
 
 	}
 
@@ -71,8 +126,7 @@ class ProjectsService {
 			`
 			MATCH (p:Project {id: "${projectId}"})
 			SET p.name = "${project.name}", 
-				p.updatedAt = "${new Date()}",
-				p.status = "${project.status || "processing"}"
+				p.updatedAt = "${new Date()}"
 			RETURN p
 			`
 		);
@@ -98,6 +152,33 @@ class ProjectsService {
 		session.close();
 
 		return res.records[0].get(0).properties;
+
+	}
+
+	public async requestBestRouteProcessing(projectId: string, origin : ICoordinate, destination : ICoordinate) {
+
+		const session = setup.app.database.driver.session();
+
+		const res = await session.run(
+			`
+			MATCH (p:Project {id: "${projectId}"})
+				SET p.status = "routing"
+				RETURN p
+			`
+		);
+		
+		session.close();
+
+		const project = res.records[0].get(0).properties;
+
+		await setup.rabbitMQServer.publishInQueue("findroute", JSON.stringify({
+			id: project.id,
+			objectKey: project.objectKey,
+			origin,
+			destination
+		}));
+
+		return project;
 
 	}
 
