@@ -193,7 +193,7 @@ const MapZone = ({ project }: { project: IProject }) => {
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             // Satelite style
-            style: 'mapbox://styles/mapbox/satellite-v9',
+            style: "mapbox://styles/mapbox/outdoors-v11",
             center: [centeredLongitude, centeredLatitude],
             zoom: zoom,
         });
@@ -253,7 +253,7 @@ const MapZone = ({ project }: { project: IProject }) => {
                 type: "Feature",
                 geometry: {
                     type: "Point",
-                    coordinates: circleA,
+                    coordinates: [-45.94516,-23.80302],
                 },
             },
         });
@@ -264,7 +264,7 @@ const MapZone = ({ project }: { project: IProject }) => {
                 type: "Feature",
                 geometry: {
                     type: "Point",
-                    coordinates: circleB,
+                    coordinates: [-45.944583333333334,-23.802638888888886],
                 },
             },
         });
