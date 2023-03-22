@@ -1,4 +1,3 @@
-import { Map } from "mapbox-gl";
 import styled from "styled-components";
 
 export const StyledProject = styled.div`
@@ -39,6 +38,7 @@ interface Map {
 export const StyledMapZone = styled.div<Map>`
     width: 100%;
     height: 100%;
+    cursor: move;
 `
 
 export const StyledControls = styled.div`
@@ -48,4 +48,26 @@ export const StyledControls = styled.div`
     padding: 0rem 1.2rem;
     display: flex;
     align-items: center;
+`
+
+export const StyledFindingBestRoute = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    position: absolute;
+
+    & > svg {
+        animation: spin 1s linear infinite;
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
 `

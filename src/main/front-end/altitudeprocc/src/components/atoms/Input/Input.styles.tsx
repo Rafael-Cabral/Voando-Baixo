@@ -5,6 +5,7 @@ export interface StyledInputProps {
     mt?: string;
     ml?: string;
     mr?: string;
+    value?: string | number;
 }
 
 export const StyledInput = styled.div<StyledInputProps>`
@@ -39,6 +40,12 @@ export const StyledInput = styled.div<StyledInputProps>`
     & > input:disabled {
         background-color: #F5F5F5;
         cursor: not-allowed;
+    }
+
+    & > input:invalid {
+        border: 0.3rem solid #FF5544;
+        background-color: #FFF0F0;
+        color: #FF5544;
     }
 
 `

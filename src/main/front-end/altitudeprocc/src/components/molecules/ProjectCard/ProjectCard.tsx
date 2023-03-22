@@ -98,7 +98,7 @@ export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr, status}: Pro
     const openProject = (event : any, id: string) => {
 
 
-        if(status == "processed") {
+        if(status != "processing") {
 
             const target = event.target as HTMLElement;
 
@@ -126,7 +126,7 @@ export const ProjectCard = ({id, name, date, image, mb, mt, ml, mr, status}: Pro
         
             <StyledProjectCard mb={mb} mt={mt} ml={ml} mr={mr} status={status} onClick={(event) => {openProject(event, id)}}>
 
-                <Top image={status == "processed" ? image : ""}/>
+                <Top image={status != "processing" ? image : ""}/>
 
                 <Bottom id={id} name={name} date={date} handleModalVisibility={handleModalVisibility}/>
 
