@@ -253,7 +253,7 @@ const MapZone = ({ project }: { project: IProject }) => {
                 type: "Feature",
                 geometry: {
                     type: "Point",
-                    coordinates: [-45.94516,-23.80302],
+                    coordinates: circleA,
                 },
             },
         });
@@ -264,7 +264,7 @@ const MapZone = ({ project }: { project: IProject }) => {
                 type: "Feature",
                 geometry: {
                     type: "Point",
-                    coordinates: [-45.944583333333334,-23.802638888888886],
+                    coordinates: circleB,
                 },
             },
         });
