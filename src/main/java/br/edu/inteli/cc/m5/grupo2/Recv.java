@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 public class Recv {
@@ -51,6 +52,11 @@ public class Recv {
                     System.out.println("     Longitude: " + destinationLongitude);
 
                     Graph graph = createGraph(projectId);
+
+                    Vertex originVertex = graph.findNearestVertex(originLatitude, originLongitude);
+                    Vertex destinationVertex = graph.findNearestVertex(destinationLatitude, destinationLongitude);
+
+                    List<Vertex> route = AStar.findPath(originVertex, destinationVertex);
 
                     System.out.println("\n Route found for project '" + projectId + "'.");
                     System.out.println("\n===============================================================================================\n");
