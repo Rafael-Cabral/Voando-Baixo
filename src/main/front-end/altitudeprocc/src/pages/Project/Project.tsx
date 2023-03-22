@@ -1,5 +1,5 @@
 import { Tag } from "../../components/atoms/Tag/Tag"
-import { StyledControls, StyledCoordinateLabel, StyledFindingBestRoute, StyledMapZone, StyledPageDescription, StyledProject, StyledProjectContent, StyledProjectSidebar } from "./Project.style"
+import { StyledControls, StyledCoordinateLabel, StyledFindingBestRoute, StyledForm, StyledMapZone, StyledPageDescription, StyledProject, StyledProjectContent, StyledProjectSidebar } from "./Project.style"
 import { ReactComponent as Back } from "../../assets/back.svg";
 import { Link, useParams } from "react-router-dom";
 import { Text } from "../../components/atoms/Text/Text";
@@ -28,7 +28,12 @@ interface IProject {
         topRight: [number, number],
         bottomLeft: [number, number],
         bottomRight: [number, number]
-    }
+    },
+    vertices?: [{
+        id: string,
+        latitude: number,
+        longitude: number
+    }],
 }
 
 const FindingBestRoute = () => {
@@ -86,14 +91,26 @@ const ProjectSidebar = ({ project, setProject }: { project: IProject, setProject
     const [originLongitude, setOriginLongitude] = useState("");
     const [destinationLatitude, setDestinationLatitude] = useState("");
     const [destinationLongitude, setDestinationLongitude] = useState("");
+    const [buttonText, setButtonText] = useState("Encontrar melhor rota");
 
     useEffect(() => {
-        if (originLatitude.length > 0 && originLongitude.length > 0 && destinationLatitude.length > 0 && destinationLongitude.length > 0) {
+
+        if (originLatitude.length > 0 && originLongitude.length > 0 && destinationLatitude.length > 0 && destinationLongitude.length > 0 && project.status != "routed") {
             setDisabled(false);
         } else {
             setDisabled(true);
         }
-    }, [originLatitude, originLongitude, destinationLatitude, destinationLongitude]);
+
+        if (project.status === "routed") {
+            setButtonText("Melhor rota encontrada");
+            setOriginLatitude(String(project.vertices?.[0].latitude.toFixed(5)));
+            setOriginLongitude(String(project.vertices?.[0].longitude.toFixed(5)));
+            setDestinationLatitude(String(project.vertices?.[project.vertices?.length - 1].latitude.toFixed(5)));
+            setDestinationLongitude(String(project.vertices?.[project.vertices?.length - 1].longitude.toFixed(5)));
+        }
+
+
+    }, [originLatitude, originLongitude, destinationLatitude, destinationLongitude, project]);
 
     const minLatitude = project.map?.bottomRight[0].toFixed(5);
     const maxLatitude = project.map?.topLeft[0].toFixed(5);
@@ -148,13 +165,15 @@ const ProjectSidebar = ({ project, setProject }: { project: IProject, setProject
                 <Tag icon={<Back />} iconPosition="left" mb="3.6rem">Voltar</Tag>
             </Link>
             <PageDescription projectName={project.name && project.name || "Carregando..."} />
-            <CoordinateLabel text="Origem" icon={<A />} />
-            <Input type="number" placeholder="Latitude de origem" icon={<Exit />} value={originLatitude} mb="1.2rem" onChange={(event) => { setOriginLatitude(event.target.value) }} min={minLatitude} max={maxLatitude} step={0.00001}></Input>
-            <Input type="number" placeholder="Longitude de origem" icon={<Exit />} value={originLongitude} mb="2.4rem" onChange={(event) => { setOriginLongitude(event.target.value) }} min={minLongitude} max={maxLongitude} step={0.00001}></Input>
-            <CoordinateLabel text="Destino" icon={<B />} />
-            <Input type="number" placeholder="Latitude de destino" icon={<Exit />} value={destinationLatitude} mb="1.2rem" onChange={(event) => { setDestinationLatitude(event.target.value) }} min={minLatitude} max={maxLatitude} step={0.00001}></Input>
-            <Input type="number" placeholder="Longitude de destino" icon={<Exit />} value={destinationLongitude} mb="3.6rem" onChange={(event) => { setDestinationLongitude(event.target.value) }} min={minLongitude} max={maxLongitude} step={0.00001}></Input>
-            <Button variant="primary" type="button" disabled={disabled} onClick={async () => {await handleClick()}}>Encontrar melhor trajeto</Button>
+            <StyledForm status={project.status}>
+                <CoordinateLabel text="Origem" icon={<A />} />
+                <Input type="number" placeholder="Latitude de origem" icon={<Exit />} value={originLatitude} setValue={setOriginLatitude} mb="1.2rem" onChange={(event) => { setOriginLatitude(event.target.value) }} min={minLatitude} max={maxLatitude} step={0.00001}></Input>
+                <Input type="number" placeholder="Longitude de origem" icon={<Exit />} value={originLongitude} setValue={setOriginLatitude} mb="2.4rem" onChange={(event) => { setOriginLongitude(event.target.value) }} min={minLongitude} max={maxLongitude} step={0.00001}></Input>
+                <CoordinateLabel text="Destino" icon={<B />} />
+                <Input type="number" placeholder="Latitude de destino" icon={<Exit />} value={destinationLatitude} setValue={setDestinationLatitude} mb="1.2rem" onChange={(event) => { setDestinationLatitude(event.target.value) }} min={minLatitude} max={maxLatitude} step={0.00001}></Input>
+                <Input type="number" placeholder="Longitude de destino" icon={<Exit />} value={destinationLongitude} setValue={setDestinationLongitude} mb="3.6rem" onChange={(event) => { setDestinationLongitude(event.target.value) }} min={minLongitude} max={maxLongitude} step={0.00001}></Input>
+                <Button variant="primary" type="button" disabled={disabled} onClick={async () => {await handleClick()}}>{buttonText}</Button>
+            </StyledForm>
         </StyledProjectSidebar>
     )
 }
@@ -178,9 +197,9 @@ const MapZone = ({ project }: { project: IProject }) => {
     const [lat, setLat] = useState(centeredLatitude);
     const [zoom, setZoom] = useState(9);
 
-    const [circleA, setCircleA] = useState([topLeftLongitude, topLeftLatitude]);
-    const [circleB, setCircleB] = useState([bottomRightLongitude, bottomRightLatitude]);
-    const [pathCoordinates, setPathCoordinates] = useState([[topLeftLongitude, topLeftLatitude], [bottomRightLongitude, bottomRightLatitude]]);
+    const [circleA, setCircleA] = useState(project.vertices ? [project.vertices[0].longitude, project.vertices[0].latitude] : [0, 0]);
+    const [circleB, setCircleB] = useState(project.vertices ? [project.vertices[project.vertices.length - 1].longitude, project.vertices[project.vertices.length - 1].latitude] : [0, 0]);
+    const [pathCoordinates, setPathCoordinates] = useState(project.vertices?.map((vertex) => [vertex.longitude, vertex.latitude]) || []);
 
 
     const bounds = [
@@ -193,7 +212,7 @@ const MapZone = ({ project }: { project: IProject }) => {
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             // Satelite style
-            style: "mapbox://styles/mapbox/outdoors-v11",
+            style: 'mapbox://styles/mapbox/satellite-v9',
             center: [centeredLongitude, centeredLatitude],
             zoom: zoom,
         });
@@ -448,6 +467,8 @@ export const Project = () => {
                     'Content-Type': 'application/json'
                 }
             });
+
+            console.log(response.data?.success.data)
             setProject(response.data?.success.data);
         } catch {
             setProject({ id: "", name: "", dt2file: "", createdAt: "", status: "processing" });

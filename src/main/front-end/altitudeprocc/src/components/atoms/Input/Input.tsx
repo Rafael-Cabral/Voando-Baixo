@@ -9,17 +9,17 @@ interface InputProps extends StyledInputProps {
     value: string;
     disabled ?: boolean;
     onChange ?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    setValue ?: any;
     min ?: string | number;
     max ?: string | number;
     step ?: number;
 }
 
-export const Input = ({placeholder, icon, mb, mt, ml, mr, type, value, disabled, id, onChange, min, max, step } : React.PropsWithChildren<InputProps>) => {
+export const Input = ({placeholder, icon, mb, mt, ml, mr, type, value, setValue, disabled, id, onChange, min, max, step } : React.PropsWithChildren<InputProps>) => {
 
     const [inputValue, setInputValue] = useState<string>(value);
 
     const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value);
         setInputValue(event.target.value);
         onChange && onChange(event);
     }
@@ -27,7 +27,7 @@ export const Input = ({placeholder, icon, mb, mt, ml, mr, type, value, disabled,
     return (
         <StyledInput mb={mb} mt={mt} ml={ml} mr={mr}>
             {icon && icon}
-            <input type={type} placeholder={placeholder} value={inputValue} onChange={handleInputValue} disabled={disabled} id={id} min={min} max={max} step={step}/>
+            <input type={type} placeholder={placeholder} value={setValue ? value : inputValue} onChange={handleInputValue} disabled={disabled} id={id} min={min} max={max} step={step}/>
         </StyledInput>
     )
 }

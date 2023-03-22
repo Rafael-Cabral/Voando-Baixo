@@ -71,3 +71,15 @@ export const StyledFindingBestRoute = styled.div`
         }
     }
 `
+
+interface projectContent {
+    status: any
+}
+
+export const StyledForm = styled.div<projectContent>`
+
+    opacity: ${props => props.status === 'routed' ? 0.5 : 1};
+    cursor: ${props => props.status === 'routed' ? 'not-allowed' : 'default'};
+    pointer-events: ${props => props.status === 'routed' ? 'none' : 'auto'};
+
+`
