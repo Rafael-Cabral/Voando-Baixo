@@ -77,6 +77,13 @@ TreeSet:
 ![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\passosMelhor.jpg)
 
 
+No melhor caso, a quantidade de passos entre as duas estruturas é exatamente a mesma e não gera evidência suficiente para gerar conclusõe.
+
+PriorityQueue:
+
+![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\passosPiorPriority.jpg)
+
+
 
 
 # Conclusão
