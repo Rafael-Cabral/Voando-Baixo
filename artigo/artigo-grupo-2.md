@@ -47,6 +47,10 @@ Ainda em outro trecho de DASGUPTA et. al. (2011), temos:
 
 # Resultados obtidos
 
+No presente estudo, foram realizados experimentos para avaliar a eficácia do algoritmo proposto de menor caminho baseado em grafos. Os resultados obtidos demonstram a capacidade do algoritmo em solucionar problemas de menor caminho em diferentes cenários e configurações de grafos. Nesta seção, apresentaremos uma análise detalhada dos resultados experimentais, destacando a performance do algoritmo em comparação com outras abordagens existentes, bem como as principais vantagens e limitações identificadas.
+
+
+
 # Conclusão
 
 # Referências Bibliográficas
