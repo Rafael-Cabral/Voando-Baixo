@@ -57,6 +57,8 @@ Após essa introdução, podemos inserir o primeiro teste experimental, que visa
 
 ![Temp execução Priority](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\execPriority.jpg)
 
+![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\execTree.jpg)
+
 
 
 # Conclusão
