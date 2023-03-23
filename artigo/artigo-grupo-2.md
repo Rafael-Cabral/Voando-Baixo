@@ -55,6 +55,8 @@ O ambiente de teste utilizado foi um notebook Acer Aspire 5, com core I5-9300h e
 
 Após essa introdução, podemos inserir o primeiro teste experimental, que visa comparar o tempo de execução. Para isso, selecionamos o ponto inicial do mapa, cujo vértice tem índice 0 (zero) e um ponto final qualquer, que segue uma sequência lógica que será exemplificada logo.
 
+![Temp execução Priority](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\execPriority.jpg)
+
 
 
 # Conclusão
