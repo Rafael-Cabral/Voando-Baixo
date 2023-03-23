@@ -206,7 +206,7 @@ const MapZone = ({ project }: { project: IProject }) => {
         topLeftLongitude, topLeftLatitude, bottomRightLongitude, bottomRightLatitude
     ];
 
-    const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/satellite-v9');
+    const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/outdoors-v11');
 
     useEffect(() => {
         if (map.current) return;

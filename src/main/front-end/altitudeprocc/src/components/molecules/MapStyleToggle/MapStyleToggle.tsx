@@ -5,10 +5,10 @@ import { StyledToggleButton, StyledToggleContainer } from './MapStyleToggle.styl
 
 export const MapStyleToggle = ({ mapStyle, setMapStyle } : { mapStyle : any, setMapStyle : any}) => {
   const handleStyleChange = () => {
-    if(mapStyle == "mapbox://styles/mapbox/satellite-v9") {
-        setMapStyle("mapbox://styles/mapbox/outdoors-v11");
-    } else {
+    if(mapStyle == "mapbox://styles/mapbox/outdoors-v11") {
         setMapStyle("mapbox://styles/mapbox/satellite-v9");
+    } else {
+        setMapStyle("mapbox://styles/mapbox/outdoors-v11");
     }
   };
 
