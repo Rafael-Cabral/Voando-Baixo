@@ -72,6 +72,11 @@ PriorityQueue:
 
 ![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\passosMelhor.jpg)
 
+TreeSet:
+
+![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\passosMelhor.jpg)
+
+
 
 
 # Conclusão
