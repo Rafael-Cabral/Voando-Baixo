@@ -47,7 +47,56 @@ Ainda em outro trecho de DASGUPTA et. al. (2011), temos:
 
 # Resultados obtidos
 
+No presente estudo, foram realizados experimentos para avaliar a eficácia do algoritmo proposto de menor caminho baseado em grafos. Os resultados obtidos demonstram a capacidade do algoritmo em solucionar problemas de menor caminho em diferentes cenários e configurações de grafos. Nesta seção, apresentaremos uma análise detalhada dos resultados experimentais, destacando a performance do algoritmo em comparação com outras abordagens existentes, bem como as principais vantagens e limitações identificadas.
+
+Com base nos estudos já referenciados neste artigo, foi constatado que a melhor abordagem para a nossa solução seria o uso do algoritmo AStar, que, por sua natureza, otimiza o tempo de execução e uso de memória. Sendo assim, buscamos maneiras de incrementar a sua performance através do uso de diferentes estruturas de dados para busca e ordenação, como a _PriorityQueue_ e a _TreeSet_. Sabendo disso, todas os testes têm, por competência, a função de comparar essas duas estruturas.
+
+O ambiente de teste utilizado foi um notebook Acer Aspire 5, com core I5-9300h e 16 Gb de memória RAM a 2400 GHz em dual channel. Isso será relevante para exemplificar o tempo de execução, que foi uma das maneiras usadas para analisar a escolha final do código, contudo, para uma metodologia mais assertiva, usamos também a experimentação baseada em passos de processamento, ou seja, quantas voltas o algoritmo realizou para finalizar uma tarefa e isso torna a análise mais assertiva.
+
+Após essa introdução, podemos inserir o primeiro teste experimental, que visa comparar o tempo de execução. Para isso, selecionamos o ponto inicial do mapa, cujo vértice tem índice 0 (zero) e um ponto final qualquer, que segue uma sequência lógica que será exemplificada logo.
+
+![Temp execução Priority](..\docs/img/execPriority.jpg)
+
+![Temp execução Tree](..\docs/img/execTree.jpg)
+
+Nesses dois gráficos, é possível observar que as linhas de tendências têm características distintas. Na PrioriryQueue o crescimento do tempo é exponencial e os resultados vão até o -PONTO 29- pois esse foi o limite em que enocntramos dado nosso ambiente de trabalho, após isso o sistema acusou um erro de quantidade de memória. Enquanto que na TreeSet nós vemos um crescimento linear. Dada essas duas informações, é importante resaaltar a magnitude dos dados coletados, o pior caso da primeira estrutura levou 123,3 segundos para ser processado enquanto que a segunda levou apenas 0,006 segundos.
+
+Com base nesse experimento, podemos concluir que a melhor opção de escolha é a TreeSet, por dois motivos, o primeiro é que ela foi a única que conseguiu processar todos os dados que precisamos trabalhar. A segunda é que para 518.400 pontos, que significam X distância, foi necessário apenas 1,045 segundos, que está dentro das restrições impostas pelo parceiro (O caminho ser gerado em até 1 minuto).
+
+![Temp execução Tree](..\docs\img\execTree518400.jpg)
+
+
+Por fim, é válido, também, verificar a quantidade de passos do algoritmo. Essa é uma verificação interessante, pois, não fica limitada ao ambiente de trabalho usado neste experimento e sua análise será feita logo após o experimento abaixo.
+
+PriorityQueue:
+
+![Temp execução Tree](..\docs\img\passosMelhor.jpg)
+
+TreeSet:
+
+![Temp execução Tree](..\docs\img\passosMelhor.jpg)
+
+
+No melhor caso, a quantidade de passos entre as duas estruturas é exatamente a mesma e não gera evidência suficiente para gerar conclusõe.
+
+PriorityQueue:
+
+![Temp execução Tree](..\docs\img\passosPiorPriority.jpg)
+
+
+TreeSet:
+
+![Temp execução Tree](..\docs\img\passosPiorTree.jpg)
+
+
+Contudo, como observado acima, para o pior caso a quantidade de passos da PriorityQueue é 34,27 vezes maior que a TreeSet e essa evidência justifica a nossa escolha final pelo segundo caso, pois, em qualquer ambiente essa será a opção menos custosa.
+
+
 # Conclusão
+
+Os resultados obtidos neste estudo indicam que a utilização do algoritmo AStar, em combinação com a estrutura de dados TreeSet, proporciona uma solução eficiente e robusta para problemas de menor caminho em grafos. A análise dos experimentos realizados demonstrou que a implementação com TreeSet apresenta um desempenho superior, tanto em termos de tempo de execução quanto de passos de processamento, quando comparada à implementação com PriorityQueue.
+
+Os tempos de execução observados para a solução baseada em TreeSet foram significativamente menores, com um crescimento linear em relação ao aumento do número de pontos. Além disso, essa abordagem foi capaz de processar todos os dados necessários, cumprindo as restrições de tempo estabelecidas pelo parceiro. No pior caso, a quantidade de passos da TreeSet foi 34,27 vezes menor que a PriorityQueue, o que também reforça sua escolha como a opção menos custosa. E, por isso, essa escolha se prova eficiente.
 
 # Referências Bibliográficas
 
