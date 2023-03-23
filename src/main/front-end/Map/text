@@ -8,5 +8,3 @@
 
 
 
-
-To create a restricted area represented by a circle on the map, you can use a combination of a circle layer and Mapbox GL JS interactivity. Here's an example of how to create a draggable, resizable, and removable circle with a radius in meters that displays the coordinates when clicked:

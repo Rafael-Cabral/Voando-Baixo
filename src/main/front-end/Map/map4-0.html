@@ -11,14 +11,13 @@
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
         #scale { position: absolute; bottom: 10px; left: 10px; z-index: 1; background-color: white; padding: 5px; border-radius: 5px; }
-
-
-
+        #circle-button { position: absolute; top: 10px; left: 10px; z-index: 1; background-color: white; padding: 5px; border-radius: 5px; }
     </style>
 </head>
 <body>
     <div id='map'></div>
     <div id='scale'></div>
+    <button id='circle-button'>Add Restriction Circle</button>
 
     <script>
         // Your Mapbox access token 
@@ -38,19 +37,71 @@
             zoom: 1,
             maxBounds: [[xmin, ymin], [xmax, ymax]]
         });
-        
+
         // Add navigation controls to the map
         map.addControl(new mapboxgl.NavigationControl());
 
-        // Add scale control to the map
-        var scale = new mapboxgl.ScaleControl({
+                // Add scale control to the map
+                var scale = new mapboxgl.ScaleControl({
             maxWidth: 100,
             unit: 'metric'
         });
-            map.addControl(scale);
+        map.addControl(scale);
 
+        // Add draggable restriction circle
+        let restrictionCircle = null;
+        let circleMarker = null;
+        let circleRadius = 500; // Default circle radius in meters
 
-// Add a line layer to display the route between origin and destiny
+        document.getElementById('circle-button').addEventListener('click', () => {
+            if (!restrictionCircle) {
+                const center = map.getCenter();
+
+                restrictionCircle = new mapboxgl.Circle({
+                    map: map,
+                    center: center,
+                    radius: circleRadius,
+                    editable: true,
+                    draggable: true
+                });
+
+                restrictionCircle.on('radiuschanged', () => {
+                    circleRadius = restrictionCircle.getRadius();
+                });
+
+                restrictionCircle.on('click', () => {
+                    const bounds = restrictionCircle.getBounds();
+                    const sw = bounds.getSouthWest();
+                    const ne = bounds.getNorthEast();
+
+                    const popupContent = `
+                        <p>SW: ${sw.lng.toFixed(6)}, ${sw.lat.toFixed(6)}</p>
+                        <p>NE: ${ne.lng.toFixed(6)}, ${ne.lat.toFixed(6)}</p>
+                    `;
+
+                    new mapboxgl.Popup()
+                        .setLngLat(center)
+                        .setHTML(popupContent)
+                        .addTo(map);
+                });
+
+                // Add circle marker for radius adjustment
+                circleMarker = new mapboxgl.Marker({ draggable: true })
+                    .setLngLat(turf.destination(center, circleRadius / 1000, 0, { units: 'kilometers' }).geometry.coordinates)
+                    .addTo(map);
+
+                circleMarker.on('drag', () => {
+                    const newRadius = turf.distance(center, circleMarker.getLngLat(), { units: 'meters' });
+                    restrictionCircle.setRadius(newRadius);
+                });
+            } else {
+                restrictionCircle.remove();
+                circleMarker.remove();
+                restrictionCircle = null;
+                circleMarker = null;
+            }
+        });
+        // Add a line layer to display the route between origin and destiny
 map.on('load', function () {
     map.addSource('route', {
         'type': 'geojson',
@@ -181,6 +232,7 @@ function getRouteInfo(coordinates) {
         });
 
               
-    </script>
+        </script>
 </body>
 </html>
+

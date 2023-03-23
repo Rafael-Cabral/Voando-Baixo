@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Topographic Map</title>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        #controls { position: absolute; top: 10px; right: 10px; z-index: 1; }
+        button { display: block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div id='map'></div>
+    <div id='controls'>
+        <button id="generate-circle">Generate Circle</button>
+    </div>
+
+    <script>
+        // Your Mapbox access token 
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYmVueWludGVsaSIsImEiOiJjbGYwM25oaWMwMjRwM3Vta2tiMjd2eGk3In0.yAOpHb-ul9chFeWMM1KOeg';
+
+        // Initialize the map
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
+            center: [-74.50, 40],
+            zoom: 9,
+        });
+
+        let resizing = false;
+        let circleRadius = 5000; // Default circle radius in meters
+
+        function updateCircle(center, radius) {
+            const circle = turf.circle(center, radius / 1000, { units: 'kilometers', steps: 64 });
+            map.getSource('circle').setData(circle);
+        }
+
+        function generateCircle() {
+            const center = map.getCenter().toArray(); // Convert to array of coordinates
+            updateCircle(center, circleRadius);
+        }
+
+        document.getElementById("generate-circle").addEventListener("click", generateCircle);
+
+        map.on('load', () => {
+            // Add circle source
+            const circleSource = {
+                'type': 'geojson',
+                'data': turf.circle(map.getCenter().toArray(), circleRadius / 1000, { units: 'kilometers', steps: 64 }),
+            };
+
+            map.addSource('circle', circleSource);
+
+            // Add circle layer
+            const circleLayer = {
+                'id': 'circle',
+                'type': 'fill',
+                'source': 'circle',
+                'layout': {},
+                'paint': {
+                    'fill-color': '#ff0000', // Circle color changed to red
+                    'fill-opacity': 0.3,
+                },
+            };
+
+            map.addLayer(circleLayer);
+
+            
