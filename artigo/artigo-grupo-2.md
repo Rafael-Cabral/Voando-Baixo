@@ -61,6 +61,7 @@ Após essa introdução, podemos inserir o primeiro teste experimental, que visa
 
 Nesses dois gráficos, é possível observar que as linhas de tendências têm características distintas. Na PrioriryQueue o crescimento do tempo é exponencial e os resultados vão até o -PONTO 29- pois esse foi o limite em que enocntramos dado nosso ambiente de trabalho, após isso o sistema acusou um erro de quantidade de memória. Enquanto que na TreeSet nós vemos um crescimento linear. Dada essas duas informações, é importante resaaltar a magnitude dos dados coletados, o pior caso da primeira estrutura levou 123,3 segundos para ser processado enquanto que a segunda levou apenas 0,006 segundos.
 
+Com base nesse experimento, podemos concluir que a melhor opção de escolha é a TreeSet, por dois motivos, o primeiro é que ela foi a única que conseguiu processar todos os dados que precisamos trabalhar. A segunda é que para 518.400 pontos, que significam X distância, foi necessário apenas 1,045 segundos, que está dentro das restrições impostas pelo parceiro (O caminho ser gerado em até 1 minuto).
 
 
 # Conclusão
