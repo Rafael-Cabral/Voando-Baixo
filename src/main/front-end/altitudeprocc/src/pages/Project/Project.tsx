@@ -14,6 +14,7 @@ import axios from "axios";
 import mapboxgl from "mapbox-gl";
 import { ReactComponent as Loading } from "../../assets/loading.svg";
 import { Notyf } from "notyf";
+import { MapStyleToggle } from "../../components/molecules/MapStyleToggle/MapStyleToggle";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiZWxpYXNiaW9uZG8iLCJhIjoiY2xmaWFlNHo0MDA5bDNwbWk4bjJlYjh4YiJ9.q4l1ugFTPCZi70qHmWkM7g";
 
@@ -201,10 +202,11 @@ const MapZone = ({ project }: { project: IProject }) => {
     const [circleB, setCircleB] = useState(project.vertices ? [project.vertices[project.vertices.length - 1].longitude, project.vertices[project.vertices.length - 1].latitude] : [0, 0]);
     const [pathCoordinates, setPathCoordinates] = useState(project.vertices?.map((vertex) => [vertex.longitude, vertex.latitude]) || []);
 
-
     const bounds = [
         topLeftLongitude, topLeftLatitude, bottomRightLongitude, bottomRightLatitude
     ];
+
+    const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/satellite-v9');
 
     useEffect(() => {
         if (map.current) return;
@@ -212,58 +214,151 @@ const MapZone = ({ project }: { project: IProject }) => {
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             // Satelite style
-            style: 'mapbox://styles/mapbox/satellite-v9',
+            style: mapStyle,
             center: [centeredLongitude, centeredLatitude],
             zoom: zoom,
         });
 
+        map.current.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
         map.current.on('load', () => {
-            // Add a new layer with the GeoJSON rectangle hole
-            map.current.addSource('rectangle-hole', {
-                type: 'geojson',
-                data: {
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Polygon',
-                        coordinates: [
-                            [
-                                [-180, -90],
-                                [180, -90],
-                                [180, 90],
-                                [-180, 90],
-                                [-180, -90],
-                            ],
-                            [
-                                [topLeftLongitude, topLeftLatitude],
-                                [bottomRightLongitude, topLeftLatitude],
-                                [bottomRightLongitude, bottomRightLatitude],
-                                [topLeftLongitude, bottomRightLatitude],
-                                [topLeftLongitude, topLeftLatitude],
-                            ],
-                        ],
-                    },
-                },
-            });
 
-            // Add the rectangle hole layer to the map
-            map.current.addLayer({
-                id: 'rectangle-hole',
-                type: 'fill',
-                source: 'rectangle-hole',
-                layout: {},
-                paint: {
-                    'fill-color': '#E0E0E0',
-                    'fill-opacity': 1,
-                },
-            });
+            map.current.addControl(new mapboxgl.ScaleControl({ maxWidth: 150, unit: 'metric' }), 'bottom-left');
 
-            addPath();
-            addCircles();
-            addCircleALabel();
-            addCircleBLabel();
+            addLayers(map);
+            
     
         });
     });
+
+    const addLayers = (map : any) => {
+        map.current.addSource('rectangle-hole', {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [
+                        [
+                            [-180, -90],
+                            [180, -90],
+                            [180, 90],
+                            [-180, 90],
+                            [-180, -90],
+                        ],
+                        [
+                            [topLeftLongitude, topLeftLatitude],
+                            [bottomRightLongitude, topLeftLatitude],
+                            [bottomRightLongitude, bottomRightLatitude],
+                            [topLeftLongitude, bottomRightLatitude],
+                            [topLeftLongitude, topLeftLatitude],
+                        ],
+                    ],
+                },
+            },
+        });
+
+        // Add the rectangle hole layer to the map
+        map.current.addLayer({
+            id: 'rectangle-hole',
+            type: 'fill',
+            source: 'rectangle-hole',
+            layout: {},
+            paint: {
+                'fill-color': '#E0E0E0',
+                'fill-opacity': 1,
+            },
+        });
+
+        addPath();
+        addCircles();
+        addCircleALabel();
+        addCircleBLabel();
+
+        map.current.on('click', 'circleA', (e:any) => {
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            showPopup(coordinates, `<b>Origem</b>: <br>Latitude: ${coordinates[1].toFixed(5)}<br> Longitude: ${coordinates[0].toFixed(5)}`);
+        });
+        
+        map.current.on('click', 'circleB', (e:any) => {
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            showPopup(coordinates, `<b>Destino</b>: <br>Latitude: ${coordinates[1].toFixed(5)}<br> Longitude: ${coordinates[0].toFixed(5)}`);
+        });
+        
+        map.current.on('click', 'path', (e:any) => {
+            const coordinates = e.lngLat;
+            const distance = calculateDistance(circleA, circleB);
+            showPopup(coordinates, `Distância: ${distance} km`);
+        });
+        
+        // Adicione o cursor "pointer" quando passar o mouse sobre os pontos A e B e o caminho
+        map.current.on('mouseenter', 'circleA', () => {
+            map.current.getCanvas().style.cursor = 'pointer';
+        });
+        map.current.on('mouseleave', 'circleA', () => {
+            map.current.getCanvas().style.cursor = '';
+        });
+        
+        map.current.on('mouseenter', 'circleB', () => {
+            map.current.getCanvas().style.cursor = 'pointer';
+        });
+        map.current.on('mouseleave', 'circleB', () => {
+            map.current.getCanvas().style.cursor = '';
+        });
+        
+        map.current.on('mouseenter', 'path', () => {
+            map.current.getCanvas().style.cursor = 'pointer';
+        });
+        map.current.on('mouseleave', 'path', () => {
+            map.current.getCanvas().style.cursor = '';
+        });
+
+        
+    }
+
+    function removeLayers() {
+        map.current.removeLayer("rectangle-hole");
+        map.current.removeLayer("path");
+        map.current.removeLayer("circleA");
+        map.current.removeLayer("circleB");
+        map.current.removeLayer("circleALabel");
+        map.current.removeLayer("circleBLabel");
+    
+        map.current.removeSource("rectangle-hole");
+        map.current.removeSource("path");
+        map.current.removeSource("circleA");
+        map.current.removeSource("circleB");
+        map.current.removeSource("circleALabel");
+        map.current.removeSource("circleBLabel");
+    }
+
+
+    const toggleMapStyle = (style : any) => {
+        removeLayers();
+        setMapStyle(style);
+        map.current.setStyle(style);
+        map.current.on('style.load', () => {
+            addLayers(map);
+        })
+    };
+
+    function showPopup(coordinates : any, text : any) {
+        const popup = new mapboxgl.Popup({ closeButton: false, closeOnClick: true, offset: [0, -10] })
+            .setLngLat(coordinates)
+            .setHTML(`<p>${text}</p>`)
+            .addTo(map.current);
+    }
+    
+    function calculateDistance(coord1 : any, coord2 : any) {
+        const R = 6371; // Raio da Terra em km
+        const dLat = (coord2[1] - coord1[1]) * (Math.PI / 180);
+        const dLon = (coord2[0] - coord1[0]) * (Math.PI / 180);
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(coord1[1] * (Math.PI / 180)) * Math.cos(coord2[1] * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const d = R * c;
+        return d.toFixed(2);
+    }
+    
 
     function addCircles() {
         map.current.addSource("circleA", {
@@ -430,9 +525,11 @@ const MapZone = ({ project }: { project: IProject }) => {
     
 
     return (
-        <StyledMapZone ref={mapContainer} className="map-container">
+        <>
+            <StyledMapZone ref={mapContainer} className="map-container" />
+            <MapStyleToggle mapStyle={mapStyle} setMapStyle={toggleMapStyle} />
+        </>
 
-        </StyledMapZone>
     )
 }
 
@@ -467,8 +564,6 @@ export const Project = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
-            console.log(response.data?.success.data)
             setProject(response.data?.success.data);
         } catch {
             setProject({ id: "", name: "", dt2file: "", createdAt: "", status: "processing" });

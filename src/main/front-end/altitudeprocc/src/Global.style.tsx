@@ -47,4 +47,12 @@ export const GlobalStyle = createGlobalStyle`
         overflow: hidden;
     }
 
+    .mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib {
+        display: none !important;
+    }
+
+    .mapboxgl-ctrl-group:not(:empty) {
+        box-shadow: none !important;
+    }
+
 `
