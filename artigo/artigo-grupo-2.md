@@ -63,6 +63,12 @@ Nesses dois gráficos, é possível observar que as linhas de tendências têm c
 
 Com base nesse experimento, podemos concluir que a melhor opção de escolha é a TreeSet, por dois motivos, o primeiro é que ela foi a única que conseguiu processar todos os dados que precisamos trabalhar. A segunda é que para 518.400 pontos, que significam X distância, foi necessário apenas 1,045 segundos, que está dentro das restrições impostas pelo parceiro (O caminho ser gerado em até 1 minuto).
 
+![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\execTree518400.jpg)
+
+
+Por fim, é válido, também, verificar a quantidade de passos do algoritmo. Essa é uma verificação interessante, pois, não fica limitada ao ambiente de trabalho usado neste experimento e sua análise será feita logo após o experimento abaixo.
+
+
 
 # Conclusão
 
