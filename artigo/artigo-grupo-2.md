@@ -84,6 +84,12 @@ PriorityQueue:
 ![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\passosPiorPriority.jpg)
 
 
+TreeSet:
+
+![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\passosPiorTree.jpg)
+
+
+Contudo, como observado acima, para o pior caso a quantidade de passos da PriorityQueue é 34,27 vezes maior que a TreeSet e essa evidência justifica a nossa escolha final pelo segundo caso, pois, em qualquer ambiente essa será a opção menos custosa.
 
 
 # Conclusão
