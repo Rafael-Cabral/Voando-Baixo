@@ -2,6 +2,7 @@ import setup from "..";
 import { IProject } from "../interfaces/IProject";
 import { v4 as uuid } from "uuid";
 import { ICoordinate } from "../interfaces/ICoordinate";
+import { interpolateVertices } from "../utils/interpolateVertices";
 
 class ProjectsService {
 
@@ -104,12 +105,14 @@ class ProjectsService {
 
 			const vertices = JSON.parse(resRoute.records[0].get(0).properties.vertices);
 
+			const interpolatedVertices = interpolateVertices(vertices, 0.5);
+
 			session.close();
 
 			const res = {
 				...project,
 				map,
-				vertices
+				vertices: interpolatedVertices
 			};
 
 			return res;
@@ -185,3 +188,4 @@ class ProjectsService {
 }
 
 export default new ProjectsService();
+
