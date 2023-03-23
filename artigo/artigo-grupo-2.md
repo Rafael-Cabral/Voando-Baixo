@@ -68,6 +68,10 @@ Com base nesse experimento, podemos concluir que a melhor opção de escolha é 
 
 Por fim, é válido, também, verificar a quantidade de passos do algoritmo. Essa é uma verificação interessante, pois, não fica limitada ao ambiente de trabalho usado neste experimento e sua análise será feita logo após o experimento abaixo.
 
+PriorityQueue:
+
+![Temp execução Tree](C:\Users\raalc\Documents\GitHub\grupo2\docs\img\passosMelhor.jpg)
+
 
 
 # Conclusão
