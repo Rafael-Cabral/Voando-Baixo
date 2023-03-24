@@ -1,14 +1,16 @@
 import FooterGraph from "../components/FooterGraph";
-import SidebarMap from "../components/SideBarMap";
+import SidebarGraph from "../components/SideBarMap";
+import VertexInfo from "../components/vertexInfo";
 import VisualizationGraph from "../components/VisualizationGraph";
 
 
 function Graph() {
-    return(
+    return (
         <div>
-            <SidebarMap />
-            <VisualizationGraph/>       
-            <FooterGraph/>
+            <SidebarGraph />
+            <VisualizationGraph />
+            <FooterGraph />
+            <VertexInfo />
         </div>
     )
 }
