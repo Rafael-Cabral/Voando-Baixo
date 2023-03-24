@@ -13,43 +13,61 @@ public class Graph {
 
     private int cols, rows;
 
+    // Constructor initializes an empty ArrayList to store vertices
     public Graph() {
         this.vertices = new ArrayList<>();
     }
 
+    // Method to add a new vertex to the graph given its latitude, longitude, and altitude
     public void addVertex(double latitude, double longitude, double altitude) {
+        // Creates a new Vertex object with a unique ID and the given coordinates
         Vertex vertex = new Vertex(nextVertexId++, latitude, longitude, altitude);
+        // Adds the new Vertex to the graph's ArrayList of vertices
         this.vertices.add(vertex);
     }
 
-    public int getCols(){return this.cols;}
+    // Returns the number of columns in the graph
+    public int getCols() {
+        return this.cols;
+    }
 
-    public int getRows(){return this.rows;}
+    // Returns the number of rows in the graph
+    public int getRows() {
+        return this.rows;
+    }
 
-    // Remove before deploy
-    public void addVertex(Vertex vertex){
-        for (int i = 0; i < this.getVertices().size(); i++){
-            if (vertex.getId() == this.getVertices().get(i).getId()){
+    // DEBUGGING METHOD: Adds a given vertex to the graph
+    public void addVertex(Vertex vertex) {
+        // Checks if a Vertex with the same ID already exists in the graph's ArrayList of vertices
+        for (int i = 0; i < this.getVertices().size(); i++) {
+            if (vertex.getId() == this.getVertices().get(i).getId()) {
+                // If a Vertex with the same ID already exists, a warning is logged and the method returns
                 LOGGER.log(Level.WARNING, "Vertex with id == " + vertex.getId() + " already exists");
                 return;
             }
         }
+        // If a Vertex with the same ID does not already exist, the Vertex is added to the graph's ArrayList of vertices
         this.vertices.add(vertex);
     }
 
+    // Method to add a new edge between two vertices given their IDs
     public void addEdge(int vertexId, int arrivalVertexId) {
+        // Finds the Vertex objects in the graph's ArrayList of vertices corresponding to the given IDs
         this.vertices.get(vertexId).addConnectionTo(this.vertices.get(arrivalVertexId));
     }
 
+    // Returns the graph's ArrayList of vertices
     public ArrayList<Vertex> getVertices() {
         return this.vertices;
     }
 
+    // Returns a LinkedList of all edges connected to a given Vertex
     public LinkedList<Edge> getConnectionsOf(int vertexId) {
         return this.vertices.get(vertexId).getAllConnections();
     }
 
-    public String getAdjacencyListForEachVertex(){
+    // Returns a string representation of each Vertex's adjacency list
+    public String getAdjacencyListForEachVertex() {
         StringBuilder str = new StringBuilder();
         for (Vertex vertex : this.vertices) {
             str.append(vertex.getAdjacencyListAsString());
@@ -58,11 +76,13 @@ public class Graph {
         return str.toString();
     }
 
+    // Method to connect all vertices in the graph that are within a certain distance of each other
     public void connectVertices(int intervalDistance, int rows, int cols) {
+        // Sets the number of columns and rows in the graph
         this.cols = cols;
         this.rows = rows;
 
-        // Amount of vertices per latitude (y) and longitude (x)
+        // Determines the total latitude and longitude differences between the first and last vertices in the graph
         double lat1 = this.vertices.get(0).getLatitude();
         double lat2 = this.vertices.get(this.vertices.size() - 1).getLatitude();
         double lon1 = this.vertices.get(0).getLongitude();
