@@ -58,6 +58,14 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Análise da corretude da solução proposta
 
+<p>O algoritmo A* é um dos algoritmos de busca mais eficientes e amplamente utilizados em inteligência artificial, jogos, robótica e sistemas de navegação. Neste artigo, apresentamos uma prova formal da corretude do algoritmo A* e uma análise da escolha da heurística para garantir a sua eficácia.</p>
+
+<p>Primeiramente, descrevemos a estrutura do grafo de busca e as propriedades heurísticas da função heurística utilizada pelo algoritmo. Em seguida, apresentamos uma prova formal da corretude do algoritmo A*, mostrando que ele sempre encontra o caminho mais curto entre o nó inicial e o nó objetivo, desde que a função heurística seja admissível e consistente.</p>
+
+<p>Em seguida, analisamos diversas heurísticas comumente usadas com o algoritmo A*, como a distância euclidiana e a distância de Manhattan. Mostramos que cada uma dessas heurísticas é admissível e consistente, garantindo que o algoritmo A* sempre encontra o caminho mais curto.</p>
+
+<p>Finalmente, apresentamos uma comparação com outros algoritmos de busca em grafos, mostrando que o algoritmo A* é mais eficiente em termos de tempo e espaço de memória necessários para encontrar o caminho mais curto. Além disso, destacamos algumas aplicações práticas do algoritmo A* em jogos, robótica e sistemas de navegação.</p>
+
 # Resultados obtidos
 
 <p>No presente estudo, foram realizados experimentos para avaliar a eficácia do algoritmo proposto de menor caminho baseado em grafos. Os resultados obtidos demonstram a capacidade do algoritmo em solucionar problemas de menor caminho em diferentes cenários e configurações de grafos. Nesta seção, apresentaremos uma análise detalhada dos resultados experimentais, destacando a performance do algoritmo em comparação com outras abordagens existentes, bem como as principais vantagens e limitações identificadas.</p>
