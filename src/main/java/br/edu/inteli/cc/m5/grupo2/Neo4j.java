@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
+// Class to send and request data from Neo4J
 public class Neo4j implements AutoCloseable {
     private final Driver driver;
 
