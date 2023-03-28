@@ -58,13 +58,42 @@ abstract: Como parte das atividades do módulo 5, cada grupo deverá redigir um 
 
 # Análise da corretude da solução proposta
 
-<p>O algoritmo A* é um dos algoritmos de busca mais eficientes e amplamente utilizados em inteligência artificial, jogos, robótica e sistemas de navegação. Neste artigo, apresentamos uma prova formal da corretude do algoritmo A* e uma análise da escolha da heurística para garantir a sua eficácia.</p>
+<p>Aqui vamos provar a corretude da solução proposta, mas antes de começar, é importante definir algumas notações que serão utilizadas na prova:</p>
 
-<p>Primeiramente, descrevemos a estrutura do grafo de busca e as propriedades heurísticas da função heurística utilizada pelo algoritmo. Em seguida, apresentamos uma prova formal da corretude do algoritmo A*, mostrando que ele sempre encontra o caminho mais curto entre o nó inicial e o nó objetivo, desde que a função heurística seja admissível e consistente.</p>
+<h4>&#x2022; g(n) representa o custo para chegar ao nó n a partir do nó inicial</h4>
+<h4>&#x2022; h(n) é uma heurística que estima o custo para chegar do nó n até o objetivo</h4>
+<h4>&#x2022; f(n) é a função de avaliação que combina g(n) e h(n), ou seja, f(n) = g(n) + h(n)</h4>
+<h4>&#x2022; s é o nó inicial</h4>
+<h4>&#x2022; t é o nó objetivo</h4>
+<h4>&#x2022; n é qualquer nó do grafo</h4>
+<br><br>
 
-<p>Em seguida, analisamos diversas heurísticas comumente usadas com o algoritmo A*, como a distância euclidiana e a distância de Manhattan. Mostramos que cada uma dessas heurísticas é admissível e consistente, garantindo que o algoritmo A* sempre encontra o caminho mais curto.</p>
+<p>A seguir, apresentaremos uma prova formal da corretude do algoritmo A*.</p>
 
-<p>Finalmente, apresentamos uma comparação com outros algoritmos de busca em grafos, mostrando que o algoritmo A* é mais eficiente em termos de tempo e espaço de memória necessários para encontrar o caminho mais curto. Além disso, destacamos algumas aplicações práticas do algoritmo A* em jogos, robótica e sistemas de navegação.</p>
+<p><b>Teorema:</b> O algoritmo A* encontra sempre o menor caminho entre o nó inicial e o nó objetivo em um grafo com arestas de peso não negativo, desde que a heurística utilizada seja admissível. Para que a heurística seja admissível, ela não pode superestimar em nenhum momento o custo real do nó inicial ao nó objetivo, e como, na heurística, utilizamos um valor que também é utilizado calcular o custo real, a heurística é admissível.</p>
+
+<p><b>Prova:</b>
+Vamos provar este teorema por indução. Suponha que o nó objetivo t foi adicionado à lista de nós abertos e que o algoritmo A* escolheu um caminho p* para chegar até ele. Isto é, p* é o caminho mínimo que conecta s a t, de acordo com a função de avaliação f(n) = g(n) + h(n).</p>
+
+<p><b>Base:</b> Quando o algoritmo A* escolhe o nó inicial s, a afirmação é trivialmente verdadeira, pois s é o único nó aberto naquele momento.
+Hipótese: Suponha que a afirmação seja verdadeira para todos os nós até o nó k, ou seja, o algoritmo A* encontrou o caminho mínimo para cada nó na lista de nós abertos até o nó k.</p>
+
+<p><b>Passo de indução:</b> Vamos provar que a afirmação é verdadeira para o nó k+1. Seja p* o caminho mínimo que conecta s a t, de acordo com a função de avaliação f(n) = g(n) + h(n). O nó k+1 é adicionado à lista de nós abertos e o algoritmo A* escolhe o caminho mínimo p que conecta s a k+1.</p>
+
+<b>Temos duas possibilidades:</b>
+<h4>&#x2022; Se o nó k+1 não estiver no caminho p*, então o algoritmo A* continua a busca até encontrar o nó objetivo t, adicionando os nós abertos à lista. Pela hipótese de indução, o algoritmo A* encontrará o caminho mínimo para cada nó na lista de nós abertos até o nó k+1. Portanto, o caminho mínimo de s a t será o caminho mínimo de s a k+1 (p) seguido do caminho mínimo de k+1 a t.</h4><br>
+
+<h4>&#x2022; Se o nó k+1 estiver no caminho p*, então podemos escrever o caminho p* como p* = p1 + (k+1) + p2, onde p1 é o caminho mínimo de s a k+1 e p2 é o caminho mínimo de k+1 a t. Como p é o caminho mínimo de s a k+1, temos que g(k+1) + h(k+1) <= g(n) + h(n) para qualquer nó n na lista de nós abertos que ainda não foi expandido.</h4>
+
+<p>Assim, temos que f(k+1) = g(k+1) + h(k+1) <= g(n) + h(n) para qualquer nó n na lista de nós abertos que ainda não foi expandido. Além disso, sabemos que f(n) >= f(k+1) para qualquer nó n na lista de nós abertos que já foi expandido. Portanto, a função de avaliação de qualquer nó na lista de nós abertos é maior ou igual a f(k+1).</p>
+
+<p>Como a heurística é admissível, temos que h(k+1) <= h(n) + d(n,k+1) para qualquer nó n no grafo, onde d(n,k+1) é a distância do nó n até o nó k+1. Substituindo na equação anterior, temos que f(k+1) <= g(n) + h(n) + d(n,k+1). Como p é o caminho mínimo de s a k+1, temos que g(k+1) = g(p1) + d(p1,k+1), onde d(p1,k+1) é a distância entre os nós p1 e k+1. Assim, temos que f(k+1) <= g(p1) + h(n) + d(n,k+1) + d(p1,k+1).</p>
+
+<p>Agora, seja p* um caminho mínimo de s a t que passa por k+1, ou seja, p* = p1 + (k+1) + p2. Podemos escrever f(t) = g(t) + h(t) <= g(p*) + h(p*) = g(p1) + d(p1,k+1) + g(p2) + h(k+1) + h(t). Como a heurística é admissível, temos que h(k+1) <= h(t) + d(k+1,t), onde d(k+1,t) é a distância entre os nós k+1 e t. Substituindo na equação anterior, temos que f(t) <= g(p1) + d(p1,k+1) + g(p2) + h(t) + d(k+1,t).</p>
+
+<p>Comparando as duas últimas equações, temos que f(t) >= f(k+1) - d(n,k+1) + d(p1,k+1) + g(p2) - d(k+1,t). Como o peso das arestas é não negativo, temos que d(p1,k+1) + g(p2) >= d(p1,k+1) + g(p2) - d(k+1,t) >= 0. Portanto, temos que f(t) >= f(k+1) - d(n,k+1), ou seja, f(k+1) + d(n,k+1) <= f(t).</p>
+
+<p>Como o algoritmo A* escolhe sempre o nó com menor valor de f(n) na lista de nós abertos, ele encontrará o caminho mínimo de s a t</p>
 
 # Resultados obtidos
 
