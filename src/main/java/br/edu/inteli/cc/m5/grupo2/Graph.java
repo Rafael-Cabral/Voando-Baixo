@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// Class to save the graph and its vertices
 public class Graph {
 
     private static final Logger LOGGER = Logger.getLogger(Graph.class.getName());
