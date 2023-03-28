@@ -135,7 +135,7 @@ TreeSet:
 
 ![Temp execução Tree](..\docs\img\passosPiorTree.jpg)
 
-<p>Contudo, como observado acima, para o pior caso a quantidade de passos da PriorityQueue é 34,27 vezes maior que a TreeSet e essa evidência justifica a nossa escolha final pelo segundo caso, pois, em qualquer ambiente essa será a opção menos custosa.</p>
+<p>Contudo, como observado acima, para o pior caso a quantidade de passos da PriorityQueue é 34,27 vezes maior que a TreeSet e essa evidência justifica a nossa escolha final pelo segundo caso, pois, em qualquer ambiente essa será a opção menos custosa. Além disso, poderíamos, também, observar o Theta, que é relativo a média de entradas, contudo, os dados atuais não permitem que esse cálculo seja realizado, pois, como o nosso algoritmo não foi implementado em produção ainda, não conseguimos ter acesso a uma quantidade significativa de entradas.</p>
 
 # Conclusão
 
