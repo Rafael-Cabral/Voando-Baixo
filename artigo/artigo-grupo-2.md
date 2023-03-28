@@ -125,7 +125,7 @@ TreeSet:
 
 ![Temp execução Tree](..\docs\img\passosMelhor.jpg)
 
-<p>No melhor caso, a quantidade de passos entre as duas estruturas é exatamente a mesma e não gera evidência suficiente para gerar conclusõe.</p>
+<p>No melhor caso, a quantidade de passos entre as duas estruturas é exatamente a mesma, ou seja, o Ômega é constante em 4 passos. Isso ocorre pela estrutura pela qual o código foi desenhado, em que, para qualquer tamanho de entrada do grafo, o melhor caso sempre estará ao seu lado e, para identificálo, o loop fará 4 verificações, que são os 4 vértices adjascêntes.</p>
 
 PriorityQueue:
 
