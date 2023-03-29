@@ -105,35 +105,35 @@ Hipótese: Suponha que a afirmação seja verdadeira para todos os nós até o n
 
 <p>Após essa introdução, podemos inserir o primeiro teste experimental, que visa comparar o tempo de execução. Para isso, selecionamos o ponto inicial do mapa, cujo vértice tem índice 0 (zero) e um ponto final qualquer, que segue uma sequência lógica que será exemplificada logo.</p>
 
-![Temp execução Priority](..\docs/img/execPriority.jpg)
+![Temp execução Priority](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/execPriority.jpg)
 
-![Temp execução Tree](..\docs/img/execTree.jpg)
+![Temp execução Tree](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/execTree.jpg)
 
 <p>Nesses dois gráficos, é possível observar que as linhas de tendências têm características distintas. Na PrioriryQueue o crescimento do tempo é exponencial de complexidade O(e^n), sendo n a quantidade de dados de entrada e os resultados vão até a distância de 4,4 Km,  pois esse foi o limite em que enocntramos dado nosso ambiente de trabalho, após isso o sistema acusou um erro de quantidade de memória. Enquanto que na TreeSet nós vemos um crescimento linear de complexidade O(n). Dada essas duas informações, é importante resaaltar a magnitude dos dados coletados, o pior caso da primeira estrutura levou 123,3 segundos para ser processado enquanto que a segunda levou apenas 0,006 segundos.</p>
 
 <p>Com base nesse experimento, podemos concluir que a melhor opção de escolha é a TreeSet, por dois motivos, o primeiro é que ela foi a única que conseguiu processar todos os dados que precisamos trabalhar. A segunda é que para 518.400 pontos, que significam X distância, foi necessário apenas 1,045 segundos, que está dentro das restrições impostas pelo parceiro (O caminho ser gerado em até 1 minuto).</p>
 
-![Temp execução Tree](..\docs\img\execTree518400.jpg)
+![Temp execução Tree](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/execTree518400.jpg)
 
 <p>Por fim, é válido, também, verificar a quantidade de passos do algoritmo. Essa é uma verificação interessante, pois, não fica limitada ao ambiente de trabalho usado neste experimento e sua análise será feita logo após o experimento abaixo.</p>
 
 PriorityQueue:
 
-![Temp execução Tree](..\docs\img\passosMelhor.jpg)
+![Temp execução Tree](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/passosMelhor.jpg)
 
 TreeSet:
 
-![Temp execução Tree](..\docs\img\passosMelhor.jpg)
+![Temp execução Tree](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/passosMelhor.jpg)
 
 <p>No melhor caso, a quantidade de passos entre as duas estruturas é exatamente a mesma, ou seja, o Ômega é constante em 4 passos. Isso ocorre pela estrutura pela qual o código foi desenhado, em que, para qualquer tamanho de entrada do grafo, o melhor caso sempre estará ao seu lado e, para identificálo, o loop fará 4 verificações, que são os 4 vértices adjascêntes.</p>
 
 PriorityQueue:
 
-![Temp execução Tree](..\docs\img\passosPiorPriority.jpg)
+![Temp execução Tree](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/passosPiorPriority.jpg)
 
 TreeSet:
 
-![Temp execução Tree](..\docs\img\passosPiorTree.jpg)
+![Temp execução Tree](https://github.com/2023M5T1-Inteli/grupo2/blob/master/docs/img/passosPiorTree.jpg)
 
 <p>Contudo, como observado acima, para o pior caso a quantidade de passos da PriorityQueue é 34,27 vezes maior que a TreeSet e essa evidência justifica a nossa escolha final pelo segundo caso, pois, em qualquer ambiente essa será a opção menos custosa. Além disso, poderíamos, também, observar o Theta, que é relativo a média de entradas, contudo, os dados atuais não permitem que esse cálculo seja realizado, pois, como o nosso algoritmo não foi implementado em produção ainda, não conseguimos ter acesso a uma quantidade significativa de entradas.</p>
 
